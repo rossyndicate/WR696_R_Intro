@@ -1,2 +1,7 @@
-# WR696_R_Intro
-Course content and website for CSU Fall 2023 WR 696: Intro to Data Analysis in R
+# Introduction to Data Analysis in R
+
+Welcome!
+
+This is the development repository for the Introduction to Data Analysis in R course content for WR 696 at Colorado State University.
+
+The course website can be found here: 
