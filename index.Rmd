@@ -1,60 +1,103 @@
---- 
-title: "A Minimal Book Example"
-author: "John Doe"
+---
+title: "Introduction to Data Analysis in R"
+author: "Caitlin C. Mothes, PhD and Katie Willi"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
+url: https://ccmothes.github.io/quantitative-reasoning-course/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  This site hosts the course content for WR 696 at Colorado State University.
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: rossyndicate/WR696_R_Intro
 ---
 
-# About
+# Welcome!
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+This site hosts the course curriculum for Colorado State University's **WR 696** course: *Introduction to Data Analysis in R*
 
-## Usage 
+## Set up Instructions {.unnumbered}
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+As your first step, please follow the instructions on the [R Setup][Setup Instructions] page to make sure you have all the necessary software installed on your computer.
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+## Navigating this site {.unnumbered}
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through working through the topic, analysis, etc. for that week with exercises at the end of the lesson that will be that week's homework assignment.
 
-## Render book
+Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create R Markdown documents in R, which you will use to write your code/answers to the exercises and then render to either a Word or HTML report which is what you will submit through Canvas.
 
-You can render the HTML version of this example book without changing anything:
+## Goals {.unnumbered}
 
-1. Find the **Build** pane in the RStudio IDE, and
+The broad goal of this course is to introduce you to the skills necessary for a career that involves data science - namely manipulating data sets and performing statistical tests in R. The more specific goals of this course are to teach students to:
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+1.  Navigate the RStudio interface and create R Markdown documents for reproducible reporting;
+2.  Utilize R packages and functions to manipulate and analyze data effectively and apply data wrangling techniques using the {tidyverse} framework;
+3.  Differentiate between various data types and structures within R; and
+4.  Explore comparative analyses, linear regression, and trend analysis techniques to reveal patterns in data.
 
-Or build the book from the R console:
+## Approach and Expectations {.unnumbered}
 
-```{r, eval=FALSE}
-bookdown::render_book()
-```
+This class is [flipped](https://ieeexplore.ieee.org/document/7344151), meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+So without lectures in class what do we do together? We code! This class has almost four hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.
 
-## Preview book
+Generally we will do a quick live-code review of concepts from the assignment and pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.
 
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+As such, coming to class is a vital part of how you can be successful and we fully expect you to be there everyday.
 
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+We also will actively encourage a collaborative coding environment where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use our Teams channel to discuss code issues!
 
+We will always send announcements with assignments, web links, and other updates through Canvas. The course syllabus will also be posted on Canvas.
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+## Class Schedule {.unnumbered}
+
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Week | Date (Monday) | Content                                                                                                                                                                                                                                                              |
++======+==========+======================================================================================================================================================================================================================================================================+
+| 1    | 8/22     | Before class: [Primers Basics](https://posit.cloud/learn/primers/1) and [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html?_gl=1*10u3rje*_ga*NzUxNjg2ODAzLjE2OTE1MTIzMzk.*_ga_2C0WZ1JHG0*MTY5MTUxNjA2OC4yLjEuMTY5MTUxNjU2Ni4wLjAuMA..); download R and RStudio |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | Introduction to R, RStudio, RMarkdown                                                                                                                                                                                                                                |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2    | 8/28     | Before class: [Work with Data](https://posit.cloud/learn/primers/2)                                                                                                                                                                                                  |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | Exploratory data analysis                                                                                                                                                                                                                                            |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3    | 9/4      | Before class: [Visualize Data](https://posit.cloud/learn/primers/3)                                                                                                                                                                                                  |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | Data visualization                                                                                                                                                                                                                                                   |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4    | 9/11     | **No Class Monday 9/4!** Beforeclass Wednesday: [Tidy Your Data](https://posit.cloud/learn/primers/4)                                                                                                                                                                |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | T-tests, ANOVA                                                                                                                                                                                                                                                       |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5    | 9/18     | Before class: [Iterate](https://posit.cloud/learn/primers/5)                                                                                                                                                                                                         |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | Linear modelling pt. 1                                                                                                                                                                                                                                               |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 6    | 9/25     | Before class: [Write Functions](https://posit.cloud/learn/primers/6)                                                                                                                                                                                                 |
+|      |          |                                                                                                                                                                                                                                                                      |
+|      |          | Linear modelling pt. 2                                                                                                                                                                                                                                               |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 7    | 10/2     | Modelling assumptions, power                                                                                                                                                                                                                                         |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8    | 10/9     | PCA                                                                                                                                                                                                                                                                  |
++------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Additional introductory resources
+
+If you are looking to learn even more outside of what this class offers, below are some great introductory R resources:
+
+-   [Stat 158](https://csu-r.github.io/Module1/) - Vectors, data frames, installing R, etc...
+
+-   [RStudio Materials](https://education.rstudio.com/learn/beginner/) - A series of videos, books, and more to get you started in R.
+
+#### Tidyverse Introduction
+
+-   [R for Data Science](https://r4ds.had.co.nz/introduction.html) - Covers all of the basic intro material, from a tidyverse perspective. As discussed, this is one way to find solutions in R, it happens to be my preferred way, but there are lots of Base R ways that work just fine!
+
+-   [Stat 159](https://csu-r.github.io/Module2/) - A CSU specific course for an intro to the tidyverse
+
+-   [R Markdown](https://bookdown.org/yihui/rmarkdown/#preface) - The primary book for learning more about R Markdown and all of its quirks.
+
+-   [Cheatsheets](https://www.rstudio.com/resources/cheatsheets/) - Short, clear documents that cover so much material from dplyr to shiny apps. Great for quick references. We find the [`rmarkdown`](https://rstudio.github.io/cheatsheets/html/rmarkdown.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..) and [`ggplot2`](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..) ones particularly useful!
