@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 3 Introduction to R, RStudio and R Markdown | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 3 Introduction to R, RStudio and R Markdown | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -169,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
 <li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
 <li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
-<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The <code>dplyr</code> package</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#visualize"><i class="fa fa-check"></i><b>3.6</b> Visualize</a>
 <ul>
@@ -213,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="figcaption">Image Credit: Software Carpentry</div>
 </div>
 <p><br></p>
-<p>To write and save code you use scripts (or RMarkdown, which we will learn shortly). You can open a new script with File -&gt; New File or by clicking the icon with the green plus sign in the upper left corner. When you open a script, RStudio then opens a fourth <strong>‘Source’ panel</strong> in the upper-left to write and save your code. You can also send code from a script directly to the console to execute it by highlighting the <strong>entire</strong> code line/chunk (or place your cursor at the end of the code chunk) and hit CTRL+ENTER on a PC or CMD+ENTER on a Mac.</p>
+<p>To write and save code you use .R scripts (or RMarkdown, which we will learn shortly). You can open a new script with File -&gt; New File or by clicking the icon with the green plus sign in the upper left corner. When you open a script, RStudio then opens a fourth <strong>‘Source’ panel</strong> in the upper-left to write and save your code. You can also send code from a script directly to the console to execute it by highlighting the <strong>entire</strong> code line/chunk (or place your cursor at the end of the code chunk) and hit CTRL+ENTER on a PC or CMD+ENTER on a Mac.</p>
 <div class="float">
 <img src="https://swcarpentry.github.io/r-novice-gapminder/fig/01-rstudio-script.png" alt="Image Credit: Software Carpentry" />
 <div class="figcaption">Image Credit: Software Carpentry</div>
@@ -241,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The first thing you do in a fresh R session is set up your environment, which mostly includes installing and loading necessary libraries and reading in required data sets. Let’s open a fresh R script and save it in our root (project) directory. Call this script ‘setup.R’.</p>
 <div id="functions" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Functions<a href="introduction-to-r-rstudio-and-r-markdown.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Before creating a set up script, it might be helpful to understand the use of functions in R if you are new to this programming language. R has many built in functions to perform various tasks. To run these functions you type the function name followed by parentheses. Within the parentheses you put in your specific arguments needed to run the function.</p>
+<p>Before creating a set up script, it might be helpful to understand the use of functions in R if you are new to this programming language. R has many built-in functions to perform various tasks. To run these functions you type the function name followed by parentheses. Within the parentheses you put in your specific arguments needed to run the function.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb1-1" tabindex="-1"></a><span class="co"># mathematical functions with numbers</span></span>
 <span id="cb1-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb1-2" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 2.302585</code></pre>
@@ -261,10 +265,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.3.2</span> Packages<a href="introduction-to-r-rstudio-and-r-markdown.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R Packages include reusable functions that are not built-in with R. To use these functions, you must install the package to your local system with the <code>install.packages()</code> function. Once a package is installed on your computer you don’t need to install it again (<em>you will likely need to update it at some point though</em>). Anytime you want to use the package in a new R session you load it with the <code>library()</code> function.</p>
 <p><strong>When do I use</strong> <code>::</code> ?</p>
-<p>If you have a package installed, you don’t necessarily have to load it in with <code>library()</code> to use it in your R session. Instead, you can type the package name followed by <code>::</code> and use any functions in that package. This may be useful for some one-off functions using a specific package, however if you will be using packages a lot throughout your workflow you will want to load it in to your session. You should also use <code>::</code> in cases where you have multiple packages loaded that may have conflicting functions (e.g., <code>plot()</code> in Base R vs. <code>plot()</code> in the <code>terra</code> package).</p>
+<p>If you have a package installed, you don’t necessarily have to load it in with <code>library()</code> to use it in your R session. Instead, you can type the package name followed by <code>::</code> and use any functions in that package. This may be useful for some one-off functions using a specific package, however if you will be using packages a lot throughout your workflow you will want to load it in to your session. You should also use <code>::</code> in cases where you have multiple packages loaded that may have conflicting functions (e.g., <code>plot()</code> in Base R vs. <code>plot()</code> in the {terra} package).</p>
 <div id="base-r-vs.-the-tidyverse" class="section level4 hasAnchor" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Base R vs. The Tidyverse<a href="introduction-to-r-rstudio-and-r-markdown.html#base-r-vs.-the-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>You may hear us use the terms ‘Base R’ and ‘Tidyverse’ a lot throughout this course. Base R includes functions that are installed with the R software and do not require the installation of additional packages to use them. The Tidyverse is a collection of R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis, and all use the same design philosophy, grammar, and data structures. When you install the Tidyverse, it installs all of these packages, and you can then load all of them in your R session with <code>library(tidyverse)</code>. Base R and Tidyverse have many similar functions, but many prefer the style, efficiency and functionality of the Tidyverse packages, and we will mostly be sticking to Tidyverse functions for this course.</p>
+<p>You may hear us use the terms ‘Base R’ and ‘Tidyverse’ a lot throughout this course. Base R includes functions that are installed with the R software and do not require the installation of additional packages to use them. The Tidyverse is a collection of R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis, and all use the same design philosophy, grammar, and data structures. When you install the Tidyverse, it installs all of these packages, and you can then load all of them in your R session with <code>library(tidyverse)</code>. Base R and the Tidyverse have many similar functions, but many prefer the style, efficiency and functionality of the Tidyverse packages, and we will mostly be sticking to Tidyverse functions for this course.</p>
 </div>
 <div id="package-load-function" class="section level4 hasAnchor" number="3.3.2.2">
 <h4><span class="header-section-number">3.3.2.2</span> Package load function<a href="introduction-to-r-rstudio-and-r-markdown.html#package-load-function" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -278,14 +282,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-7"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb11-7" tabindex="-1"></a>      <span class="fu">library</span>(x[i], <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb11-8"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb11-8" tabindex="-1"></a>    }</span>
 <span id="cb11-9"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb11-9" tabindex="-1"></a>  }</span></code></pre></div>
-<p>For each package name given (‘x’) it checks if it is already installed, if not installs it, and then loads that package into the session. In future lessons we will learn more about writing custom functions, and iterating with for loops, but for now you can copy/paste this function and put it at the top of your set up script. When you execute this chunk of code, you won’t see anything printed in the console, however you should now see <code>packageLoad()</code> in your Environment under ‘Functions’. You can now use this function as many times as you want. Test is out, and use it to install the <code>tidyverse</code> package(s).</p>
+<p>For each package name given (‘x’) it checks if it is already installed, if not installs it, and then loads that package into the session. In future lessons we will learn more about writing custom functions, and iterating with for loops, but for now you can copy/paste this function and put it at the top of your set up script. When you execute this chunk of code, you won’t see anything printed in the console, however you should now see <code>packageLoad()</code> in your Environment under ‘Functions’. You can now use this function as many times as you want. Test is out, and use it to install the Tidyverse package(s).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb12-1" tabindex="-1"></a><span class="fu">packageLoad</span>(<span class="st">&#39;tidyverse&#39;</span>)</span></code></pre></div>
 <p>You can also give this function a string of package names. Lets install all the packages we will need for the first week, or if you already followed the set up instructions, this will just load the packages into your session since you already installed them.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-1" tabindex="-1"></a><span class="co"># create a string of package names</span></span>
 <span id="cb13-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-2" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;tidyverse&#39;</span>,</span>
 <span id="cb13-3"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-3" tabindex="-1"></a>              <span class="st">&#39;palmerpenguins&#39;</span>,</span>
 <span id="cb13-4"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-4" tabindex="-1"></a>              <span class="st">&#39;rmarkdown&#39;</span>)</span>
-<span id="cb13-5"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-5" tabindex="-1"></a><span class="co"># use the packageLoad function we created on those packages</span></span>
 <span id="cb13-6"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb13-6" tabindex="-1"></a><span class="fu">packageLoad</span>(packages)</span></code></pre></div>
 <p>Since this is code you will be re-using throughout your workflows, we will save it as its own script and run it at the beginning of other scripts/documents using the <code>source()</code> function as a part of our reproducible workflows.</p>
 <hr>
@@ -310,11 +314,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>R code chunks surrounded by <code>```</code>s</p></li>
 <li><p>text mixed with simple text formatting</p></li>
 </ul>
-<p>Since this is a notebook style document, you run the code chunks by clicking the green play button, and then the output is returned directly below the chunk.</p>
+<p>Since this is a notebook style document, you run the code chunks by clicking the green play button in the top right corner of each code chunk, and then the output is returned directly below the chunk.</p>
 <div class="alert alert-info">
 <p>If you’d rather have the code chunk output go to the console instead of directly below the chunk in your R Markdown document, go to Tools -&gt; Global Options -&gt; R Markdown and uncheck “Show output inline for all R Markdown documents”</p>
 </div>
-<p>When you want to create a report from your notebook, you render it by hitting the ‘knit’ button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the <code>rmarkdown</code> package installed.</p>
+<p>When you want to create a report from your notebook, you render it by hitting the ‘knit’ button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the {rmarkdown} package installed.</p>
 <p>You can delete the rest of the code/text below the YAML header, and insert a new code chunk at the top. <strong>You can insert code chunks by clicking the green C with the ‘+’ sign at the top of the source editor, or with the keyboard short cut (Ctrl+Alt+I for Windows, Option+Command+I for Macs)</strong>. For the rest of the lesson (and course) you will be writing and executing code through code chunks, and you can type any notes in the main body of the document.</p>
 <p>The first chunk is almost always your set up code, where you read in libraries and any necessary data sets. Here we will execute our set up script to install and load all the libraries we need:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb14-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
@@ -326,31 +330,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Normally when working with a new data set, the first thing we do is explore the data to better understand what we’re working with. To do so, you also need to understand the fundamental data types and structures you can work with in R.</p>
 <div id="the-penguins-data" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> The <code>penguins</code> data<a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For this intro lesson, we are going to use the Palmer Penguins data set (which is loaded with the <code>palmerpenguins</code> package you installed in your set up script). This data was collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> and the <a href="https://pallter.marine.rutgers.edu/">Palmer Station, Antarctica LTER</a>, a member of the <a href="https://lternet.edu/">Long Term Ecological Research Network</a>.</p>
+<p>For this intro lesson, we are going to use the Palmer Penguins data set (which is loaded with the {palmerpenguins} package you installed in your set up script). This data was collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> and the <a href="https://pallter.marine.rutgers.edu/">Palmer Station, Antarctica LTER</a>, a member of the <a href="https://lternet.edu/">Long Term Ecological Research Network</a>.</p>
 <p>Load the <code>penguins</code> data set.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb15-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span></code></pre></div>
 <p>You now see it in the Environment pane. Print it to the console to see a snapshot of the data:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb16-1" tabindex="-1"></a>penguins</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g</code></pre>
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <hr>
 </div>
 <div id="data-types" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Data Types<a href="introduction-to-r-rstudio-and-r-markdown.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This data is structured as a data frame, probably the most common data type and one you are most familiar with. These are like Excel spreadsheets, tabular data organized by rows and columns. However we see at the top this is called a <code>tibble</code> which is just a fancy kind of data frame specific to the <code>tidyverse</code>.</p>
+<p>This data is structured as a data frame, probably the most common data type and one you are most familiar with. These are like Excel spreadsheets: tabular data organized by rows and columns. However we see at the top this is called a <code>tibble</code> which is just a fancy kind of data frame specific to the Tidyverse.</p>
 <p>At the top we can see the data type of each column. There are five main data types:</p>
 <ul>
 <li><p><strong>character</strong>: <code>"a"</code>, <code>"swc"</code></p></li>
@@ -359,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>logical</strong>: <code>TRUE</code>, <code>FALSE</code></p></li>
 <li><p><strong>complex</strong>: <code>1+4i</code> (complex numbers with real and imaginary parts)</p></li>
 </ul>
-<p>Data types are combined to form data structures. R’s basic data structures include</p>
+<p>Data types are combined to form data structures. R’s basic data structures include:</p>
 <ul>
 <li><p>atomic vector</p></li>
 <li><p>list</p></li>
@@ -401,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..$ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
 ##   ..$ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
 ##   ..$ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
-<p>You can even nest lists within lists</p>
+<p>You can even nest lists within lists:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb28-1" tabindex="-1"></a><span class="fu">list</span>(myList, <span class="fu">list</span>(<span class="st">&quot;more stuff here&quot;</span>, <span class="fu">list</span>(<span class="st">&quot;and more&quot;</span>)))</span></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
@@ -415,20 +419,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## [[1]][[4]]
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
 ## 
 ## 
 ## [[2]]
@@ -438,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[2]][[2]]
 ## [[2]][[2]][[1]]
 ## [1] &quot;and more&quot;</code></pre>
-<p>You can use the <code>names()</code> function to retrieve or assign names to list and vector elements</p>
+<p>You can use the <code>names()</code> function to retrieve or assign names to list and vector elements:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb30-1" tabindex="-1"></a><span class="fu">names</span>(myList) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;logic&quot;</span>, <span class="st">&quot;data&quot;</span>)</span>
 <span id="cb30-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb30-2" tabindex="-1"></a><span class="fu">names</span>(myList)</span></code></pre></div>
 <pre><code>## [1] &quot;fruit&quot; &quot;year&quot;  &quot;logic&quot; &quot;data&quot;</code></pre>
@@ -448,24 +452,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Indexing is an extremely important aspect to data exploration and manipulation. In fact you already started indexing when we looked at the data type of individual columns with <code>penguins$species</code>. How you index is dependent on the data structure.</p>
 <p>Index lists:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb32-1" tabindex="-1"></a><span class="co"># for lists we use double brackes [[]]</span></span>
-<span id="cb32-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb32-2" tabindex="-1"></a>myList[[<span class="dv">1</span>]]</span></code></pre></div>
+<span id="cb32-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb32-2" tabindex="-1"></a>myList[[<span class="dv">1</span>]] <span class="co"># select the first stored object in the list</span></span></code></pre></div>
 <pre><code>## [1] &quot;apple&quot;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb34-1" tabindex="-1"></a>myList[[<span class="st">&quot;data&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb34-1" tabindex="-1"></a>myList[[<span class="st">&quot;data&quot;</span>]] <span class="co"># select the object in the list named &quot;data&quot; (a data frame)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g</code></pre>
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <p>Index vectors:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb36-1" tabindex="-1"></a><span class="co"># for vectors we use single brackets []</span></span>
 <span id="cb36-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb36-2" tabindex="-1"></a>myVector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>)</span>
@@ -496,7 +500,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb39-1" tabindex="-1"></a>myList[<span class="st">&quot;Fruit&quot;</span>]</span></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb40-1" tabindex="-1"></a>penguins<span class="sc">$</span>flipper_lenght_mm</span></code></pre></div>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb41-1" tabindex="-1"></a>penguins[island<span class="sc">==</span><span class="st">&#39;Dream&#39;</span>,]</span></code></pre></div></li>
-<li><p>How many species are in the <code>penguins</code> dataset? What islands were the data collected for? (Note: the <code>unique()</code> function might help)</p></li>
+<li><p>How many species are in the <code>penguins</code> data set? What islands were the data collected for? (Note: the <code>unique()</code> function might help)</p></li>
 <li><p>Use indexing to create a new data frame that has only 3 columns: species, island and flipper length columns, and subset all rows for just the ‘Dream’ island.</p></li>
 <li><p>Use indexing and the <code>mean()</code> function to find the average flipper length for the <em>Adelie</em> species on Dream island. (Note: explore the <code>mean()</code> function and how to deal with NA values).</p></li>
 </ol>
@@ -504,9 +508,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div id="the-dplyr-package" class="section level3 hasAnchor" number="3.5.4">
-<h3><span class="header-section-number">3.5.4</span> The <code>dplyr</code> package<a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>So far the code you’ve been writing has consisted of Base R functionality. Now lets dive into the Tidyverse with the <code>dplyr</code> package.</p>
-<p><code>dplyr</code> is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing, you may notice the first two <code>dplyr</code> functions you are going to learn, <code>filter()</code> and <code>select()</code> act as indexing functions by subsetting rows and columns based on specified names and/or conditions.</p>
+<h3><span class="header-section-number">3.5.4</span> The {dplyr} package<a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far the code you’ve been writing has consisted of Base R functionality. Now lets dive into the Tidyverse with the {dplyr} package.</p>
+<p>{dplyr} is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing, you may notice the first two {dplyr} functions you are going to learn. <code>filter()</code> and <code>select()</code> act as indexing functions by subsetting rows and columns based on specified names and/or conditions.</p>
 <p><strong>Subset rows with <a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a></strong></p>
 <p>You can filter data in many ways using logical operators (<code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>!=</code> (not equal), and <code>==</code> (equal)), AND (<code>&amp;</code>), OR (<code>|</code>), and NOT (<code>!</code>) operators, and other operations such as <code>%in%</code>, which returns everything that matches at least one of the values in a given vector, and <code>is.na()</code> and <code>!is.na()</code> to return all missing or all non-missing data.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb42-1" tabindex="-1"></a><span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>)</span>
@@ -516,10 +520,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb42-5"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb42-5" tabindex="-1"></a><span class="fu">filter</span>(penguins, island <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dream&quot;</span>, <span class="st">&quot;Torgersen&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(bill_length_mm))</span></code></pre></div>
 <p><strong>Note: Tidyverse package functions take in column names <em>without</em> quotations.</strong></p>
 <div class="alert alert-info">
-<p>Using <code>dplyr</code> functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.</p>
+<p>Using {dplyr} functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.</p>
 </div>
 <p><strong>Select columns with <a href="https://dplyr.tidyverse.org/reference/select.html" style="font-size: 13pt;"><code>select()</code></a></strong></p>
-<p><code>select()</code> has many helper functions you can use with it, such as <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code> and many more that are very useful when dealing with large data sets. See <code>?select</code> for more details</p>
+<p><code>select()</code> has many helper functions you can use with it, such as <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code> and many more that are very useful when dealing with large data sets. See <code>?select</code> for more details.</p>
+<div class="alert alert-info">
+<p>Writing out <code>?</code> ahead of any function from a package will open a description of that function in the “Help” pane.</p>
+</div>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb43-1" tabindex="-1"></a><span class="co"># Select two specific variables</span></span>
 <span id="cb43-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb43-2" tabindex="-1"></a><span class="fu">select</span>(penguins, species, sex)</span>
 <span id="cb43-3"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb43-3" tabindex="-1"></a></span>
@@ -539,10 +546,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-5"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb44-5" tabindex="-1"></a><span class="fu">mutate</span>(penguins, <span class="at">species_sex =</span> <span class="fu">if_else</span>(sex <span class="sc">==</span> <span class="st">&#39;male&#39;</span>, <span class="fu">paste0</span>(species,<span class="st">&quot;_m&quot;</span>), <span class="fu">paste0</span>(species, <span class="st">&quot;_f&quot;</span>)))</span></code></pre></div>
 <p><em>Notice the use of <code>paste0()</code> here, and when we briefly used a similar function <code>paste()</code> in the ‘Functions’ section above. Explore the difference between these two. They are both very useful functions for pasting strings together.</em></p>
 <p><a href="https://dplyr.tidyverse.org/reference/group_by.html"><strong><code>group_by()</code></strong></a> <strong>and <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a></strong></p>
-<p>These can all be used in conjunction with <code>group_by()</code> which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. <code>group_by()</code> becomes even more powerful when used along with <code>summarise()</code> to calculate some specified summary statistic for each group. However before we start using multiple operations in conjunction with one another, we need to talk about the pipe operator <code>%&gt;%</code>.</p>
+<p>These can all be used in conjunction with <code>group_by()</code> which changes the scope of each function from operating on the entire data set to operating on it group-by-group. <code>group_by()</code> becomes even more powerful when used along with <code>summarise()</code> to calculate some specified summary statistic for each group. However before we start using multiple operations in conjunction with one another, we need to talk about the pipe operator <code>%&gt;%</code>.</p>
 <div id="the-pipe" class="section level4 hasAnchor" number="3.5.4.1">
 <h4><span class="header-section-number">3.5.4.1</span> The pipe <code>%&gt;%</code><a href="introduction-to-r-rstudio-and-r-markdown.html#the-pipe" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The pipe, <code>%&gt;%</code>, comes from the <strong>magrittr</strong> package by Stefan Milton Bache. Packages in the tidyverse load <code>%&gt;%</code> for you automatically, so you don’t usually load magrittr explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.</p>
+<p>The pipe, <code>%&gt;%</code>, comes from the <strong>magrittr</strong> package by Stefan Milton Bache. Packages in the Tidyverse load <code>%&gt;%</code> for you automatically, so you don’t usually load {magrittr} explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.</p>
 <p>For example, the pipe operator can take this sequence of operations:</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb45-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, island <span class="sc">==</span> <span class="st">&quot;Dream&quot;</span>)</span>
 <span id="cb45-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb45-2" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df1, <span class="at">flipper_length_cm =</span> flipper_length_mm<span class="sc">/</span><span class="dv">10</span>)</span>
@@ -554,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb46-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb46-2" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">==</span> <span class="st">&quot;Dream&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb46-3"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb46-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flipper_length_cm =</span> flipper_length_mm<span class="sc">/</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb46-4"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb46-4" tabindex="-1"></a>  <span class="fu">select</span>(species, year, flipper_length_cm)</span></code></pre></div>
-<p>You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce <code>%&gt;%</code> when reading code is “then”. It takes the output of the operation to the left of <code>%&gt;%</code> and feeds it into the next function as the input.</p>
+<p>You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce <code>%&gt;%</code> when reading code is “and then”. It takes the output of the operation to the left of <code>%&gt;%</code> and feeds it into the next function as the input.</p>
 <p>Say you want to summarize data by some specified group, for example you want to find the average body mass for each species, this is where the <code>group_by()</code> function comes into play.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb47-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb47-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb47-2" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
@@ -571,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>Reorder the variables in <code>penguins</code> so that <code>year</code> is the first column followed by the rest (Hint: look into the use of <code>everything()</code>).</p></li>
 <li><p>Create a new column called ‘size_group’ where individuals with body mass greater than the overall average are called ‘large’ and those smaller are called ‘small’.</p></li>
-<li><p>Find out which year for each species were individuals on average the largest according to body mass.</p></li>
+<li><p>Find out which year for each species had the largest average body mass.</p></li>
 <li><p>You want to filter data for years that are <em>not</em> in a vector of given years, but this code doesn’t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here).</p></li>
 </ol>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb49-1" tabindex="-1"></a>    penguins <span class="sc">%&gt;%</span> </span>
@@ -582,9 +589,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="visualize" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Visualize<a href="introduction-to-r-rstudio-and-r-markdown.html#visualize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can’t see from starting a a data frame of numbers. Here we are going to walk through a very quick introduction to <code>ggplot2</code>, using some code examples from the <code>palmerpenguins</code> R package tutorial: <a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html" class="uri">https://allisonhorst.github.io/palmerpenguins/articles/intro.html</a>.</p>
-<p><code>ggplot2</code> is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about <code>ggplot</code> though is that it does not use the pipe <code>%&gt;%</code> operator like we just learned, but instead threads together arguments with <code>+</code> signs.</p>
-<p>The general structure for ggplots follows the template below. However note that you can also specify the <code>aes()</code> parameters withing <code>ggplot()</code> instead of your geom function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The geom function is the type of plot you want to make, such as <code>geom_point()</code>, <code>geom_bar()</code>, etc, there are a lot to choose from.</p>
+<p>A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can’t see from starting a data frame of numbers. Here we are going to walk through a very quick introduction to {ggplot2} using some code examples from the {palmerpenguins} R package tutorial: <a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html" class="uri">https://allisonhorst.github.io/palmerpenguins/articles/intro.html</a>.</p>
+<p>{ggplot2} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about {ggplot} though is that it does not use the pipe <code>%&gt;%</code> operator like we just learned, but instead threads together arguments with <code>+</code> signs.</p>
+<p>The general structure for ggplots follows the template below. However note that you can also specify the <code>aes()</code> parameters within <code>ggplot()</code> instead of your <code>geom_</code> function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The <code>geom_</code> function is the type of plot you want to make, such as <code>geom_point()</code>, <code>geom_bar()</code>, etc, there are a lot to choose from.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
 <span id="cb50-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb50-2" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>))</span></code></pre></div>
 <p>If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with <code>geom_histogram()</code></p>
@@ -607,7 +614,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb54-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span></span>
 <span id="cb54-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb54-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> island, <span class="at">fill =</span> species))</span></code></pre></div>
 <p><img src="02-R-Intro_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
-<p>As you may have already noticed, the beauty about <code>ggplot2</code> is there are a million ways you can customize your plots. This example builds on our simple bar plot</p>
+<p>As you may have already noticed, the beauty about {ggplot2} is there are a million ways you can customize your plots. This example builds on our simple bar plot:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb55-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> island, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
 <span id="cb55-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb55-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb55-3"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb55-3" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;cyan4&quot;</span>), </span>
@@ -633,7 +640,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="read-and-write-data" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Read and Write Data<a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We used an R data package today to read in our data frame, but that probably isn’t how you will normally read in your data.</p>
-<p>There are many ways to read and write data in R. To read in .csv files, you can use <code>read_csv()</code> which is included in the Tidyverse with the <code>readr</code> package, and to save csv files use <code>write_csv()</code>. The <code>readxl</code> package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.</p>
+<p>There are many ways to read and write data in R. To read in .csv files, you can use <code>read_csv()</code> which is included in the Tidyverse with the {readr} package, and to save csv files use <code>write_csv()</code>. The {readxl} package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.</p>
 
 </div>
 </div>
