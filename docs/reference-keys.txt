@@ -18,14 +18,10 @@ explore
 the-penguins-data
 data-types
 indexing
-exercises-not-required-but-work-through-them-if-you-want
+exercises
 the-dplyr-package
 the-pipe
-exercises-not-required-but-useful-if-you-want-to-work-through-them
-visualize
-exercises-not-required
-read-and-write-data
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
-exercises
 exercises-1
+visualize
 exercises-2
+read-and-write-data
