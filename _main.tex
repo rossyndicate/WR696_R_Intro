@@ -1,0 +1,1126 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introduction to Data Analysis in R},
+  pdfauthor={Caitlin C. Mothes, PhD and Katie Willi},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Introduction to Data Analysis in R}
+\author{Caitlin C. Mothes, PhD and Katie Willi}
+\date{2023-08-17}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{welcome}{%
+\chapter{Welcome!}\label{welcome}}
+
+This site hosts the course curriculum for Colorado State University's \textbf{WR 696} course: \emph{Introduction to Data Analysis in R}
+
+\hypertarget{set-up-instructions}{%
+\section*{Set up Instructions}\label{set-up-instructions}}
+\addcontentsline{toc}{section}{Set up Instructions}
+
+As your first step, please follow the instructions on the \protect\hyperlink{setup-instructions}{R Setup} page to make sure you have all the necessary software installed on your computer before the class starts.
+
+\hypertarget{navigating-this-site}{%
+\section*{Navigating this site}\label{navigating-this-site}}
+\addcontentsline{toc}{section}{Navigating this site}
+
+The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through the topic(s), analysis, etc. for that week. There are exercises at the end of the lesson that will be that week's homework assignment.
+
+Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create these R Markdown documents; you will use these R Markdowns as the basis for writing your code/answers to the exercises and then render them to either a Word or HTML report which is what you will submit through Canvas.
+
+\hypertarget{goals}{%
+\section*{Goals}\label{goals}}
+\addcontentsline{toc}{section}{Goals}
+
+The broad goal of this course is to introduce you to the skills necessary for a career that involves data science - namely manipulating data sets and performing statistical tests in R. The more specific goals of this course are to teach students to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Navigate the RStudio interface and create R Markdown documents for reproducible reporting;
+\item
+  Utilize R packages and functions to manipulate and analyze data effectively and apply data wrangling techniques using the \{tidyverse\} framework;
+\item
+  Differentiate between various data types and structures within R; and
+\item
+  Explore comparative analyses, linear regression, and trend analysis techniques to reveal patterns in data.
+\end{enumerate}
+
+\hypertarget{approach-and-expectations}{%
+\section*{Approach and Expectations}\label{approach-and-expectations}}
+\addcontentsline{toc}{section}{Approach and Expectations}
+
+This class is \href{https://ieeexplore.ieee.org/document/7344151}{flipped}, meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.
+
+So without lectures in class what do we do together? We code! This class has almost four hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.
+
+Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.
+
+As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.
+
+We also will actively encourage a collaborative coding environment where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use our Teams channel to discuss code issues!
+
+We will always send announcements with assignments, web links, and other updates through Canvas. The course syllabus will also be posted on Canvas.
+
+\hypertarget{class-schedule}{%
+\section*{Class Schedule}\label{class-schedule}}
+\addcontentsline{toc}{section}{Class Schedule}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0244}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0557}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9164}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Week & Data (Monday) & Content \\
+1 & 8/22 & Before class: \href{https://posit.cloud/learn/primers/1}{Primers Basics} and \href{https://rmarkdown.rstudio.com/lesson-1.html?_gl=1*10u3rje*_ga*NzUxNjg2ODAzLjE2OTE1MTIzMzk.*_ga_2C0WZ1JHG0*MTY5MTUxNjA2OC4yLjEuMTY5MTUxNjU2Ni4wLjAuMA..}{R Markdown}; download R and RStudio
+
+Introduction to R, RStudio, RMarkdown \\
+2 & 8/28 & Before class: \href{https://posit.cloud/learn/primers/2}{Work with Data}
+
+Exploratory data analysis \\
+3 & 9/4 & Before class:~\href{https://posit.cloud/learn/primers/3}{Visualize Data}
+
+Data visualization \\
+4 & 9/11 & \textbf{No Class Monday 9/4!} Before class Wednesday: \href{https://posit.cloud/learn/primers/4}{Tidy Your Data}
+
+T-tests, ANOVA \\
+5 & 9/18 & Before class: \href{https://posit.cloud/learn/primers/5}{Iterate}
+
+Linear modelling pt.~1 \\
+6 & 9/25 & Before class: \href{https://posit.cloud/learn/primers/6}{Write Functions}
+
+Linear modelling pt.~2 \\
+7 & 10/2 & Modelling assumptions, power \\
+8 & 10/9 & PCA \\
+\end{longtable}
+
+\hypertarget{additional-introductory-resources}{%
+\section*{Additional introductory resources}\label{additional-introductory-resources}}
+\addcontentsline{toc}{section}{Additional introductory resources}
+
+If you are looking to learn even more outside of what this class offers, below are some great introductory R resources:
+
+\begin{itemize}
+\item
+  \href{https://csu-r.github.io/Module1/}{Stat 158} - Vectors, data frames, installing R, etc\ldots{}
+\item
+  \href{https://education.rstudio.com/learn/beginner/}{RStudio Materials} - A series of videos, books, and more to get you started in R.
+\end{itemize}
+
+\hypertarget{tidyverse-introduction}{%
+\subsubsection{Tidyverse Introduction}\label{tidyverse-introduction}}
+
+\begin{itemize}
+\item
+  \href{https://r4ds.had.co.nz/introduction.html}{R for Data Science} - Covers all of the basic intro material, from a tidyverse perspective. As discussed, this is one way to find solutions in R, it happens to be my preferred way, but there are lots of Base R ways that work just fine!
+\item
+  \href{https://csu-r.github.io/Module2/}{Stat 159} - A CSU specific course for an intro to the tidyverse
+\item
+  \href{https://bookdown.org/yihui/rmarkdown/\#preface}{R Markdown} - The primary book for learning more about R Markdown and all of its quirks.
+\item
+  \href{https://www.rstudio.com/resources/cheatsheets/}{Cheatsheets} - Short, clear documents that cover so much material from dplyr to shiny apps. Great for quick references. We find the \href{https://rstudio.github.io/cheatsheets/html/rmarkdown.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..}{\texttt{rmarkdown}} and \href{https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..}{\texttt{ggplot2}} ones particularly useful!
+\end{itemize}
+
+\hypertarget{setup-instructions}{%
+\chapter{Setup Instructions}\label{setup-instructions}}
+
+This tutorial walks you through all the \textbf{required} setup steps for using R and RStudio in this course. Please use our class's Teams Channel to post any questions/problems that you encounter.
+
+\hypertarget{install-r-and-rstudio}{%
+\section{Install R and RStudio}\label{install-r-and-rstudio}}
+
+\textbf{R} is an open source language and software environment for statistical analysis and graphics (plus so much more!). You must \textbf{first download the R software (for free) here: \url{https://www.r-project.org/}.}
+
+\begin{itemize}
+\tightlist
+\item
+  Click the download link based on your operating system (OS). Then, for Mac users, install the latest release based on your macOS. For Windows users, click the `install R for the first time' link.
+\end{itemize}
+
+\emph{Note: If you already have R installed, you \textbf{must have at least version 4.0.0. or greater}, but it is best to have the most recent version installed (4.3.1)}
+
+\textbf{RStudio} is a (also free) R Integrated Development Environment (IDE) that provides a built-in editor and other advantages such as version control and project management. \textbf{Once you have the R software installed on your computer, you can install RStudio Desktop here: \url{https://posit.co/download/rstudio-desktop/}.}
+
+\begin{itemize}
+\tightlist
+\item
+  Under \textbf{Step 2} click the download RStudio Desktop button.
+\end{itemize}
+
+\hypertarget{package-installation}{%
+\section{Package Installation}\label{package-installation}}
+
+While the R software comes with many pre-loaded functions (referred to as `base R' functions) to perform various operations in R, there are thousands of R packages that provide additional reusable R functions. In order to use these functions you need to first install the package to your local machine using the \texttt{install.packages()} function. Once a package is installed on your computer you don't need to install it again (but you may have to update it). Anytime you want to use the package in a new R session you can load it with the \texttt{library()} function.
+
+We will be working in RStudio for this entire course, so after you have installed both R and RStudio, \textbf{open a new session of RStudio.}
+
+You will learn more about the ins and outs of RStudio in class, but for set up purposes you will just be running code in the Console. Normally you want to save the code you write, but since package installation is only needed once (unless you are working on a new machine or need to update any packages) you can execute this directly in the console.
+
+Run the following three lines of code (one at a time) in the console. \emph{You can click the copy button in the upper right corner when you hover over the code chunk, then paste that after the \texttt{\textgreater{}} in the Console. Spelling and capitalization is important!}
+
+\textbf{Install the \{tidyverse\} package.} The Tidyverse is actually a collection of multiple R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis. When you install the Tidyverse, it installs all of these packages, and you can later load all of them in your R session with \texttt{library(tidyverse).} Since you are installing multiple packages here this may take a little while.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Install the \{palmerpenguins\} package.} This is a data package that installs a couple of spreadsheets you can load and work with in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"palmerpenguins"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Install the \{rmarkdown\} package}. Later on in the course you will be working in and rendering R Markdown files and reports. R Markdown is a notebook style interface integrating text and code, allowing you to create fully reproducible documents and render them to various elegantly formatted static or dynamic outputs.
+
+You can learn more about R Markdown at their website, which has really informative lessons on their \href{https://rmarkdown.rstudio.com/lesson-1.html}{Getting Started} page, and see the range of outputs you can create at their \href{https://rmarkdown.rstudio.com/gallery.html}{Gallery} page.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"rmarkdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To see if you successfully installed all three packages, use the \texttt{library()} function to load the packages into your session. You should either see nothing printed to the console after running \texttt{library()}, or in the case of the \texttt{tidyverse} you may see some messages printed. As long as there are no \texttt{error} messages, you should be all set! Please use our class's Teams Channel for assistance if you get any error messages.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\FunctionTok{library}\NormalTok{(rmarkdown)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{introduction-to-r-rstudio-and-r-markdown}{%
+\chapter{Introduction to R, RStudio and R Markdown}\label{introduction-to-r-rstudio-and-r-markdown}}
+
+In this lesson we will get a general introduction to coding in RStudio, using R Markdown, some R fundamentals such as data types and indexing, and touch on a range of coding topics that we will dive into deeper throughout the course.
+
+\hypertarget{getting-to-know-rstudio}{%
+\section{Getting to know RStudio}\label{getting-to-know-rstudio}}
+
+When you first open RStudio, it is split into 3 panels:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The Console} (left), where you can directly type and run code (by hitting Enter)
+\item
+  \textbf{The Environment/History pane} (upper-right), where you can view the objects you currently have stored in your environment and a history of the code you've run
+\item
+  \textbf{The Files/Plots/Packages/Help pane} (lower-right), where you can search for files, view and save your plots, view and manage what packages are loaded in your library and session, and get R help.
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth,height=\textheight]{https://swcarpentry.github.io/r-novice-gapminder/fig/01-rstudio.png}
+\caption{Image Credit: Software Carpentry}
+\end{figure}
+
+To write and save code you use .R scripts (or RMarkdown, which we will learn shortly). You can open a new script with File -\textgreater{} New File or by clicking the icon with the green plus sign in the upper left corner. When you open a script, RStudio then opens a fourth \textbf{`Source' panel} in the upper-left to write and save your code. You can also send code from a script directly to the console to execute it by highlighting the \textbf{entire} code line/chunk (or place your cursor at the end of the code chunk) and hit CTRL+ENTER on a PC or CMD+ENTER on a Mac.
+
+\begin{figure}
+\centering
+\includegraphics{https://swcarpentry.github.io/r-novice-gapminder/fig/01-rstudio-script.png}
+\caption{Image Credit: Software Carpentry}
+\end{figure}
+
+It is good practice to add comments/notes throughout your scripts to document what the code is doing. To do this start a line with a \texttt{\#}. R knows to ignore everything after a \texttt{\#}, so you can write whatever you want there. Note that R reads line by line, so if you want your comments to carry over multiple lines you need a \texttt{\#} at every line.
+
+\hypertarget{r-projects}{%
+\section{R Projects}\label{r-projects}}
+
+As a first step whenever you start a new project, workflow, analysis, etc., it is good practice to set up an R project. R Projects are RStudio's way of bundling together all your files for a specific project, such as data, scripts, results, figures. Your project directory also becomes your working directory, so everything is self-contained and easily portable.
+
+We recommend using a single R Project (i.e., contained in a single folder) for this course, so lets create one now.
+
+You can start an R project in an existing directory or in a new one. To create a project go to File -\textgreater{} New Project:
+
+\includegraphics{images/project-start.png}
+
+Let's choose `New Directory' then `New Project'. Now choose a directory name, this will be both the folder name and the project name, so use proper spelling conventions (\textbf{no spaces!}). We recommend naming it something course specific, like `WR-696-2023', or even more generic `Intro-R-Fall23'. Choose where on your local file system you want to save this new folder/project (somewhere you can find it easily), then click `Create Project'.
+
+Now you can see your RStudio session is working in the R project you just created. You can see the working directory printed at the top of your console is now the project directory, and in the `Files' tab in RStudio you can see there is an .Rproj file with the same name as the R project, which will open up this R project in RStudio whenever you come back to it.
+
+\textbf{Test out how this .Rproj file works}. Close out of your R session, navigate to the project folder on your computer, and double-click the .Rproj file.
+
+\textbf{\emph{What is a working directory?}} A working directory is the default file path to a specific file location on your computer to read files from or save files to. Since everyone's computer is unique, everyone's full file paths will be different. This is an advantage of working in R Projects, you can use \emph{relative} file paths, since the working directory defaults to wherever the .RProj file is saved on your computer you don't need to specify the full unique path to read and write files within the project directory.
+
+\hypertarget{write-a-set-up-script}{%
+\section{Write a set-up script}\label{write-a-set-up-script}}
+
+Let's start coding!
+
+The first thing you do in a fresh R session is set up your environment, which mostly includes installing and loading necessary libraries and reading in required data sets. Let's open a fresh R script and save it in our root (project) directory. Call this script `setup.R'.
+
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+Before creating a set up script, it might be helpful to understand the use of functions in R if you are new to this programming language. R has many built-in functions to perform various tasks. To run these functions you type the function name followed by parentheses. Within the parentheses you put in your specific arguments needed to run the function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mathematical functions with numbers}
+\FunctionTok{log}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.302585
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# average a range of numbers}
+\FunctionTok{mean}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# nested functions for a string of numbers, using the concatenate function \textquotesingle{}c\textquotesingle{}}
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# functions with characters}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Hello World"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello World"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(}\StringTok{"Hello"}\NormalTok{, }\StringTok{"World"}\NormalTok{, }\AttributeTok{sep =} \StringTok{"{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello-World"
+\end{verbatim}
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+R Packages include reusable functions that are not built-in with R. To use these functions, you must install the package to your local system with the \texttt{install.packages()} function. Once a package is installed on your computer you don't need to install it again (\emph{you will likely need to update it at some point though}). Anytime you want to use the package in a new R session you load it with the \texttt{library()} function.
+
+\textbf{When do I use} \texttt{::} ?
+
+If you have a package installed, you don't necessarily have to load it in with \texttt{library()} to use it in your R session. Instead, you can type the package name followed by \texttt{::} and use any functions in that package. This may be useful for some one-off functions using a specific package, however if you will be using packages a lot throughout your workflow you will want to load it in to your session. You should also use \texttt{::} in cases where you have multiple packages loaded that may have conflicting functions (e.g., \texttt{plot()} in Base R vs.~\texttt{plot()} in the \{terra\} package).
+
+\hypertarget{base-r-vs.-the-tidyverse}{%
+\subsubsection{Base R vs.~The Tidyverse}\label{base-r-vs.-the-tidyverse}}
+
+You may hear us use the terms `Base R' and `Tidyverse' a lot throughout this course. Base R includes functions that are installed with the R software and do not require the installation of additional packages to use them. The Tidyverse is a collection of R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis, and all use the same design philosophy, grammar, and data structures. When you install the Tidyverse, it installs all of these packages, and you can then load all of them in your R session with \texttt{library(tidyverse)}. Base R and the Tidyverse have many similar functions, but many prefer the style, efficiency and functionality of the Tidyverse packages, and we will mostly be sticking to Tidyverse functions for this course.
+
+\hypertarget{package-load-function}{%
+\subsubsection{Package load function}\label{package-load-function}}
+
+To make code reproducible (meaning anyone can run your code from their local machines) we can write a function that checks whether or not necessary packages are installed, if not install them and load them, or if they are already installed it will only load them and not re-install. This function looks like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{packageLoad }\OtherTok{\textless{}{-}}
+  \ControlFlowTok{function}\NormalTok{(x) \{}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x)) \{}
+      \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\NormalTok{x[i] }\SpecialCharTok{\%in\%} \FunctionTok{installed.packages}\NormalTok{()) \{}
+        \FunctionTok{install.packages}\NormalTok{(x[i])}
+\NormalTok{      \}}
+      \FunctionTok{library}\NormalTok{(x[i], }\AttributeTok{character.only =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+For each package name given (`x') it checks if it is already installed, if not installs it, and then loads that package into the session. In future lessons we will learn more about writing custom functions, and iterating with for loops, but for now you can copy/paste this function and put it at the top of your set up script. When you execute this chunk of code, you won't see anything printed in the console, however you should now see \texttt{packageLoad()} in your Environment under `Functions'. You can now use this function as many times as you want. Test is out, and use it to install the Tidyverse package(s).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{packageLoad}\NormalTok{(}\StringTok{\textquotesingle{}tidyverse\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You can also give this function a string of package names. Lets install all the packages we will need for the first week, or if you already followed the set up instructions, this will just load the packages into your session since you already installed them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create a string of package names}
+\NormalTok{packages }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}tidyverse\textquotesingle{}}\NormalTok{,}
+              \StringTok{\textquotesingle{}palmerpenguins\textquotesingle{}}\NormalTok{,}
+              \StringTok{\textquotesingle{}rmarkdown\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# use the packageLoad function we created on those packages}
+\FunctionTok{packageLoad}\NormalTok{(packages)}
+\end{Highlighting}
+\end{Shaded}
+
+Since this is code you will be re-using throughout your workflows, we will save it as its own script and run it at the beginning of other scripts/documents using the \texttt{source()} function as a part of our reproducible workflows.
+
+\hypertarget{r-markdown}{%
+\section{R Markdown}\label{r-markdown}}
+
+Throughout this course you will be working mostly in R Markdown documents. R Markdown is a notebook style interface integrating text and code, allowing you to create fully reproducible documents and render them to various elegantly formatted static or dynamic outputs (which is how you will be submitting your assignments).
+
+You can learn more at the R Markdown website, which has really informative lessons on the \href{https://rmarkdown.rstudio.com/lesson-1.html}{Getting Started} page and you can see the range of outputs you can create at the \href{https://rmarkdown.rstudio.com/gallery.html}{Gallery} page.
+
+\hypertarget{what-about-quarto}{%
+\subsection{What About Quarto?}\label{what-about-quarto}}
+
+Some of you may have heard of Quarto, which is essentially an extension of R Markdown but it lives as its own software to allow its use in other languages such as Python, Julia and Observable. You can install the Quarto CLI on its own and RStudio will detect it so you can create documents within the IDE, or alternatively with newer versions of RStudio a version of Quarto is built-in and you can enable Quarto through the R Markdown tab in Global Options. R Markdown isn't going anywhere, however many in the data science realm are switching to Quarto. Quarto documents are very similar to R Markdown, in fact Quarto can even render R Markdown documents, so after learning R Markdown in this course you should have some of the fundamental skills to easily switch to Quarto if you want to. You can read more about Quarto \href{https://quarto.org/}{here}.
+
+\hypertarget{getting-started-with-r-markdown}{%
+\subsection{Getting started with R Markdown}\label{getting-started-with-r-markdown}}
+
+Let's create a new document by going to File -\textgreater{} New File -\textgreater{} R Markdown. You will be prompted to add information like title and author, fill those in (let's call it ``Intro to R and R Markdown'') and keep the output as HTML for now. Click OK to create the document.
+
+This creates an outline of an R Markdown document, and you see the title, author and date you gave the prompt at the top of the document which is called the YAML header.
+
+Notice that the file contains three types of content:
+
+\begin{itemize}
+\item
+  An (optional) YAML header surrounded by \texttt{-\/-\/-}s
+\item
+  R code chunks surrounded by \texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}}s
+\item
+  text mixed with simple text formatting
+\end{itemize}
+
+Since this is a notebook style document, you run the code chunks by clicking the green play button in the top right corner of each code chunk, and then the output is returned directly below the chunk.
+
+If you'd rather have the code chunk output go to the console instead of directly below the chunk in your R Markdown document, go to Tools -\textgreater{} Global Options -\textgreater{} R Markdown and uncheck ``Show output inline for all R Markdown documents''
+
+When you want to create a report from your notebook, you render it by hitting the `knit' button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the \{rmarkdown\} package installed.
+
+You can delete the rest of the code/text below the YAML header, and insert a new code chunk at the top. \textbf{You can insert code chunks by clicking the green C with the `+' sign at the top of the source editor, or with the keyboard short cut (Ctrl+Alt+I for Windows, Option+Command+I for Macs)}. For the rest of the lesson (and course) you will be writing and executing code through code chunks, and you can type any notes in the main body of the document.
+
+The first chunk is almost always your set up code, where you read in libraries and any necessary data sets. Here we will execute our set up script to install and load all the libraries we need:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"setup.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{explore}{%
+\section{Explore}\label{explore}}
+
+Normally when working with a new data set, the first thing we do is explore the data to better understand what we're working with. To do so, you also need to understand the fundamental data types and structures you can work with in R.
+
+\hypertarget{the-penguins-data}{%
+\subsection{\texorpdfstring{The \texttt{penguins} data}{The penguins data}}\label{the-penguins-data}}
+
+For this intro lesson, we are going to use the Palmer Penguins data set (which is loaded with the \{palmerpenguins\} package you installed in your set up script). This data was collected and made available by \href{https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php}{Dr.~Kristen Gorman} and the \href{https://pallter.marine.rutgers.edu/}{Palmer Station, Antarctica LTER}, a member of the \href{https://lternet.edu/}{Long Term Ecological Research Network}.
+
+Load the \texttt{penguins} data set.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"penguins"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You now see it in the Environment pane. Print it to the console to see a snapshot of the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # i 334 more rows
+## # i 2 more variables: sex <fct>, year <int>
+\end{verbatim}
+
+\hypertarget{data-types}{%
+\subsection{Data Types}\label{data-types}}
+
+This data is structured as a data frame, probably the most common data type and one you are most familiar with. These are like Excel spreadsheets: tabular data organized by rows and columns. However we see at the top this is called a \texttt{tibble} which is just a fancy kind of data frame specific to the Tidyverse.
+
+At the top we can see the data type of each column. There are five main data types:
+
+\begin{itemize}
+\item
+  \textbf{character}: \texttt{"a"}, \texttt{"swc"}
+\item
+  \textbf{numeric}: \texttt{2}, \texttt{15.5}
+\item
+  \textbf{integer}: \texttt{2L} (the \texttt{L} tells R to store this as an integer)
+\item
+  \textbf{logical}: \texttt{TRUE}, \texttt{FALSE}
+\item
+  \textbf{complex}: \texttt{1+4i} (complex numbers with real and imaginary parts)
+\end{itemize}
+
+Data types are combined to form data structures. R's basic data structures include:
+
+\begin{itemize}
+\item
+  atomic vector
+\item
+  list
+\item
+  matrix
+\item
+  data frame
+\item
+  factors
+\end{itemize}
+
+You can see the data type or structure of an object using the \texttt{class()} function, and get more specific details using the \texttt{str()} function. (Note that `tbl' stands for tibble).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(penguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "tbl_df"     "tbl"        "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(penguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tibble [344 x 8] (S3: tbl_df/tbl/data.frame)
+##  $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##  $ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
+##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+When we pull one column from a data frame like we just did above using the \texttt{\$} operator, that returns a vector. Vectors are 1-dimensional, and must contain data of a single data type (i.e., you cannot have a vector of both numbers and characters).
+
+If you want a 1-dimensional object that holds mixed data types and structures, that would be a list. You can put together pretty much anything in a list.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myList }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\StringTok{"apple"}\NormalTok{, }\DecValTok{1993}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, penguins)}
+\FunctionTok{str}\NormalTok{(myList)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 4
+##  $ : chr "apple"
+##  $ : num 1993
+##  $ : logi FALSE
+##  $ : tibble [344 x 8] (S3: tbl_df/tbl/data.frame)
+##   ..$ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+##   ..$ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+##   ..$ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##   ..$ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##   ..$ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##   ..$ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##   ..$ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
+##   ..$ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
+\end{verbatim}
+
+You can even nest lists within lists:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list}\NormalTok{(myList, }\FunctionTok{list}\NormalTok{(}\StringTok{"more stuff here"}\NormalTok{, }\FunctionTok{list}\NormalTok{(}\StringTok{"and more"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [[1]][[1]]
+## [1] "apple"
+## 
+## [[1]][[2]]
+## [1] 1993
+## 
+## [[1]][[3]]
+## [1] FALSE
+## 
+## [[1]][[4]]
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # i 334 more rows
+## # i 2 more variables: sex <fct>, year <int>
+## 
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] "more stuff here"
+## 
+## [[2]][[2]]
+## [[2]][[2]][[1]]
+## [1] "and more"
+\end{verbatim}
+
+You can use the \texttt{names()} function to retrieve or assign names to list and vector elements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(myList) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"fruit"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"logic"}\NormalTok{, }\StringTok{"data"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(myList)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "fruit" "year"  "logic" "data"
+\end{verbatim}
+
+\hypertarget{indexing}{%
+\subsection{Indexing}\label{indexing}}
+
+Indexing is an extremely important aspect to data exploration and manipulation. In fact you already started indexing when we looked at the data type of individual columns with \texttt{penguins\$species}. How you index is dependent on the data structure.
+
+Index lists:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# for lists we use double brackes [[]]}
+\NormalTok{myList[[}\DecValTok{1}\NormalTok{]] }\CommentTok{\# select the first stored object in the list}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "apple"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myList[[}\StringTok{"data"}\NormalTok{]] }\CommentTok{\# select the object in the list named "data" (a data frame)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # i 334 more rows
+## # i 2 more variables: sex <fct>, year <int>
+\end{verbatim}
+
+Index vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# for vectors we use single brackets []}
+\NormalTok{myVector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"apple"}\NormalTok{, }\StringTok{"banana"}\NormalTok{, }\StringTok{"pear"}\NormalTok{)}
+\NormalTok{myVector[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "banana"
+\end{verbatim}
+
+Index data frames:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dataframe[row(s), columns()]}
+\NormalTok{penguins[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{]}
+
+\NormalTok{penguins[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\StringTok{"island"}\NormalTok{]}
+
+\NormalTok{penguins[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+
+\NormalTok{penguins[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"species"}\NormalTok{,}\StringTok{"sex"}\NormalTok{)]}
+
+\NormalTok{penguins[penguins}\SpecialCharTok{$}\NormalTok{sex}\SpecialCharTok{==}\StringTok{\textquotesingle{}female\textquotesingle{}}\NormalTok{,]}
+
+\CommentTok{\# $ for a single column}
+\NormalTok{penguins}\SpecialCharTok{$}\NormalTok{species}
+\end{Highlighting}
+\end{Shaded}
+
+To index elements of a list you must use double brackets \texttt{{[}{[}\ {]}{]}}, and to index vectors and data frames you use single brackets \texttt{{[}\ {]}}
+
+\hypertarget{exercises}{%
+\subsubsection{Exercises}\label{exercises}}
+
+(\emph{not required, but work through them if you want!})
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Why don't the following lines of code work? Tweak each one so the code runs
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myList[}\StringTok{"Fruit"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins}\SpecialCharTok{$}\NormalTok{flipper\_lenght\_mm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins[island}\SpecialCharTok{==}\StringTok{\textquotesingle{}Dream\textquotesingle{}}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  How many species are in the \texttt{penguins} data set? What islands were the data collected for? (Note: the \texttt{unique()} function might help)
+\item
+  Use indexing to create a new data frame that has only 3 columns: species, island and flipper length columns, and subset all rows for just the `Dream' island.
+\item
+  Use indexing and the \texttt{mean()} function to find the average flipper length for the \emph{Adelie} species on Dream island. (Note: explore the \texttt{mean()} function and how to deal with NA values).
+\end{enumerate}
+
+\hypertarget{the-dplyr-package}{%
+\subsection{The \{dplyr\} package}\label{the-dplyr-package}}
+
+So far the code you've been writing has consisted of Base R functionality. Now lets dive into the Tidyverse with the \{dplyr\} package.
+
+\{dplyr\} is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing, you may notice the first two \{dplyr\} functions you are going to learn. \texttt{filter()} and \texttt{select()} act as indexing functions by subsetting rows and columns based on specified names and/or conditions.
+
+\textbf{Subset rows with \href{https://dplyr.tidyverse.org/reference/filter.html}{\texttt{filter()}}}
+
+You can filter data in many ways using logical operators (\texttt{\textgreater{}}, \texttt{\textgreater{}=}, \texttt{\textless{}}, \texttt{\textless{}=}, \texttt{!=} (not equal), and \texttt{==} (equal)), AND (\texttt{\&}), OR (\texttt{\textbar{}}), and NOT (\texttt{!}) operators, and other operations such as \texttt{\%in\%}, which returns everything that matches at least one of the values in a given vector, and \texttt{is.na()} and \texttt{!is.na()} to return all missing or all non-missing data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(penguins, species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{)}
+
+\FunctionTok{filter}\NormalTok{(penguins, species }\SpecialCharTok{!=} \StringTok{"Adelie"}\NormalTok{)}
+
+\FunctionTok{filter}\NormalTok{(penguins, island }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Dream"}\NormalTok{, }\StringTok{"Torgersen"}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(bill\_length\_mm))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Note: Tidyverse package functions take in column names \emph{without} quotations.}
+
+Using \{dplyr\} functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.
+
+\textbf{Select columns with \href{https://dplyr.tidyverse.org/reference/select.html}{\texttt{select()}}}
+
+\texttt{select()} has many helper functions you can use with it, such as \texttt{starts\_with()}, \texttt{ends\_with()}, \texttt{contains()} and many more that are very useful when dealing with large data sets. See \texttt{?select} for more details.
+
+Writing out \texttt{?} ahead of any function from a package will open a description of that function in the ``Help'' pane.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select two specific variables}
+\FunctionTok{select}\NormalTok{(penguins, species, sex)}
+
+\CommentTok{\# Select a range of variables}
+\FunctionTok{select}\NormalTok{(penguins, species}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm)}
+
+\CommentTok{\# Rename columns within select}
+\FunctionTok{select}\NormalTok{(penguins, }\AttributeTok{genus =}\NormalTok{ species, island)}
+
+\CommentTok{\# Select column variables that are recorded in mm}
+\FunctionTok{select}\NormalTok{(penguins, }\FunctionTok{contains}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Create new variables with \href{https://dplyr.tidyverse.org/reference/mutate.html}{\texttt{mutate()}}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# New variable that calculates bill length in cm}
+\FunctionTok{mutate}\NormalTok{(penguins, }\AttributeTok{bill\_length\_cm =}\NormalTok{ bill\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
+
+\CommentTok{\# mutate based on conditional statements}
+\FunctionTok{mutate}\NormalTok{(penguins, }\AttributeTok{species\_sex =} \FunctionTok{if\_else}\NormalTok{(sex }\SpecialCharTok{==} \StringTok{\textquotesingle{}male\textquotesingle{}}\NormalTok{, }\FunctionTok{paste0}\NormalTok{(species,}\StringTok{"\_m"}\NormalTok{), }\FunctionTok{paste0}\NormalTok{(species, }\StringTok{"\_f"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Notice the use of \texttt{paste0()} here, and when we briefly used a similar function \texttt{paste()} in the `Functions' section above. Explore the difference between these two. They are both very useful functions for pasting strings together.}
+
+\href{https://dplyr.tidyverse.org/reference/group_by.html}{\textbf{\texttt{group\_by()}}} \textbf{and \href{https://dplyr.tidyverse.org/reference/summarise.html}{\texttt{summarise()}}}
+
+These can all be used in conjunction with \texttt{group\_by()} which changes the scope of each function from operating on the entire data set to operating on it group-by-group. \texttt{group\_by()} becomes even more powerful when used along with \texttt{summarise()} to calculate some specified summary statistic for each group. However before we start using multiple operations in conjunction with one another, we need to talk about the pipe operator \texttt{\%\textgreater{}\%}.
+
+\hypertarget{the-pipe}{%
+\subsubsection{\texorpdfstring{The pipe \texttt{\%\textgreater{}\%}}{The pipe \%\textgreater\%}}\label{the-pipe}}
+
+The pipe, \texttt{\%\textgreater{}\%}, comes from the \textbf{magrittr} package by Stefan Milton Bache. Packages in the Tidyverse load \texttt{\%\textgreater{}\%} for you automatically, so you don't usually load \{magrittr\} explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.
+
+For example, the pipe operator can take this sequence of operations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(penguins, island }\SpecialCharTok{==} \StringTok{"Dream"}\NormalTok{)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(df1, }\AttributeTok{flipper\_length\_cm =}\NormalTok{ flipper\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
+\NormalTok{df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(df2, species, year, flipper\_length\_cm)}
+
+\FunctionTok{print}\NormalTok{(df3)}
+\end{Highlighting}
+\end{Shaded}
+
+And turn it into this, removing the need to create intermediate variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(island }\SpecialCharTok{==} \StringTok{"Dream"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flipper\_length\_cm =}\NormalTok{ flipper\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(species, year, flipper\_length\_cm)}
+\end{Highlighting}
+\end{Shaded}
+
+You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce \texttt{\%\textgreater{}\%} when reading code is ``and then''. It takes the output of the operation to the left of \texttt{\%\textgreater{}\%} and feeds it into the next function as the input.
+
+Say you want to summarize data by some specified group, for example you want to find the average body mass for each species, this is where the \texttt{group\_by()} function comes into play.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{body\_mass\_avg =} \FunctionTok{mean}\NormalTok{(body\_mass\_g, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Or get a count of how many individuals were observed for each species each year
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n\_observations =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+You can even shorten the above operation buy using \texttt{count()} instead of \texttt{summarise}.
+
+\hypertarget{exercises-1}{%
+\subsubsection{Exercises}\label{exercises-1}}
+
+(\emph{not required, but useful if you want to work through them!})
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Reorder the variables in \texttt{penguins} so that \texttt{year} is the first column followed by the rest (Hint: look into the use of \texttt{everything()}).
+\item
+  Create a new column called `size\_group' where individuals with body mass greater than the overall average are called `large' and those smaller are called `small'.
+\item
+  Find out which year for each species had the largest average body mass.
+\item
+  You want to filter data for years that are \emph{not} in a vector of given years, but this code doesn't work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    penguins }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{!\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{2008}\NormalTok{, }\DecValTok{2009}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visualize}{%
+\section{Visualize}\label{visualize}}
+
+A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can't see from starting a data frame of numbers. Here we are going to walk through a very quick introduction to \{ggplot2\} using some code examples from the \{palmerpenguins\} R package tutorial: \url{https://allisonhorst.github.io/palmerpenguins/articles/intro.html}.
+
+\{ggplot2\} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about \{ggplot\} though is that it does not use the pipe \texttt{\%\textgreater{}\%} operator like we just learned, but instead threads together arguments with \texttt{+} signs.
+
+The general structure for ggplots follows the template below. However note that you can also specify the \texttt{aes()} parameters within \texttt{ggplot()} instead of your \texttt{geom\_} function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The \texttt{geom\_} function is the type of plot you want to make, such as \texttt{geom\_point()}, \texttt{geom\_bar()}, etc, there are a lot to choose from.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =} \SpecialCharTok{\textless{}}\NormalTok{DATA}\SpecialCharTok{\textgreater{}}\NormalTok{) }\SpecialCharTok{+} 
+  \ErrorTok{\textless{}}\NormalTok{GEOM\_FUNCTION}\SpecialCharTok{\textgreater{}}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\SpecialCharTok{\textless{}}\NormalTok{MAPPINGS}\SpecialCharTok{\textgreater{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with \texttt{geom\_histogram()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+This tells us there may be a lot of variation in flipper size among species. We can use the `fill =' argument to color the bars by species, and \texttt{scale\_fill\_manual()} to specify the colors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram example: flipper length by species}
+\FunctionTok{ggplot}\NormalTok{(penguins) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{fill =}\NormalTok{ species), }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkorange"}\NormalTok{,}\StringTok{"darkorchid"}\NormalTok{,}\StringTok{"cyan4"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with \texttt{facet\_wrap()}, which will create a separate plot for each group, in this case species.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{fill =}\NormalTok{ species), }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkorange"}\NormalTok{,}\StringTok{"darkorchid"}\NormalTok{,}\StringTok{"cyan4"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+Lets make a quick bar plot showing the total count of each species studied on each island
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+As you may have already noticed, the beauty about \{ggplot2\} is there are a million ways you can customize your plots. This example builds on our simple bar plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkorange"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"cyan4"}\NormalTok{), }
+                    \AttributeTok{guide =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{species, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+We can use \texttt{geom\_point()} to view the relationship between two variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the point by species:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ body\_mass\_g, }\AttributeTok{y =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{color =}\NormalTok{ species))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+\hypertarget{exercises-2}{%
+\subsection{Exercises}\label{exercises-2}}
+
+(\emph{not required})
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Make a barplot showing the average flipper length for each species.
+\item
+  Make a scatter plot of bill length compared to bill depth but only for observations on the Dream island.
+\end{enumerate}
+
+\hypertarget{read-and-write-data}{%
+\section{Read and Write Data}\label{read-and-write-data}}
+
+We used an R data package today to read in our data frame, but that probably isn't how you will normally read in your data.
+
+There are many ways to read and write data in R. To read in .csv files, you can use \texttt{read\_csv()} which is included in the Tidyverse with the \{readr\} package, and to save csv files use \texttt{write\_csv()}. The \{readxl\} package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}
