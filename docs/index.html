@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-08-16" />
+<meta name="date" content="2023-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -169,13 +173,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
 <li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
 <li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
-<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The <code>dplyr</code> package</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#visualize"><i class="fa fa-check"></i><b>3.6</b> Visualize</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#exercises-not-required"><i class="fa fa-check"></i><b>3.6.1</b> Exercises (<em>not required</em>)</a></li>
+<li class="chapter" data-level="3.6.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#exercises-2"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.7</b> 8. Read and Write Data</a></li>
+<li class="chapter" data-level="3.7" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.7</b> Read and Write Data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -200,19 +204,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to Data Analysis in R</h1>
 <p class="author"><em>Caitlin C. Mothes, PhD and Katie Willi</em></p>
-<p class="date"><em>2023-08-16</em></p>
+<p class="date"><em>2023-08-17</em></p>
 </div>
 <div id="welcome" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number"> 1</span> Welcome!<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This site hosts the course curriculum for Colorado State University’s <strong>WR 696</strong> course: <em>Introduction to Data Analysis in R</em></p>
 <div id="set-up-instructions" class="section level2 unnumbered hasAnchor">
 <h2>Set up Instructions<a href="index.html#set-up-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As your first step, please follow the instructions on the <a href="setup-instructions.html#setup-instructions">R Setup</a> page to make sure you have all the necessary software installed on your computer.</p>
+<p>As your first step, please follow the instructions on the <a href="setup-instructions.html#setup-instructions">R Setup</a> page to make sure you have all the necessary software installed on your computer before the class starts.</p>
 </div>
 <div id="navigating-this-site" class="section level2 unnumbered hasAnchor">
 <h2>Navigating this site<a href="index.html#navigating-this-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through working through the topic, analysis, etc. for that week with exercises at the end of the lesson that will be that week’s homework assignment.</p>
-<p>Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create R Markdown documents in R, which you will use to write your code/answers to the exercises and then render to either a Word or HTML report which is what you will submit through Canvas.</p>
+<p>The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through the topic(s), analysis, etc. for that week. There are exercises at the end of the lesson that will be that week’s homework assignment.</p>
+<p>Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create these R Markdown documents; you will use these R Markdowns as the basis for writing your code/answers to the exercises and then render them to either a Word or HTML report which is what you will submit through Canvas.</p>
 </div>
 <div id="goals" class="section level2 unnumbered hasAnchor">
 <h2>Goals<a href="index.html#goals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -228,8 +232,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Approach and Expectations<a href="index.html#approach-and-expectations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This class is <a href="https://ieeexplore.ieee.org/document/7344151">flipped</a>, meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.</p>
 <p>So without lectures in class what do we do together? We code! This class has almost four hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.</p>
-<p>Generally we will do a quick live-code review of concepts from the assignment and pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.</p>
-<p>As such, coming to class is a vital part of how you can be successful and we fully expect you to be there everyday.</p>
+<p>Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.</p>
+<p>As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.</p>
 <p>We also will actively encourage a collaborative coding environment where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use our Teams channel to discuss code issues!</p>
 <p>We will always send announcements with assignments, web links, and other updates through Canvas. The course syllabus will also be posted on Canvas.</p>
 </div>

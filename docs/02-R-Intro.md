@@ -16,7 +16,7 @@ When you first open RStudio, it is split into 3 panels:
 
 <br>
 
-To write and save code you use scripts (or RMarkdown, which we will learn shortly). You can open a new script with File -\> New File or by clicking the icon with the green plus sign in the upper left corner. When you open a script, RStudio then opens a fourth **'Source' panel** in the upper-left to write and save your code. You can also send code from a script directly to the console to execute it by highlighting the **entire** code line/chunk (or place your cursor at the end of the code chunk) and hit CTRL+ENTER on a PC or CMD+ENTER on a Mac.
+To write and save code you use .R scripts (or RMarkdown, which we will learn shortly). You can open a new script with File -\> New File or by clicking the icon with the green plus sign in the upper left corner. When you open a script, RStudio then opens a fourth **'Source' panel** in the upper-left to write and save your code. You can also send code from a script directly to the console to execute it by highlighting the **entire** code line/chunk (or place your cursor at the end of the code chunk) and hit CTRL+ENTER on a PC or CMD+ENTER on a Mac.
 
 ![Image Credit: Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/fig/01-rstudio-script.png)
 
@@ -54,7 +54,7 @@ The first thing you do in a fresh R session is set up your environment, which mo
 
 ### Functions
 
-Before creating a set up script, it might be helpful to understand the use of functions in R if you are new to this programming language. R has many built in functions to perform various tasks. To run these functions you type the function name followed by parentheses. Within the parentheses you put in your specific arguments needed to run the function.
+Before creating a set up script, it might be helpful to understand the use of functions in R if you are new to this programming language. R has many built-in functions to perform various tasks. To run these functions you type the function name followed by parentheses. Within the parentheses you put in your specific arguments needed to run the function.
 
 
 ```r
@@ -107,11 +107,11 @@ R Packages include reusable functions that are not built-in with R. To use these
 
 **When do I use** `::` ?
 
-If you have a package installed, you don't necessarily have to load it in with `library()` to use it in your R session. Instead, you can type the package name followed by `::` and use any functions in that package. This may be useful for some one-off functions using a specific package, however if you will be using packages a lot throughout your workflow you will want to load it in to your session. You should also use `::` in cases where you have multiple packages loaded that may have conflicting functions (e.g., `plot()` in Base R vs. `plot()` in the `terra` package).
+If you have a package installed, you don't necessarily have to load it in with `library()` to use it in your R session. Instead, you can type the package name followed by `::` and use any functions in that package. This may be useful for some one-off functions using a specific package, however if you will be using packages a lot throughout your workflow you will want to load it in to your session. You should also use `::` in cases where you have multiple packages loaded that may have conflicting functions (e.g., `plot()` in Base R vs. `plot()` in the {terra} package).
 
 #### Base R vs. The Tidyverse
 
-You may hear us use the terms 'Base R' and 'Tidyverse' a lot throughout this course. Base R includes functions that are installed with the R software and do not require the installation of additional packages to use them. The Tidyverse is a collection of R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis, and all use the same design philosophy, grammar, and data structures. When you install the Tidyverse, it installs all of these packages, and you can then load all of them in your R session with `library(tidyverse)`. Base R and Tidyverse have many similar functions, but many prefer the style, efficiency and functionality of the Tidyverse packages, and we will mostly be sticking to Tidyverse functions for this course.
+You may hear us use the terms 'Base R' and 'Tidyverse' a lot throughout this course. Base R includes functions that are installed with the R software and do not require the installation of additional packages to use them. The Tidyverse is a collection of R packages designed for data manipulation, exploration, and visualization that you are likely to use in every day data analysis, and all use the same design philosophy, grammar, and data structures. When you install the Tidyverse, it installs all of these packages, and you can then load all of them in your R session with `library(tidyverse)`. Base R and the Tidyverse have many similar functions, but many prefer the style, efficiency and functionality of the Tidyverse packages, and we will mostly be sticking to Tidyverse functions for this course.
 
 #### Package load function
 
@@ -130,7 +130,7 @@ packageLoad <-
   }
 ```
 
-For each package name given ('x') it checks if it is already installed, if not installs it, and then loads that package into the session. In future lessons we will learn more about writing custom functions, and iterating with for loops, but for now you can copy/paste this function and put it at the top of your set up script. When you execute this chunk of code, you won't see anything printed in the console, however you should now see `packageLoad()` in your Environment under 'Functions'. You can now use this function as many times as you want. Test is out, and use it to install the `tidyverse` package(s).
+For each package name given ('x') it checks if it is already installed, if not installs it, and then loads that package into the session. In future lessons we will learn more about writing custom functions, and iterating with for loops, but for now you can copy/paste this function and put it at the top of your set up script. When you execute this chunk of code, you won't see anything printed in the console, however you should now see `packageLoad()` in your Environment under 'Functions'. You can now use this function as many times as you want. Test is out, and use it to install the Tidyverse package(s).
 
 
 ```r
@@ -145,7 +145,7 @@ You can also give this function a string of package names. Lets install all the 
 packages <- c('tidyverse',
               'palmerpenguins',
               'rmarkdown')
-
+# use the packageLoad function we created on those packages
 packageLoad(packages)
 ```
 
@@ -177,13 +177,13 @@ Notice that the file contains three types of content:
 
 -   text mixed with simple text formatting
 
-Since this is a notebook style document, you run the code chunks by clicking the green play button, and then the output is returned directly below the chunk.
+Since this is a notebook style document, you run the code chunks by clicking the green play button in the top right corner of each code chunk, and then the output is returned directly below the chunk.
 
 ::: {.alert .alert-info}
 If you'd rather have the code chunk output go to the console instead of directly below the chunk in your R Markdown document, go to Tools -> Global Options -> R Markdown and uncheck "Show output inline for all R Markdown documents"
 :::
 
-When you want to create a report from your notebook, you render it by hitting the 'knit' button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the `rmarkdown` package installed.
+When you want to create a report from your notebook, you render it by hitting the 'knit' button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the {rmarkdown} package installed.
 
 You can delete the rest of the code/text below the YAML header, and insert a new code chunk at the top. **You can insert code chunks by clicking the green C with the '+' sign at the top of the source editor, or with the keyboard short cut (Ctrl+Alt+I for Windows, Option+Command+I for Macs)**. For the rest of the lesson (and course) you will be writing and executing code through code chunks, and you can type any notes in the main body of the document.
 
@@ -202,7 +202,7 @@ Normally when working with a new data set, the first thing we do is explore the 
 
 ### The `penguins` data
 
-For this intro lesson, we are going to use the Palmer Penguins data set (which is loaded with the `palmerpenguins` package you installed in your set up script). This data was collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pallter.marine.rutgers.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/).
+For this intro lesson, we are going to use the Palmer Penguins data set (which is loaded with the {palmerpenguins} package you installed in your set up script). This data was collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pallter.marine.rutgers.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/).
 
 Load the `penguins` data set.
 
@@ -220,27 +220,27 @@ penguins
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex <fct>, year <int>
 ```
 
 <hr>
 
 ### Data Types
 
-This data is structured as a data frame, probably the most common data type and one you are most familiar with. These are like Excel spreadsheets, tabular data organized by rows and columns. However we see at the top this is called a `tibble` which is just a fancy kind of data frame specific to the `tidyverse`.
+This data is structured as a data frame, probably the most common data type and one you are most familiar with. These are like Excel spreadsheets: tabular data organized by rows and columns. However we see at the top this is called a `tibble` which is just a fancy kind of data frame specific to the Tidyverse.
 
 At the top we can see the data type of each column. There are five main data types:
 
@@ -254,7 +254,7 @@ At the top we can see the data type of each column. There are five main data typ
 
 -   **complex**: `1+4i` (complex numbers with real and imaginary parts)
 
-Data types are combined to form data structures. R's basic data structures include
+Data types are combined to form data structures. R's basic data structures include:
 
 -   atomic vector
 
@@ -336,7 +336,7 @@ str(myList)
 ##   ..$ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
 ```
 
-You can even nest lists within lists
+You can even nest lists within lists:
 
 
 ```r
@@ -356,20 +356,20 @@ list(myList, list("more stuff here", list("and more")))
 ## 
 ## [[1]][[4]]
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex <fct>, year <int>
 ## 
 ## 
 ## [[2]]
@@ -381,7 +381,7 @@ list(myList, list("more stuff here", list("and more")))
 ## [1] "and more"
 ```
 
-You can use the `names()` function to retrieve or assign names to list and vector elements
+You can use the `names()` function to retrieve or assign names to list and vector elements:
 
 
 ```r
@@ -402,7 +402,7 @@ Index lists:
 
 ```r
 # for lists we use double brackes [[]]
-myList[[1]]
+myList[[1]] # select the first stored object in the list
 ```
 
 ```
@@ -410,25 +410,25 @@ myList[[1]]
 ```
 
 ```r
-myList[["data"]]
+myList[["data"]] # select the object in the list named "data" (a data frame)
 ```
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex <fct>, year <int>
 ```
 
 Index vectors:
@@ -487,7 +487,7 @@ To index elements of a list you must use double brackets `[[ ]]`, and to index v
     penguins[island=='Dream',]
     ```
 
-2.  How many species are in the `penguins` dataset? What islands were the data collected for? (Note: the `unique()` function might help)
+2.  How many species are in the `penguins` data set? What islands were the data collected for? (Note: the `unique()` function might help)
 
 3.  Use indexing to create a new data frame that has only 3 columns: species, island and flipper length columns, and subset all rows for just the 'Dream' island.
 
@@ -495,11 +495,11 @@ To index elements of a list you must use double brackets `[[ ]]`, and to index v
 
 <hr>
 
-### The `dplyr` package
+### The {dplyr} package
 
-So far the code you've been writing has consisted of Base R functionality. Now lets dive into the Tidyverse with the `dplyr` package.
+So far the code you've been writing has consisted of Base R functionality. Now lets dive into the Tidyverse with the {dplyr} package.
 
-`dplyr` is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing, you may notice the first two `dplyr` functions you are going to learn, `filter()` and `select()` act as indexing functions by subsetting rows and columns based on specified names and/or conditions.
+{dplyr} is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing, you may notice the first two {dplyr} functions you are going to learn. `filter()` and `select()` act as indexing functions by subsetting rows and columns based on specified names and/or conditions.
 
 **Subset rows with [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)**
 
@@ -517,13 +517,17 @@ filter(penguins, island %in% c("Dream", "Torgersen") & !is.na(bill_length_mm))
 **Note: Tidyverse package functions take in column names *without* quotations.**
 
 ::: {.alert .alert-info}
-Using `dplyr` functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.
+Using {dplyr} functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.
 :::
 
 
 **Select columns with [`select()`](https://dplyr.tidyverse.org/reference/select.html){style="font-size: 13pt;"}**
 
-`select()` has many helper functions you can use with it, such as `starts_with()`, `ends_with()`, `contains()` and many more that are very useful when dealing with large data sets. See `?select` for more details
+`select()` has many helper functions you can use with it, such as `starts_with()`, `ends_with()`, `contains()` and many more that are very useful when dealing with large data sets. See `?select` for more details.
+
+::: {.alert .alert-info}
+Writing out `?` ahead of any function from a package will open a description of that function in the "Help" pane. 
+:::
 
 
 ```r
@@ -555,11 +559,11 @@ mutate(penguins, species_sex = if_else(sex == 'male', paste0(species,"_m"), past
 
 [**`group_by()`**](https://dplyr.tidyverse.org/reference/group_by.html) **and [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)**
 
-These can all be used in conjunction with `group_by()` which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. `group_by()` becomes even more powerful when used along with `summarise()` to calculate some specified summary statistic for each group. However before we start using multiple operations in conjunction with one another, we need to talk about the pipe operator `%>%`.
+These can all be used in conjunction with `group_by()` which changes the scope of each function from operating on the entire data set to operating on it group-by-group. `group_by()` becomes even more powerful when used along with `summarise()` to calculate some specified summary statistic for each group. However before we start using multiple operations in conjunction with one another, we need to talk about the pipe operator `%>%`.
 
 #### The pipe `%>%`
 
-The pipe, `%>%`, comes from the **magrittr** package by Stefan Milton Bache. Packages in the tidyverse load `%>%` for you automatically, so you don't usually load magrittr explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.
+The pipe, `%>%`, comes from the **magrittr** package by Stefan Milton Bache. Packages in the Tidyverse load `%>%` for you automatically, so you don't usually load {magrittr} explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.
 
 For example, the pipe operator can take this sequence of operations:
 
@@ -582,7 +586,7 @@ penguins %>%
   select(species, year, flipper_length_cm)
 ```
 
-You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce `%>%` when reading code is "then". It takes the output of the operation to the left of `%>%` and feeds it into the next function as the input.
+You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce `%>%` when reading code is "and then". It takes the output of the operation to the left of `%>%` and feeds it into the next function as the input.
 
 Say you want to summarize data by some specified group, for example you want to find the average body mass for each species, this is where the `group_by()` function comes into play.
 
@@ -611,7 +615,7 @@ You can even shorten the above operation buy using `count()` instead of `summari
 
 2.  Create a new column called 'size_group' where individuals with body mass greater than the overall average are called 'large' and those smaller are called 'small'.
 
-3.  Find out which year for each species were individuals on average the largest according to body mass.
+3.  Find out which year for each species had the largest average body mass.
 
 4.  You want to filter data for years that are *not* in a vector of given years, but this code doesn't work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here).
 
@@ -626,11 +630,11 @@ You can even shorten the above operation buy using `count()` instead of `summari
 
 ## Visualize
 
-A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can't see from starting a a data frame of numbers. Here we are going to walk through a very quick introduction to `ggplot2`, using some code examples from the `palmerpenguins` R package tutorial: <https://allisonhorst.github.io/palmerpenguins/articles/intro.html>.
+A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can't see from starting a data frame of numbers. Here we are going to walk through a very quick introduction to {ggplot2} using some code examples from the {palmerpenguins} R package tutorial: <https://allisonhorst.github.io/palmerpenguins/articles/intro.html>.
 
-`ggplot2` is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about `ggplot` though is that it does not use the pipe `%>%` operator like we just learned, but instead threads together arguments with `+` signs.
+{ggplot2} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about {ggplot} though is that it does not use the pipe `%>%` operator like we just learned, but instead threads together arguments with `+` signs.
 
-The general structure for ggplots follows the template below. However note that you can also specify the `aes()` parameters withing `ggplot()` instead of your geom function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The geom function is the type of plot you want to make, such as `geom_point()`, `geom_bar()`, etc, there are a lot to choose from.
+The general structure for ggplots follows the template below. However note that you can also specify the `aes()` parameters within `ggplot()` instead of your `geom_` function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The `geom_` function is the type of plot you want to make, such as `geom_point()`, `geom_bar()`, etc, there are a lot to choose from.
 
 
 ```r
@@ -682,7 +686,7 @@ ggplot(penguins) +
 
 <img src="02-R-Intro_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
-As you may have already noticed, the beauty about `ggplot2` is there are a million ways you can customize your plots. This example builds on our simple bar plot
+As you may have already noticed, the beauty about {ggplot2} is there are a million ways you can customize your plots. This example builds on our simple bar plot:
 
 
 ```r
@@ -720,4 +724,4 @@ ggplot(penguins) +
 
 We used an R data package today to read in our data frame, but that probably isn't how you will normally read in your data.
 
-There are many ways to read and write data in R. To read in .csv files, you can use `read_csv()` which is included in the Tidyverse with the `readr` package, and to save csv files use `write_csv()`. The `readxl` package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.
+There are many ways to read and write data in R. To read in .csv files, you can use `read_csv()` which is included in the Tidyverse with the {readr} package, and to save csv files use `write_csv()`. The {readxl} package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.

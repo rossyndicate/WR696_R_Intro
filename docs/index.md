@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Data Analysis in R"
 author: "Caitlin C. Mothes, PhD and Katie Willi"
-date: "2023-08-16"
+date: "2023-08-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -21,13 +21,13 @@ This site hosts the course curriculum for Colorado State University's **WR 696**
 
 ## Set up Instructions {.unnumbered}
 
-As your first step, please follow the instructions on the [R Setup][Setup Instructions] page to make sure you have all the necessary software installed on your computer.
+As your first step, please follow the instructions on the [R Setup][Setup Instructions] page to make sure you have all the necessary software installed on your computer before the class starts.
 
 ## Navigating this site {.unnumbered}
 
-The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through working through the topic, analysis, etc. for that week with exercises at the end of the lesson that will be that week's homework assignment.
+The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through the topic(s), analysis, etc. for that week. There are exercises at the end of the lesson that will be that week's homework assignment.
 
-Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create R Markdown documents in R, which you will use to write your code/answers to the exercises and then render to either a Word or HTML report which is what you will submit through Canvas.
+Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create these R Markdown documents; you will use these R Markdowns as the basis for writing your code/answers to the exercises and then render them to either a Word or HTML report which is what you will submit through Canvas.
 
 ## Goals {.unnumbered}
 
@@ -44,9 +44,9 @@ This class is [flipped](https://ieeexplore.ieee.org/document/7344151), meaning a
 
 So without lectures in class what do we do together? We code! This class has almost four hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.
 
-Generally we will do a quick live-code review of concepts from the assignment and pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.
+Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1.5 hours per day will be dedicated to you coding and working on the assignment in class.
 
-As such, coming to class is a vital part of how you can be successful and we fully expect you to be there everyday.
+As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.
 
 We also will actively encourage a collaborative coding environment where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use our Teams channel to discuss code issues!
 
