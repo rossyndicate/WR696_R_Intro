@@ -280,15 +280,15 @@ penguins %>%
 
     
 
-4.  Reorder the variables in `penguins` so that `year` is the first column followed by the rest (Hint: look into the use of `everything()`).
+4.  Reorder the variables in `penguins` so that `year` is the first column followed by the rest (Hint: look into the use of `everything()`). (2 pts.)
 
     
 
-5.  Create a new column called \'size_group\' where individuals with body mass greater than the *overall* average are called \'large\' and those smaller are called \'small\'. (Note: this answer requires the additional use of both the `if_else()` and `mean()` functions. Remember how to deal with `NA` values in `mean()`). (3 pts)
+5.  Create a new column called \'size_group\' where individuals with body mass greater than the *overall* average are called \'large\' and those smaller are called \'small\'. (Note: this answer requires the additional use of both the `if_else()` and `mean()` functions. Remember how to deal with `NA` values in `mean()`). (4 pts.)
 
     
 
-6.  You want to filter data for years that are *not* in a vector of given years, but this code doesn\'t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts)
+6.  You want to filter data for years that are *not* in a vector of given years, but this code doesn\'t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)
 
     
     ```r
