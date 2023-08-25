@@ -180,7 +180,7 @@ Notice that the file contains three types of content:
 Since this is a notebook style document, you run the code chunks by clicking the green play button in the top right corner of each code chunk, and then the output is returned directly below the chunk.
 
 ::: {.alert .alert-info}
-If you'd rather have the code chunk output go to the console instead of directly below the chunk in your R Markdown document, go to Tools -> Global Options -> R Markdown and uncheck "Show output inline for all R Markdown documents"
+If you'd rather have the code chunk output go to the console instead of directly below the chunk in your R Markdown document, go to Tools -\> Global Options -\> R Markdown and uncheck "Show output inline for all R Markdown documents"
 :::
 
 When you want to create a report from your notebook, you render it by hitting the 'knit' button at the top of the Source pane (with the ball of yarn next to it), and it will render to the format you have specified in the YAML header. In order to do so though, you need to have the {rmarkdown} package installed.
@@ -220,20 +220,20 @@ penguins
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-##  1 Adelie  Torgersen           39.1          18.7               181        3750
-##  2 Adelie  Torgersen           39.5          17.4               186        3800
-##  3 Adelie  Torgersen           40.3          18                 195        3250
-##  4 Adelie  Torgersen           NA            NA                  NA          NA
-##  5 Adelie  Torgersen           36.7          19.3               193        3450
-##  6 Adelie  Torgersen           39.3          20.6               190        3650
-##  7 Adelie  Torgersen           38.9          17.8               181        3625
-##  8 Adelie  Torgersen           39.2          19.6               195        4675
-##  9 Adelie  Torgersen           34.1          18.1               193        3475
-## 10 Adelie  Torgersen           42            20.2               190        4250
-## # ℹ 334 more rows
-## # ℹ 2 more variables: sex <fct>, year <int>
+##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
+##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
+##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
+##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
+##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
+##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
+##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
+##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
+##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
+##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
+##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
+## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
+## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
+## #   ²​body_mass_g
 ```
 
 <hr>
@@ -356,20 +356,20 @@ list(myList, list("more stuff here", list("and more")))
 ## 
 ## [[1]][[4]]
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-##  1 Adelie  Torgersen           39.1          18.7               181        3750
-##  2 Adelie  Torgersen           39.5          17.4               186        3800
-##  3 Adelie  Torgersen           40.3          18                 195        3250
-##  4 Adelie  Torgersen           NA            NA                  NA          NA
-##  5 Adelie  Torgersen           36.7          19.3               193        3450
-##  6 Adelie  Torgersen           39.3          20.6               190        3650
-##  7 Adelie  Torgersen           38.9          17.8               181        3625
-##  8 Adelie  Torgersen           39.2          19.6               195        4675
-##  9 Adelie  Torgersen           34.1          18.1               193        3475
-## 10 Adelie  Torgersen           42            20.2               190        4250
-## # ℹ 334 more rows
-## # ℹ 2 more variables: sex <fct>, year <int>
+##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
+##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
+##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
+##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
+##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
+##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
+##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
+##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
+##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
+##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
+##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
+## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
+## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
+## #   ²​body_mass_g
 ## 
 ## 
 ## [[2]]
@@ -415,20 +415,20 @@ myList[["data"]] # select the object in the list named "data" (a data frame)
 
 ```
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
-##  1 Adelie  Torgersen           39.1          18.7               181        3750
-##  2 Adelie  Torgersen           39.5          17.4               186        3800
-##  3 Adelie  Torgersen           40.3          18                 195        3250
-##  4 Adelie  Torgersen           NA            NA                  NA          NA
-##  5 Adelie  Torgersen           36.7          19.3               193        3450
-##  6 Adelie  Torgersen           39.3          20.6               190        3650
-##  7 Adelie  Torgersen           38.9          17.8               181        3625
-##  8 Adelie  Torgersen           39.2          19.6               195        4675
-##  9 Adelie  Torgersen           34.1          18.1               193        3475
-## 10 Adelie  Torgersen           42            20.2               190        4250
-## # ℹ 334 more rows
-## # ℹ 2 more variables: sex <fct>, year <int>
+##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
+##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
+##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
+##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
+##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
+##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
+##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
+##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
+##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
+##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
+##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
+## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
+## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
+## #   ²​body_mass_g
 ```
 
 Index vectors:
@@ -467,7 +467,8 @@ penguins$species
 To index elements of a list you must use double brackets `[[ ]]`, and to index vectors and data frames you use single brackets `[ ]`
 :::
 
-#### Exercises 
+#### Exercises
+
 (*not required, but work through them if you want!*)
 
 1.  Why don't the following lines of code work? Tweak each one so the code runs
@@ -520,13 +521,12 @@ filter(penguins, island %in% c("Dream", "Torgersen") & !is.na(bill_length_mm))
 Using {dplyr} functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.
 :::
 
-
 **Select columns with [`select()`](https://dplyr.tidyverse.org/reference/select.html){style="font-size: 13pt;"}**
 
 `select()` has many helper functions you can use with it, such as `starts_with()`, `ends_with()`, `contains()` and many more that are very useful when dealing with large data sets. See `?select` for more details.
 
 ::: {.alert .alert-info}
-Writing out `?` ahead of any function from a package will open a description of that function in the "Help" pane. 
+Writing out `?` ahead of any function from a package will open a description of that function in the "Help" pane.
 :::
 
 
@@ -606,9 +606,10 @@ penguins %>%
   summarise(n_observations = n())
 ```
 
-You can even shorten the above operation buy using `count()` instead of `summarise`.
+You can even shorten the above operation by using `count()` instead of `summarise`.
 
-#### Exercises 
+#### Exercises
+
 (*not required, but useful if you want to work through them!*)
 
 1.  Reorder the variables in `penguins` so that `year` is the first column followed by the rest (Hint: look into the use of `everything()`).
@@ -624,99 +625,6 @@ You can even shorten the above operation buy using `count()` instead of `summari
     penguins %>% 
       filter(year !%in% c(2008, 2009))
 ```
-
-<hr>
-
-
-## Visualize
-
-A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can't see from starting a data frame of numbers. Here we are going to walk through a very quick introduction to {ggplot2} using some code examples from the {palmerpenguins} R package tutorial: <https://allisonhorst.github.io/palmerpenguins/articles/intro.html>.
-
-{ggplot2} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about {ggplot} though is that it does not use the pipe `%>%` operator like we just learned, but instead threads together arguments with `+` signs.
-
-The general structure for ggplots follows the template below. However note that you can also specify the `aes()` parameters within `ggplot()` instead of your `geom_` function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The `geom_` function is the type of plot you want to make, such as `geom_point()`, `geom_bar()`, etc, there are a lot to choose from.
-
-
-```r
-ggplot(data = <DATA>) + 
-  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
-```
-
-If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with `geom_histogram()`
-
-
-```r
-ggplot(penguins) + 
-  geom_histogram(mapping = aes(x = flipper_length_mm))
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-29-1.png" width="672" />
-
-This tells us there may be a lot of variation in flipper size among species. We can use the 'fill =' argument to color the bars by species, and `scale_fill_manual()` to specify the colors.
-
-
-```r
-# Histogram example: flipper length by species
-ggplot(penguins) +
-  geom_histogram(aes(x = flipper_length_mm, fill = species), alpha = 0.5, position = "identity") +
-  scale_fill_manual(values = c("darkorange","darkorchid","cyan4"))
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-30-1.png" width="672" />
-
-Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with `facet_wrap()`, which will create a separate plot for each group, in this case species.
-
-
-```r
-ggplot(penguins) +
-  geom_histogram(aes(x = flipper_length_mm, fill = species), alpha = 0.5, position = "identity") +
-  scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) +
-  facet_wrap(~species)
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-31-1.png" width="672" />
-
-Lets make a quick bar plot showing the total count of each species studied on each island
-
-
-```r
-ggplot(penguins) +
-  geom_bar(mapping = aes(x = island, fill = species))
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-32-1.png" width="672" />
-
-As you may have already noticed, the beauty about {ggplot2} is there are a million ways you can customize your plots. This example builds on our simple bar plot:
-
-
-```r
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"), 
-                    guide = FALSE) +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-33-1.png" width="672" />
-
-We can use `geom_point()` to view the relationship between two variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the point by species:
-
-
-```r
-ggplot(penguins) +
-  geom_point(mapping = aes(x = body_mass_g, y = flipper_length_mm, color = species))
-```
-
-<img src="02-R-Intro_files/figure-html/unnamed-chunk-34-1.png" width="672" />
-
-### Exercises 
-(*not required*)
-
-1.  Make a barplot showing the average flipper length for each species.
-
-2.  Make a scatter plot of bill length compared to bill depth but only for observations on the Dream island.
 
 <hr>
 

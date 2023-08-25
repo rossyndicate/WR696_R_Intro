@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 4 Exploratory Data Analysis | Introduction to Data Analysis in R</title>
+  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 4 Exploratory Data Analysis | Introduction to Data Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 4 Exploratory Data Analysis | Introduction to Data Analysis in R" />
+  
+  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  
+
+<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+
+
+<meta name="date" content="2023-08-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r-rstudio-and-r-markdown.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Data Analysis in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> cover-image: path to the social sharing image like images/cover.jpg</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
+<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
+<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploratory-data-analysis" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number"> 4</span> Exploratory Data Analysis<a href="exploratory-data-analysis.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For this lesson you will be working with the same <code>penguins</code> data from last week. You will be submitting this as your first assignment, so start a new R Markdown document to record your code and answers to the assignment questions, which you will submit as a rendered HTML or Word document on Canvas.</p>
+<p>You can set up your session by executing your set up script we created in <a href="introduction-to-r-rstudio-and-r-markdown.html#introduction-to-r-rstudio-and-r-markdown">Lesson 1</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="exploratory-data-analysis.html#cb1-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
+<p><em>OR if you haven’t created your set up script, you can load the two libraries below we will need for today:</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-data-analysis.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="exploratory-data-analysis.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div>
+<div class="alert alert-info">
+<p>Note: To avoid warnings and other messages showing up in your rendered R Markdown document, you can set <code>messae = FALSE</code> and <code>warning = FALSE</code> in your code chunk arguments.</p>
+</div>
+<div id="the-penguins-data-1" class="section level3 hasAnchor" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> The <code>penguins</code> data<a href="exploratory-data-analysis.html#the-penguins-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For this lesson, we are going to use the Palmer Penguins data set (which is loaded with the {palmerpenguins} package). This data was collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> and the <a href="https://pallter.marine.rutgers.edu/">Palmer Station, Antarctica LTER</a>, a member of the <a href="https://lternet.edu/">Long Term Ecological Research Network</a>.</p>
+<p>Since this is a data set from the data package {palmerpenguins}, we can use the <code>data()</code> function to load it into our session:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploratory-data-analysis.html#cb3-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span></code></pre></div>
+<p>You should now see it in the Environment pane. Print it to the console to see a snapshot of the data:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploratory-data-analysis.html#cb4-1" tabindex="-1"></a>penguins</span></code></pre></div>
+<pre><code>## # A tibble: 344 × 8
+##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
+##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
+##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
+##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
+##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
+##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
+##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
+##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
+##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
+## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
+## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
+## #   ²​body_mass_g</code></pre>
+</div>
+<div id="exploratory-data-analysis-1" class="section level3 hasAnchor" number="4.0.2">
+<h3><span class="header-section-number">4.0.2</span> Exploratory Data Analysis<a href="exploratory-data-analysis.html#exploratory-data-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When working with a new data set, often the first thing you do is perform some initial investigations on the data using various summary statistics and graphical representations. This is exploratory data analysis! Or for short, EDA. EDA is used to catch any potential errors, assess statistical assumptions, observe patterns and help form initial hypotheses of your data that you can then test with statistics.</p>
+<p>For our <code>penguins</code> data, we want to start by exploring things like sample size, variation and distribution of our variables, and make initial comparisons among species, islands, and sex.</p>
+<p>A new Base R function we have yet to use is <code>summary()</code>. This functions gives us a very quick snapshot of each variable in our dataset, where we can see things like sample size and summary statistics.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploratory-data-analysis.html#cb6-1" tabindex="-1"></a><span class="fu">summary</span>(penguins)</span></code></pre></div>
+<pre><code>##       species          island    bill_length_mm  bill_depth_mm  
+##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+##                                  Mean   :43.92   Mean   :17.15  
+##                                  3rd Qu.:48.50   3rd Qu.:18.70  
+##                                  Max.   :59.60   Max.   :21.50  
+##                                  NA&#39;s   :2       NA&#39;s   :2      
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
+##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<p>For some more in depth EDA, the <code>tidyverse</code> packages provide many useful functions to summarize and visualize data. Today we are going to simultaneously learn more about various functions of <code>tidyverse</code> packages while investigating and formulating hypotheses about our <code>penguins</code> data set.</p>
+</div>
+<div id="data-wrangling" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data wrangling<a href="exploratory-data-analysis.html#data-wrangling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-dplyr-package-1" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> The <code>dplyr</code> package<a href="exploratory-data-analysis.html#the-dplyr-package-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>dplyr</code> is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing in the [Intro to R lesson][Introduction to R and RStudio], you may notice the first two <code>dplyr</code> functions we are going to learn, <code>filter()</code> and <code>select()</code> act as indexing functions, subsetting rows and columns based on specified names and/or conditions.</p>
+<p><strong>Subset rows with <code>filter()</code></strong></p>
+<p>You can filter data in many ways using logical operators (<code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>!=</code> (not equal), and <code>==</code> (equal)), AND (<code>&amp;</code>), OR (<code>|</code>), and NOT (<code>!</code>) operators, and other operations such as <code>%in%</code>, which returns everything that matches at least one of the values in a given vector, and <code>is.na()</code> and <code>!is.na()</code> to return all missing or all non-missing data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploratory-data-analysis.html#cb8-1" tabindex="-1"></a><span class="co"># filter rows for just the Adelie species</span></span>
+<span id="cb8-2"><a href="exploratory-data-analysis.html#cb8-2" tabindex="-1"></a><span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>)</span>
+<span id="cb8-3"><a href="exploratory-data-analysis.html#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="exploratory-data-analysis.html#cb8-4" tabindex="-1"></a><span class="co"># filter rows for all species EXCEPT Adelie</span></span>
+<span id="cb8-5"><a href="exploratory-data-analysis.html#cb8-5" tabindex="-1"></a><span class="fu">filter</span>(penguins, species <span class="sc">!=</span> <span class="st">&quot;Adelie&quot;</span>)</span>
+<span id="cb8-6"><a href="exploratory-data-analysis.html#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="exploratory-data-analysis.html#cb8-7" tabindex="-1"></a><span class="co"># filter islands Dream and Torgersen AND rows that DO NOT have  missing values for bill length</span></span>
+<span id="cb8-8"><a href="exploratory-data-analysis.html#cb8-8" tabindex="-1"></a><span class="fu">filter</span>(penguins, island <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dream&quot;</span>, <span class="st">&quot;Torgersen&quot;</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(bill_length_mm))</span></code></pre></div>
+<div class="alert alert-info">
+<p>Note: Tidyverse package functions take in column names <em>without</em> quotations.</p>
+</div>
+<p>Using <code>dplyr</code> functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="exploratory-data-analysis.html#cb9-1" tabindex="-1"></a>body_mass_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, body_mass_g <span class="sc">&gt;</span> <span class="dv">4750</span> <span class="sc">|</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">3550</span>)</span></code></pre></div>
+<p><strong>Subset columns with <a href="https://dplyr.tidyverse.org/reference/select.html" style="font-size: 13pt;"><code>select()</code></a></strong></p>
+<p><code>select()</code> has many helper functions you can use with it, such as <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code> and many more that are very useful when dealing with large data sets. See <code>?select</code> for more details</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploratory-data-analysis.html#cb10-1" tabindex="-1"></a><span class="co"># Select two specific variables</span></span>
+<span id="cb10-2"><a href="exploratory-data-analysis.html#cb10-2" tabindex="-1"></a><span class="fu">select</span>(penguins, species, sex)</span>
+<span id="cb10-3"><a href="exploratory-data-analysis.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="exploratory-data-analysis.html#cb10-4" tabindex="-1"></a><span class="co"># Select a range of variables</span></span>
+<span id="cb10-5"><a href="exploratory-data-analysis.html#cb10-5" tabindex="-1"></a><span class="fu">select</span>(penguins, species<span class="sc">:</span>flipper_length_mm)</span>
+<span id="cb10-6"><a href="exploratory-data-analysis.html#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="exploratory-data-analysis.html#cb10-7" tabindex="-1"></a><span class="co"># Rename columns within select</span></span>
+<span id="cb10-8"><a href="exploratory-data-analysis.html#cb10-8" tabindex="-1"></a><span class="fu">select</span>(penguins, <span class="at">genus =</span> species, island)</span>
+<span id="cb10-9"><a href="exploratory-data-analysis.html#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="exploratory-data-analysis.html#cb10-10" tabindex="-1"></a><span class="co"># Select column variables that have &#39;mm&#39; in their name</span></span>
+<span id="cb10-11"><a href="exploratory-data-analysis.html#cb10-11" tabindex="-1"></a><span class="fu">select</span>(penguins, <span class="fu">contains</span>(<span class="st">&quot;mm&quot;</span>))</span></code></pre></div>
+<p><strong>Create new variables with <a href="https://dplyr.tidyverse.org/reference/mutate.html" style="font-size: 13pt;"><code>mutate()</code></a></strong></p>
+<p><code>mutate()</code> allows you to edit existing columns or create new columns in an existing data frame, and you can perform calculations on existing columns to return outputs in the new column. The syntax is the name of the new column you want to make (or the current column you want to edit) on the left of <code>=</code>, and then to the right is what you want to put in the new column. Note that <code>mutate()</code> works row wise on the data frame.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="exploratory-data-analysis.html#cb11-1" tabindex="-1"></a><span class="co"># New variable that calculates bill length in cm</span></span>
+<span id="cb11-2"><a href="exploratory-data-analysis.html#cb11-2" tabindex="-1"></a><span class="fu">mutate</span>(penguins, <span class="at">bill_length_cm =</span> bill_length_mm<span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb11-3"><a href="exploratory-data-analysis.html#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="exploratory-data-analysis.html#cb11-4" tabindex="-1"></a><span class="co"># mutate based on conditional statements with if_else()</span></span>
+<span id="cb11-5"><a href="exploratory-data-analysis.html#cb11-5" tabindex="-1"></a><span class="fu">mutate</span>(penguins, <span class="at">species_sex =</span> <span class="fu">if_else</span>(sex <span class="sc">==</span> <span class="st">&#39;male&#39;</span>, <span class="fu">paste0</span>(species,<span class="st">&quot;_m&quot;</span>), <span class="fu">paste0</span>(species, <span class="st">&quot;_f&quot;</span>)))</span></code></pre></div>
+<p><code>if_else()</code> reads as: IF the given argument (<code>sex == 'male'</code>) is TRUE, put this: <code>paste0(species,"_m")</code> otherwise if FALSE put this: <code>paste0(species, "_f")</code></p>
+<div class="alert alert-info">
+<p>Notice the use of <code>paste0()</code> here, and when we briefly used a similar function <code>paste()</code> in the ‘Functions’ section of the Intro to R lesson. Explore the difference between these two. They are both very useful functions for creating new character strings.</p>
+</div>
+<div id="the-pipe-1" class="section level4 hasAnchor" number="4.1.1.1">
+<h4><span class="header-section-number">4.1.1.1</span> The pipe <code>%&gt;%</code><a href="exploratory-data-analysis.html#the-pipe-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The pipe, <code>%&gt;%</code>, comes from the <strong>magrittr</strong> package by Stefan Milton Bache. Packages in the tidyverse load <code>%&gt;%</code> for you automatically, so you don’t usually load magrittr explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.</p>
+<p>For example, the pipe operator can take this sequence of operations:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploratory-data-analysis.html#cb12-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, island <span class="sc">==</span> <span class="st">&quot;Dream&quot;</span>)</span>
+<span id="cb12-2"><a href="exploratory-data-analysis.html#cb12-2" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df1, <span class="at">flipper_length_cm =</span> flipper_length_mm<span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb12-3"><a href="exploratory-data-analysis.html#cb12-3" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">select</span>(df2, <span class="sc">-</span>flipper_length_mm) <span class="co"># keep everything BUT the flipper_length_mm column</span></span>
+<span id="cb12-4"><a href="exploratory-data-analysis.html#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="exploratory-data-analysis.html#cb12-5" tabindex="-1"></a><span class="fu">print</span>(df3)</span></code></pre></div>
+<p>And turn it into this, removing the need to create intermediate variables</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="exploratory-data-analysis.html#cb13-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="exploratory-data-analysis.html#cb13-2" tabindex="-1"></a>  <span class="fu">filter</span>(island <span class="sc">==</span> <span class="st">&quot;Dream&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="exploratory-data-analysis.html#cb13-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flipper_length_cm =</span> flipper_length_mm<span class="sc">/</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="exploratory-data-analysis.html#cb13-4" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>flipper_length_cm)</span></code></pre></div>
+<p>You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce <code>%&gt;%</code> when reading code is “then”. It takes the output of the operation to the left of <code>%&gt;%</code> and feeds it into the next function as the input.</p>
+<p><a href="https://dplyr.tidyverse.org/reference/group_by.html"><strong><code>group_by()</code></strong></a> <strong>and <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a></strong></p>
+<p>All the above functions can all be used in conjunction with <code>group_by()</code>, which changes the scope of each function from operating on the entire data set to instead operate by specified groups. <code>group_by()</code> becomes even more powerful when used along with <code>summarise()</code> to calculate some specified summary statistic for each group.</p>
+<p>Say you want to summarize data by some specified group, for example you want to find the average body mass for each species, this is how you could do that:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploratory-data-analysis.html#cb14-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="exploratory-data-analysis.html#cb14-2" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="exploratory-data-analysis.html#cb14-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">body_mass_avg =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   species   body_mass_avg
+##   &lt;fct&gt;             &lt;dbl&gt;
+## 1 Adelie            3701.
+## 2 Chinstrap         3733.
+## 3 Gentoo            5076.</code></pre>
+<div class="alert alert-info">
+<p>Notice the additional argument <code>na.rm = TRUE</code> within the <code>mean()</code> function. This is required for any mathamatical or statistical functions if you have ANY missing (NA) values in your dataset. What this does is remove those values from the calculation, otherwise <code>mean()</code> would just return <code>NA</code> without the <code>na.rm = TRUE</code> argument.</p>
+</div>
+<p>The output now only has 3 rows, one for each unique group (i.e., species), and a new column with the calculated average body mass for each species.</p>
+<p>You can also group by multiple variables. Say you want to calculate the sample size (i.e., count, which can be calculated with the <code>n()</code> function) for each species for each year of the study:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploratory-data-analysis.html#cb16-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="exploratory-data-analysis.html#cb16-2" tabindex="-1"></a>  <span class="fu">group_by</span>(species, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="exploratory-data-analysis.html#cb16-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_observations =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 3
+## # Groups:   species [3]
+##   species    year n_observations
+##   &lt;fct&gt;     &lt;int&gt;          &lt;int&gt;
+## 1 Adelie     2007             50
+## 2 Adelie     2008             50
+## 3 Adelie     2009             52
+## 4 Chinstrap  2007             26
+## 5 Chinstrap  2008             18
+## 6 Chinstrap  2009             24
+## 7 Gentoo     2007             34
+## 8 Gentoo     2008             46
+## 9 Gentoo     2009             44</code></pre>
+<p>You can even shorten the above operation by using a new function, <code>count()</code>, instead of <code>summarise()</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="exploratory-data-analysis.html#cb18-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="exploratory-data-analysis.html#cb18-2" tabindex="-1"></a>  <span class="fu">group_by</span>(species, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="exploratory-data-analysis.html#cb18-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="exercises-2" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Exercises<a href="exploratory-data-analysis.html#exercises-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>You must include the line(s) of code used to answer each question</em></p>
+<ol style="list-style-type: decimal">
+<li><p>Why don’t the following lines of code work? Tweak each one so the code runs (3 pts.)</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exploratory-data-analysis.html#cb19-1" tabindex="-1"></a>penguins[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, (<span class="st">&quot;species&quot;</span>, <span class="st">&quot;island&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploratory-data-analysis.html#cb20-1" tabindex="-1"></a>penguins<span class="sc">$</span>flipper_lenght_mm</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploratory-data-analysis.html#cb21-1" tabindex="-1"></a>penguins[island<span class="sc">==</span><span class="st">&#39;Dream&#39;</span>,]</span></code></pre></div></li>
+<li><p>Find the average flipper length for each species. Which species has the largest flippers? (2 pts.)</p></li>
+<li><p>Which is the only species that was sampled across all three islands in this study? You must use {dplyr} functions to answer this question (e.g., <code>group_by()</code> …) (2 pts.)</p></li>
+<li><p>Reorder the variables in <code>penguins</code> so that <code>year</code> is the first column followed by the rest (Hint: look into the use of <code>everything()</code>).</p></li>
+<li><p>Create a new column called 'size_group' where individuals with body mass greater than the <em>overall</em> average are called 'large' and those smaller are called 'small'. (Note: this answer requires the additional use of both the <code>if_else()</code> and <code>mean()</code> functions. Remember how to deal with <code>NA</code> values in <code>mean()</code>). (3 pts)</p></li>
+<li><p>You want to filter data for years that are <em>not</em> in a vector of given years, but this code doesn't work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts)</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="exploratory-data-analysis.html#cb22-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="exploratory-data-analysis.html#cb22-2" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">!%in%</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2009</span>))</span></code></pre></div></li>
+</ol>
+<hr />
+</div>
+<div id="visualization" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Visualization<a href="exploratory-data-analysis.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An important part of data exploration includes visualizing the data to reveal patterns you can’t necessarily see from viewing a data frame of numbers. Here we are going to walk through a very quick introduction to <code>ggplot2</code>, using some code examples from the <code>palmerpenguins</code> R package tutorial: <a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html" class="uri">https://allisonhorst.github.io/palmerpenguins/articles/intro.html</a>.</p>
+<p><code>ggplot2</code> is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about <code>ggplot</code> though is that it <strong>does not use the pipe <code>%&gt;%</code> operator</strong> like we just learned, but instead threads together arguments with <code>+</code> signs (but you can pipe a data frame into the first <code>ggplot()</code> argument).</p>
+<p>The general structure for ggplots follows the template below. Note that you can also specify the <code>aes()</code> parameters within <code>ggplot()</code> instead of your geom function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The geom function is the type of plot you want to make, such as <code>geom_point()</code>, <code>geom_bar()</code>, etc, there are a lot to choose from.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="exploratory-data-analysis.html#cb23-1" tabindex="-1"></a><span class="co"># general structure of ggplot functions</span></span>
+<span id="cb23-2"><a href="exploratory-data-analysis.html#cb23-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="exploratory-data-analysis.html#cb23-3" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>))</span></code></pre></div>
+<p><strong>Visualize variable distributions with <code>geom_historgram()</code></strong></p>
+<p>If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with <code>geom_histogram()</code></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="exploratory-data-analysis.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="exploratory-data-analysis.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm))</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>This tells us there may be a lot of variation in flipper size among species. We can use the ‘fill =’ argument to color the bars by species, and <code>scale_fill_manual()</code> to specify the colors.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="exploratory-data-analysis.html#cb25-1" tabindex="-1"></a><span class="co"># Histogram example: flipper length by species</span></span>
+<span id="cb25-2"><a href="exploratory-data-analysis.html#cb25-2" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="exploratory-data-analysis.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="exploratory-data-analysis.html#cb25-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;darkorchid&quot;</span>,<span class="st">&quot;cyan4&quot;</span>))</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with <code>facet_wrap()</code>, which will create a separate plot for each group, in this case species.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="exploratory-data-analysis.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="exploratory-data-analysis.html#cb26-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="exploratory-data-analysis.html#cb26-3" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;darkorchid&quot;</span>,<span class="st">&quot;cyan4&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="exploratory-data-analysis.html#cb26-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><strong>Compare sample sizes with <code>geom_bar()</code></strong></p>
+<p>Let’s use ggplot to see sample size for each species on each island.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="exploratory-data-analysis.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="exploratory-data-analysis.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> island, <span class="at">fill =</span> species))</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>As you may have already noticed, the beauty about <code>ggplot2</code> is there are a million ways you can customize your plots. This example builds on our simple bar plot:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="exploratory-data-analysis.html#cb28-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> island, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="exploratory-data-analysis.html#cb28-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="exploratory-data-analysis.html#cb28-3" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkorange&quot;</span>,<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;cyan4&quot;</span>), </span>
+<span id="cb28-4"><a href="exploratory-data-analysis.html#cb28-4" tabindex="-1"></a>                    <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="exploratory-data-analysis.html#cb28-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb28-6"><a href="exploratory-data-analysis.html#cb28-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="exploratory-data-analysis.html#cb28-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>This is important information, since we know now that not all species were sampled on every island, which will have complications for any comparisons we may want to make among islands.</p>
+<p><strong>Visualize variable relationships with <code>geom_point()</code></strong></p>
+<p>We can use <code>geom_point()</code> to view the relationship between two continuous variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the points by species:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="exploratory-data-analysis.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(penguins) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="exploratory-data-analysis.html#cb29-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">color =</span> species))</span></code></pre></div>
+<p><img src="03-explore_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="exercises-3" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Exercises<a href="exploratory-data-analysis.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Please include the line(s) of code you used to create your figure and make sure the figure is shown in the rendered report.</em></p>
+<ol style="list-style-type: decimal">
+<li>Using the visualization techniques you learned today, create a figure that allows you to visualize some comparison of your choice among the <code>penguins</code> data set. Below your figure write a testable hypothesis about the data and the patterns you see from this figure. (5 pts.)</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r-rstudio-and-r-markdown.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-explore.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

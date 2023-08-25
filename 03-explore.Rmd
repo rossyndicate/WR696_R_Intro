@@ -4,16 +4,20 @@ For this lesson you will be working with the same `penguins` data from last week
 
 You can set up your session by executing your set up script we created in [Lesson 1][Introduction to R, RStudio and R Markdown]
 
-```{r}
+```{r eval = FALSE}
 source("setup.R")
 ```
 
-OR if you haven't created your set up script, you can load the two libraries below we will need for today:
+*OR if you haven't created your set up script, you can load the two libraries below we will need for today:*
 
-```{r eval = FALSE}
+```{r warning = FALSE, message = FALSE}
 library(tidyverse)
 library(palmerpenguins)
 ```
+
+::: {.alert .alert-info}
+Note: To avoid warnings and other messages showing up in your rendered R Markdown document, you can set `messae = FALSE` and `warning = FALSE` in your code chunk arguments.
+:::
 
 ### The `penguins` data
 
@@ -56,7 +60,7 @@ For some more in depth EDA, the `tidyverse` packages provide many useful functio
 
 You can filter data in many ways using logical operators (`>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal)), AND (`&`), OR (`|`), and NOT (`!`) operators, and other operations such as `%in%`, which returns everything that matches at least one of the values in a given vector, and `is.na()` and `!is.na()` to return all missing or all non-missing data.
 
-```{r}
+```{r eval= FALSE}
 # filter rows for just the Adelie species
 filter(penguins, species == "Adelie")
 
@@ -81,7 +85,7 @@ body_mass_filtered <- filter(penguins, body_mass_g > 4750 | body_mass_g < 3550)
 
 `select()` has many helper functions you can use with it, such as `starts_with()`, `ends_with()`, `contains()` and many more that are very useful when dealing with large data sets. See `?select` for more details
 
-```{r}
+```{r eval = FALSE}
 # Select two specific variables
 select(penguins, species, sex)
 
@@ -100,7 +104,7 @@ select(penguins, contains("mm"))
 
 `mutate()` allows you to edit existing columns or create new columns in an existing data frame, and you can perform calculations on existing columns to return outputs in the new column. The syntax is the name of the new column you want to make (or the current column you want to edit) on the left of `=`, and then to the right is what you want to put in the new column. Note that `mutate()` works row wise on the data frame.
 
-```{r}
+```{r eval=FALSE}
 # New variable that calculates bill length in cm
 mutate(penguins, bill_length_cm = bill_length_mm/10)
 
@@ -108,7 +112,7 @@ mutate(penguins, bill_length_cm = bill_length_mm/10)
 mutate(penguins, species_sex = if_else(sex == 'male', paste0(species,"_m"), paste0(species, "_f")))
 ```
 
-`if_else()` reads as IF the given argument (`sex == 'male'`) is TRUE, put this: `paste0(species,"_m")` otherwise if FALSE put this: `paste0(species, "_f")`
+`if_else()` reads as: IF the given argument (`sex == 'male'`) is TRUE, put this: `paste0(species,"_m")` otherwise if FALSE put this: `paste0(species, "_f")`
 
 ::: {.alert .alert-info}
 Notice the use of `paste0()` here, and when we briefly used a similar function `paste()` in the 'Functions' section of the Intro to R lesson. Explore the difference between these two. They are both very useful functions for creating new character strings.
@@ -120,7 +124,7 @@ The pipe, `%>%`, comes from the **magrittr** package by Stefan Milton Bache. Pac
 
 For example, the pipe operator can take this sequence of operations:
 
-```{r}
+```{r eval=FALSE}
 df1 <- filter(penguins, island == "Dream")
 df2 <- mutate(df1, flipper_length_cm = flipper_length_mm/10)
 df3 <- select(df2, -flipper_length_mm) # keep everything BUT the flipper_length_mm column
@@ -130,7 +134,7 @@ print(df3)
 
 And turn it into this, removing the need to create intermediate variables
 
-```{r}
+```{r eval=FALSE}
 penguins %>% 
   filter(island == "Dream") %>% 
   mutate(flipper_length_cm = flipper_length_mm/10) %>% 
@@ -159,7 +163,7 @@ The output now only has 3 rows, one for each unique group (i.e., species), and a
 
 You can also group by multiple variables. Say you want to calculate the sample size (i.e., count, which can be calculated with the `n()` function) for each species for each year of the study:
 
-```{r}
+```{r message=FALSE}
 penguins %>% 
   group_by(species, year) %>% 
   summarise(n_observations = n())
@@ -167,13 +171,15 @@ penguins %>%
 
 You can even shorten the above operation by using a new function, `count()`, instead of `summarise()`:
 
-```{r}
+```{r eval = FALSE}
 penguins %>% 
   group_by(species, year) %>% 
   count()
 ```
 
 ## Exercises
+
+*You must include the line(s) of code used to answer each question*
 
 1.  Why don't the following lines of code work? Tweak each one so the code runs (3 pts.)
 
@@ -254,14 +260,14 @@ ggplot(data = <DATA>) +
 
 If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with `geom_histogram()`
 
-```{r}
+```{r message = FALSE, warning=FALSE}
 ggplot(penguins) + 
   geom_histogram(mapping = aes(x = flipper_length_mm))
 ```
 
 This tells us there may be a lot of variation in flipper size among species. We can use the 'fill =' argument to color the bars by species, and `scale_fill_manual()` to specify the colors.
 
-```{r, eval=TRUE}
+```{r, message=FALSE, warning=FALSE}
 # Histogram example: flipper length by species
 ggplot(penguins) +
   geom_histogram(aes(x = flipper_length_mm, fill = species), alpha = 0.5, position = "identity") +
@@ -270,7 +276,7 @@ ggplot(penguins) +
 
 Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with `facet_wrap()`, which will create a separate plot for each group, in this case species.
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 ggplot(penguins) +
   geom_histogram(aes(x = flipper_length_mm, fill = species), alpha = 0.5, position = "identity") +
   scale_fill_manual(values = c("darkorange","darkorchid","cyan4")) +
@@ -289,7 +295,7 @@ ggplot(penguins) +
 
 As you may have already noticed, the beauty about `ggplot2` is there are a million ways you can customize your plots. This example builds on our simple bar plot:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, warning=FALSE}
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(alpha = 0.8) +
   scale_fill_manual(values = c("darkorange","purple","cyan4"), 
@@ -305,7 +311,7 @@ This is important information, since we know now that not all species were sampl
 
 We can use `geom_point()` to view the relationship between two continuous variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the points by species:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, warning=FALSE}
 ggplot(penguins) +
   geom_point(mapping = aes(x = body_mass_g, y = flipper_length_mm, color = species))
 ```
