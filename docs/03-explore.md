@@ -40,21 +40,21 @@ penguins
 ```
 
 ```
-## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    <fct>   <fct>              <dbl>         <dbl>      <int>   <int> <fct> <int>
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA <NA>   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 <NA>   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # i 334 more rows
+## # i 2 more variables: sex <fct>, year <int>
 ```
 
 ### Exploratory Data Analysis
@@ -203,7 +203,7 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 3 × 2
+## # A tibble: 3 x 2
 ##   species   body_mass_avg
 ##   <fct>             <dbl>
 ## 1 Adelie            3701.
@@ -227,7 +227,7 @@ penguins %>%
 ```
 
 ```
-## # A tibble: 9 × 3
+## # A tibble: 9 x 3
 ## # Groups:   species [3]
 ##   species    year n_observations
 ##   <fct>     <int>          <int>
@@ -325,7 +325,7 @@ ggplot(penguins) +
   geom_histogram(mapping = aes(x = flipper_length_mm))
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
 
 This tells us there may be a lot of variation in flipper size among species. We can use the 'fill =' argument to color the bars by species, and `scale_fill_manual()` to specify the colors.
 
@@ -337,7 +337,7 @@ ggplot(penguins) +
   scale_fill_manual(values = c("darkorange","darkorchid","cyan4"))
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with `facet_wrap()`, which will create a separate plot for each group, in this case species.
 
@@ -349,7 +349,7 @@ ggplot(penguins) +
   facet_wrap(~species)
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
 
 **Compare sample sizes with `geom_bar()`**
 
@@ -361,7 +361,7 @@ ggplot(penguins) +
   geom_bar(mapping = aes(x = island, fill = species))
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 As you may have already noticed, the beauty about `ggplot2` is there are a million ways you can customize your plots. This example builds on our simple bar plot:
 
@@ -376,7 +376,7 @@ ggplot(penguins, aes(x = island, fill = species)) +
   coord_flip()
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-29-1.pdf)<!-- --> 
 
 This is important information, since we know now that not all species were sampled on every island, which will have complications for any comparisons we may want to make among islands.
 
@@ -390,7 +390,7 @@ ggplot(penguins) +
   geom_point(mapping = aes(x = body_mass_g, y = flipper_length_mm, color = species))
 ```
 
-<img src="03-explore_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+![](03-explore_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
 
 ## Exercises
 

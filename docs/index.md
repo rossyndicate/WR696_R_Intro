@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Data Analysis in R"
 author: "Caitlin C. Mothes, PhD and Katie Willi"
-date: "2023-08-25"
+date: "2023-08-28"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -65,11 +65,11 @@ We will always send announcements with assignments, web links, and other updates
 |      |               |                                                                                                                                                                                                                                                                      |
 |      |               | Exploratory data analysis                                                                                                                                                                                                                                            |
 +------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 3    | 9/4           | Before class: [Visualize Data](https://posit.cloud/learn/primers/3)                                                                                                                                                                                                  |
+| 3    | 9/4           | **No Class Monday 9/4!** Before class Wednesday: [Visualize Data](https://posit.cloud/learn/primers/3)                                                                                                                                                               |
 |      |               |                                                                                                                                                                                                                                                                      |
 |      |               | Data visualization                                                                                                                                                                                                                                                   |
 +------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 4    | 9/11          | **No Class Monday 9/4!** Before class Wednesday: [Tidy Your Data](https://posit.cloud/learn/primers/4)                                                                                                                                                               |
+| 4    | 9/11          | Before class: [Tidy Your Data](https://posit.cloud/learn/primers/4)                                                                                                                                                                                                  |
 |      |               |                                                                                                                                                                                                                                                                      |
 |      |               | T-tests, ANOVA                                                                                                                                                                                                                                                       |
 +------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

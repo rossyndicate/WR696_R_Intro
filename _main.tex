@@ -120,7 +120,7 @@
 
 \title{Introduction to Data Analysis in R}
 \author{Caitlin C. Mothes, PhD and Katie Willi}
-\date{2023-08-17}
+\date{2023-08-28}
 
 \begin{document}
 \maketitle
@@ -202,10 +202,10 @@ Introduction to R, RStudio, RMarkdown \\
 2 & 8/28 & Before class: \href{https://posit.cloud/learn/primers/2}{Work with Data}
 
 Exploratory data analysis \\
-3 & 9/4 & Before class:~\href{https://posit.cloud/learn/primers/3}{Visualize Data}
+3 & 9/4 & \textbf{No Class Monday 9/4!} Before class Wednesday:~\href{https://posit.cloud/learn/primers/3}{Visualize Data}
 
 Data visualization \\
-4 & 9/11 & \textbf{No Class Monday 9/4!} Before class Wednesday: \href{https://posit.cloud/learn/primers/4}{Tidy Your Data}
+4 & 9/11 & Before class: \href{https://posit.cloud/learn/primers/4}{Tidy Your Data}
 
 T-tests, ANOVA \\
 5 & 9/18 & Before class: \href{https://posit.cloud/learn/primers/5}{Iterate}
@@ -984,7 +984,7 @@ Or get a count of how many individuals were observed for each species each year
 \end{Highlighting}
 \end{Shaded}
 
-You can even shorten the above operation buy using \texttt{count()} instead of \texttt{summarise}.
+You can even shorten the above operation by using \texttt{count()} instead of \texttt{summarise}.
 
 \hypertarget{exercises-1}{%
 \subsubsection{Exercises}\label{exercises-1}}
@@ -1010,21 +1010,344 @@ You can even shorten the above operation buy using \texttt{count()} instead of \
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{visualize}{%
-\section{Visualize}\label{visualize}}
+\hypertarget{read-and-write-data}{%
+\section{Read and Write Data}\label{read-and-write-data}}
 
-A huge part of data exploration includes data visualization to get quick snapshots of your data and reveal patterns you can't see from starting a data frame of numbers. Here we are going to walk through a very quick introduction to \{ggplot2\} using some code examples from the \{palmerpenguins\} R package tutorial: \url{https://allisonhorst.github.io/palmerpenguins/articles/intro.html}.
+We used an R data package today to read in our data frame, but that probably isn't how you will normally read in your data.
 
-\{ggplot2\} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about \{ggplot\} though is that it does not use the pipe \texttt{\%\textgreater{}\%} operator like we just learned, but instead threads together arguments with \texttt{+} signs.
+There are many ways to read and write data in R. To read in .csv files, you can use \texttt{read\_csv()} which is included in the Tidyverse with the \{readr\} package, and to save csv files use \texttt{write\_csv()}. The \{readxl\} package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.
 
-The general structure for ggplots follows the template below. However note that you can also specify the \texttt{aes()} parameters within \texttt{ggplot()} instead of your \texttt{geom\_} function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The \texttt{geom\_} function is the type of plot you want to make, such as \texttt{geom\_point()}, \texttt{geom\_bar()}, etc, there are a lot to choose from.
+\hypertarget{exploratory-data-analysis}{%
+\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+For this lesson you will be working with the same \texttt{penguins} data from last week. You will be submitting this as your first assignment, so start a new R Markdown document to record your code and answers to the assignment questions, which you will submit as a rendered HTML or Word document on Canvas.
+
+You can set up your session by executing your set up script we created in \protect\hyperlink{introduction-to-r-rstudio-and-r-markdown}{Lesson 1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"setup.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{OR if you haven't created your set up script, you can load the two libraries below we will need for today:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\end{Highlighting}
+\end{Shaded}
+
+Note: To avoid warnings and other messages showing up in your rendered R Markdown document, you can set \texttt{messae\ =\ FALSE} and \texttt{warning\ =\ FALSE} in your code chunk arguments.
+
+\hypertarget{the-penguins-data-1}{%
+\subsection{\texorpdfstring{The \texttt{penguins} data}{The penguins data}}\label{the-penguins-data-1}}
+
+For this lesson, we are going to use the Palmer Penguins data set (which is loaded with the \{palmerpenguins\} package). This data was collected and made available by \href{https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php}{Dr.~Kristen Gorman} and the \href{https://pallter.marine.rutgers.edu/}{Palmer Station, Antarctica LTER}, a member of the \href{https://lternet.edu/}{Long Term Ecological Research Network}.
+
+Since this is a data set from the data package \{palmerpenguins\}, we can use the \texttt{data()} function to load it into our session:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"penguins"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You should now see it in the Environment pane. Print it to the console to see a snapshot of the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # i 334 more rows
+## # i 2 more variables: sex <fct>, year <int>
+\end{verbatim}
+
+\hypertarget{exploratory-data-analysis-1}{%
+\subsection{Exploratory Data Analysis}\label{exploratory-data-analysis-1}}
+
+When working with a new data set, often the first thing you do is perform some initial investigations on the data using various summary statistics and graphical representations. This is exploratory data analysis! Or for short, EDA. EDA is used to catch any potential errors, assess statistical assumptions, observe patterns and help form initial hypotheses of your data that you can then test with statistics.
+
+For our \texttt{penguins} data, we want to start by exploring things like sample size, variation and distribution of our variables, and make initial comparisons among species, islands, and sex.
+
+A new Base R function we have yet to use is \texttt{summary()}. This functions gives us a very quick snapshot of each variable in our dataset, where we can see things like sample size and summary statistics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(penguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       species          island    bill_length_mm  bill_depth_mm  
+##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+##                                  Mean   :43.92   Mean   :17.15  
+##                                  3rd Qu.:48.50   3rd Qu.:18.70  
+##                                  Max.   :59.60   Max.   :21.50  
+##                                  NA's   :2       NA's   :2      
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA's  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
+##  NA's   :2         NA's   :2
+\end{verbatim}
+
+For some more in depth EDA, the \texttt{tidyverse} packages provide many useful functions to summarize and visualize data. Today we are going to simultaneously learn more about various functions of \texttt{tidyverse} packages while investigating and formulating hypotheses about our \texttt{penguins} data set.
+
+\hypertarget{data-wrangling}{%
+\section{Data wrangling}\label{data-wrangling}}
+
+\hypertarget{the-dplyr-package-1}{%
+\subsection{\texorpdfstring{The \texttt{dplyr} package}{The dplyr package}}\label{the-dplyr-package-1}}
+
+\texttt{dplyr} is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing in the {[}Intro to R lesson{]}{[}Introduction to R and RStudio{]}, you may notice the first two \texttt{dplyr} functions we are going to learn, \texttt{filter()} and \texttt{select()} act as indexing functions, subsetting rows and columns based on specified names and/or conditions.
+
+\textbf{Subset rows with \texttt{filter()}}
+
+You can filter data in many ways using logical operators (\texttt{\textgreater{}}, \texttt{\textgreater{}=}, \texttt{\textless{}}, \texttt{\textless{}=}, \texttt{!=} (not equal), and \texttt{==} (equal)), AND (\texttt{\&}), OR (\texttt{\textbar{}}), and NOT (\texttt{!}) operators, and other operations such as \texttt{\%in\%}, which returns everything that matches at least one of the values in a given vector, and \texttt{is.na()} and \texttt{!is.na()} to return all missing or all non-missing data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# filter rows for just the Adelie species}
+\FunctionTok{filter}\NormalTok{(penguins, species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{)}
+
+\CommentTok{\# filter rows for all species EXCEPT Adelie}
+\FunctionTok{filter}\NormalTok{(penguins, species }\SpecialCharTok{!=} \StringTok{"Adelie"}\NormalTok{)}
+
+\CommentTok{\# filter islands Dream and Torgersen AND rows that DO NOT have  missing values for bill length}
+\FunctionTok{filter}\NormalTok{(penguins, island }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Dream"}\NormalTok{, }\StringTok{"Torgersen"}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(bill\_length\_mm))}
+\end{Highlighting}
+\end{Shaded}
+
+Note: Tidyverse package functions take in column names \emph{without} quotations.
+
+Using \texttt{dplyr} functions will not manipulate the original data, so if you want to save the returned object you need to assign it to a new variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{body\_mass\_filtered }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(penguins, body\_mass\_g }\SpecialCharTok{\textgreater{}} \DecValTok{4750} \SpecialCharTok{|}\NormalTok{ body\_mass\_g }\SpecialCharTok{\textless{}} \DecValTok{3550}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Subset columns with \href{https://dplyr.tidyverse.org/reference/select.html}{\texttt{select()}}}
+
+\texttt{select()} has many helper functions you can use with it, such as \texttt{starts\_with()}, \texttt{ends\_with()}, \texttt{contains()} and many more that are very useful when dealing with large data sets. See \texttt{?select} for more details
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select two specific variables}
+\FunctionTok{select}\NormalTok{(penguins, species, sex)}
+
+\CommentTok{\# Select a range of variables}
+\FunctionTok{select}\NormalTok{(penguins, species}\SpecialCharTok{:}\NormalTok{flipper\_length\_mm)}
+
+\CommentTok{\# Rename columns within select}
+\FunctionTok{select}\NormalTok{(penguins, }\AttributeTok{genus =}\NormalTok{ species, island)}
+
+\CommentTok{\# Select column variables that have \textquotesingle{}mm\textquotesingle{} in their name}
+\FunctionTok{select}\NormalTok{(penguins, }\FunctionTok{contains}\NormalTok{(}\StringTok{"mm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Create new variables with \href{https://dplyr.tidyverse.org/reference/mutate.html}{\texttt{mutate()}}}
+
+\texttt{mutate()} allows you to edit existing columns or create new columns in an existing data frame, and you can perform calculations on existing columns to return outputs in the new column. The syntax is the name of the new column you want to make (or the current column you want to edit) on the left of \texttt{=}, and then to the right is what you want to put in the new column. Note that \texttt{mutate()} works row wise on the data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# New variable that calculates bill length in cm}
+\FunctionTok{mutate}\NormalTok{(penguins, }\AttributeTok{bill\_length\_cm =}\NormalTok{ bill\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
+
+\CommentTok{\# mutate based on conditional statements with if\_else()}
+\FunctionTok{mutate}\NormalTok{(penguins, }\AttributeTok{species\_sex =} \FunctionTok{if\_else}\NormalTok{(sex }\SpecialCharTok{==} \StringTok{\textquotesingle{}male\textquotesingle{}}\NormalTok{, }\FunctionTok{paste0}\NormalTok{(species,}\StringTok{"\_m"}\NormalTok{), }\FunctionTok{paste0}\NormalTok{(species, }\StringTok{"\_f"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{if\_else()} reads as: IF the given argument (\texttt{sex\ ==\ \textquotesingle{}male\textquotesingle{}}) is TRUE, put this: \texttt{paste0(species,"\_m")} otherwise if FALSE put this: \texttt{paste0(species,\ "\_f")}
+
+Notice the use of \texttt{paste0()} here, and when we briefly used a similar function \texttt{paste()} in the `Functions' section of the Intro to R lesson. Explore the difference between these two. They are both very useful functions for creating new character strings.
+
+\hypertarget{the-pipe-1}{%
+\subsubsection{\texorpdfstring{The pipe \texttt{\%\textgreater{}\%}}{The pipe \%\textgreater\%}}\label{the-pipe-1}}
+
+The pipe, \texttt{\%\textgreater{}\%}, comes from the \textbf{magrittr} package by Stefan Milton Bache. Packages in the tidyverse load \texttt{\%\textgreater{}\%} for you automatically, so you don't usually load magrittr explicitly. Pipes are a powerful tool for clearly expressing a sequence of multiple operations.
+
+For example, the pipe operator can take this sequence of operations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(penguins, island }\SpecialCharTok{==} \StringTok{"Dream"}\NormalTok{)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(df1, }\AttributeTok{flipper\_length\_cm =}\NormalTok{ flipper\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
+\NormalTok{df3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(df2, }\SpecialCharTok{{-}}\NormalTok{flipper\_length\_mm) }\CommentTok{\# keep everything BUT the flipper\_length\_mm column}
+
+\FunctionTok{print}\NormalTok{(df3)}
+\end{Highlighting}
+\end{Shaded}
+
+And turn it into this, removing the need to create intermediate variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(island }\SpecialCharTok{==} \StringTok{"Dream"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flipper\_length\_cm =}\NormalTok{ flipper\_length\_mm}\SpecialCharTok{/}\DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{flipper\_length\_cm)}
+\end{Highlighting}
+\end{Shaded}
+
+You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce \texttt{\%\textgreater{}\%} when reading code is ``then''. It takes the output of the operation to the left of \texttt{\%\textgreater{}\%} and feeds it into the next function as the input.
+
+\href{https://dplyr.tidyverse.org/reference/group_by.html}{\textbf{\texttt{group\_by()}}} \textbf{and \href{https://dplyr.tidyverse.org/reference/summarise.html}{\texttt{summarise()}}}
+
+All the above functions can all be used in conjunction with \texttt{group\_by()}, which changes the scope of each function from operating on the entire data set to instead operate by specified groups. \texttt{group\_by()} becomes even more powerful when used along with \texttt{summarise()} to calculate some specified summary statistic for each group.
+
+Say you want to summarize data by some specified group, for example you want to find the average body mass for each species, this is how you could do that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{body\_mass\_avg =} \FunctionTok{mean}\NormalTok{(body\_mass\_g, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   species   body_mass_avg
+##   <fct>             <dbl>
+## 1 Adelie            3701.
+## 2 Chinstrap         3733.
+## 3 Gentoo            5076.
+\end{verbatim}
+
+Notice the additional argument \texttt{na.rm\ =\ TRUE} within the \texttt{mean()} function. This is required for any mathamatical or statistical functions if you have ANY missing (NA) values in your dataset. What this does is remove those values from the calculation, otherwise \texttt{mean()} would just return \texttt{NA} without the \texttt{na.rm\ =\ TRUE} argument.
+
+The output now only has 3 rows, one for each unique group (i.e., species), and a new column with the calculated average body mass for each species.
+
+You can also group by multiple variables. Say you want to calculate the sample size (i.e., count, which can be calculated with the \texttt{n()} function) for each species for each year of the study:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n\_observations =} \FunctionTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9 x 3
+## # Groups:   species [3]
+##   species    year n_observations
+##   <fct>     <int>          <int>
+## 1 Adelie     2007             50
+## 2 Adelie     2008             50
+## 3 Adelie     2009             52
+## 4 Chinstrap  2007             26
+## 5 Chinstrap  2008             18
+## 6 Chinstrap  2009             24
+## 7 Gentoo     2007             34
+## 8 Gentoo     2008             46
+## 9 Gentoo     2009             44
+\end{verbatim}
+
+You can even shorten the above operation by using a new function, \texttt{count()}, instead of \texttt{summarise()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species, year) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exercises-2}{%
+\section{Exercises}\label{exercises-2}}
+
+\emph{You must include the line(s) of code used to answer each question}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Why don't the following lines of code work? Tweak each one so the code runs (3 pts.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, (}\StringTok{"species"}\NormalTok{, }\StringTok{"island"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins}\SpecialCharTok{$}\NormalTok{flipper\_lenght\_mm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins[island}\SpecialCharTok{==}\StringTok{\textquotesingle{}Dream\textquotesingle{}}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Find the average flipper length for each species. Which species has the largest flippers? (2 pts.)
+\item
+  Which is the only species that was sampled across all three islands in this study? You must use \{dplyr\} functions to answer this question (e.g., \texttt{group\_by()} \ldots) (2 pts.)
+\item
+  Reorder the variables in \texttt{penguins} so that \texttt{year} is the first column followed by the rest (Hint: look into the use of \texttt{everything()}). (2 pts.)
+\item
+  Create a new column called \textquotesingle size\_group\textquotesingle{} where individuals with body mass greater than the \emph{overall} average are called \textquotesingle large\textquotesingle{} and those smaller are called \textquotesingle small\textquotesingle. (Note: this answer requires the additional use of both the \texttt{if\_else()} and \texttt{mean()} functions. Remember how to deal with \texttt{NA} values in \texttt{mean()}). (4 pts.)
+\item
+  You want to filter data for years that are \emph{not} in a vector of given years, but this code doesn\textquotesingle t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{!\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{2008}\NormalTok{, }\DecValTok{2009}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{visualization}{%
+\section{Visualization}\label{visualization}}
+
+An important part of data exploration includes visualizing the data to reveal patterns you can't necessarily see from viewing a data frame of numbers. Here we are going to walk through a very quick introduction to \texttt{ggplot2}, using some code examples from the \texttt{palmerpenguins} R package tutorial: \url{https://allisonhorst.github.io/palmerpenguins/articles/intro.html}.
+
+\texttt{ggplot2} is perhaps the most popular data visualization package in the R language, and is also a part of the Tidyverse. One big difference about \texttt{ggplot} though is that it \textbf{does not use the pipe \texttt{\%\textgreater{}\%} operator} like we just learned, but instead threads together arguments with \texttt{+} signs (but you can pipe a data frame into the first \texttt{ggplot()} argument).
+
+The general structure for ggplots follows the template below. Note that you can also specify the \texttt{aes()} parameters within \texttt{ggplot()} instead of your geom function, which you may see a lot of people do. The mappings include arguments such as the x and y variables from your data you want to use for the plot. The geom function is the type of plot you want to make, such as \texttt{geom\_point()}, \texttt{geom\_bar()}, etc, there are a lot to choose from.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# general structure of ggplot functions}
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =} \SpecialCharTok{\textless{}}\NormalTok{DATA}\SpecialCharTok{\textgreater{}}\NormalTok{) }\SpecialCharTok{+} 
   \ErrorTok{\textless{}}\NormalTok{GEOM\_FUNCTION}\SpecialCharTok{\textgreater{}}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\SpecialCharTok{\textless{}}\NormalTok{MAPPINGS}\SpecialCharTok{\textgreater{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+\textbf{Visualize variable distributions with \texttt{geom\_historgram()}}
 
 If you plan on doing any statistical analysis on your data , one of the first things you are likely to do is explore the distribution of your variables. You can plot histograms with \texttt{geom\_histogram()}
 
@@ -1035,7 +1358,7 @@ If you plan on doing any statistical analysis on your data , one of the first th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-29-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-25-1.pdf}
 
 This tells us there may be a lot of variation in flipper size among species. We can use the `fill =' argument to color the bars by species, and \texttt{scale\_fill\_manual()} to specify the colors.
 
@@ -1048,7 +1371,7 @@ This tells us there may be a lot of variation in flipper size among species. We 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-30-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-26-1.pdf}
 
 Cool, now we can see there seems to be some pretty clear variation in flipper size among species. Another way to visualize across groups is with \texttt{facet\_wrap()}, which will create a separate plot for each group, in this case species.
 
@@ -1061,9 +1384,11 @@ Cool, now we can see there seems to be some pretty clear variation in flipper si
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-31-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-27-1.pdf}
 
-Lets make a quick bar plot showing the total count of each species studied on each island
+\textbf{Compare sample sizes with \texttt{geom\_bar()}}
+
+Let's use ggplot to see sample size for each species on each island.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1072,9 +1397,9 @@ Lets make a quick bar plot showing the total count of each species studied on ea
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-32-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-28-1.pdf}
 
-As you may have already noticed, the beauty about \{ggplot2\} is there are a million ways you can customize your plots. This example builds on our simple bar plot:
+As you may have already noticed, the beauty about \texttt{ggplot2} is there are a million ways you can customize your plots. This example builds on our simple bar plot:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1088,9 +1413,13 @@ As you may have already noticed, the beauty about \{ggplot2\} is there are a mil
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-33-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-29-1.pdf}
 
-We can use \texttt{geom\_point()} to view the relationship between two variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the point by species:
+This is important information, since we know now that not all species were sampled on every island, which will have complications for any comparisons we may want to make among islands.
+
+\textbf{Visualize variable relationships with \texttt{geom\_point()}}
+
+We can use \texttt{geom\_point()} to view the relationship between two continuous variables by specifying the x and y axes. Say we want to visualize the relationship between penguin body mass and flipper length and color the points by species:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1099,27 +1428,19 @@ We can use \texttt{geom\_point()} to view the relationship between two variables
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{02-R-Intro_files/figure-latex/unnamed-chunk-34-1.pdf}
+\includegraphics{03-explore_files/figure-latex/unnamed-chunk-30-1.pdf}
 
-\hypertarget{exercises-2}{%
-\subsection{Exercises}\label{exercises-2}}
+\hypertarget{exercises-3}{%
+\section{Exercises}\label{exercises-3}}
 
-(\emph{not required})
+\emph{Please include the line(s) of code you used to create your figure and make sure the figure is shown in the rendered report.}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
-  Make a barplot showing the average flipper length for each species.
-\item
-  Make a scatter plot of bill length compared to bill depth but only for observations on the Dream island.
+  Using the visualization techniques you learned today, create a figure that allows you to visualize some comparison of your choice among the \texttt{penguins} data set. Below your figure write a testable hypothesis about the data and the patterns you see from this figure. (5 pts.)
 \end{enumerate}
-
-\hypertarget{read-and-write-data}{%
-\section{Read and Write Data}\label{read-and-write-data}}
-
-We used an R data package today to read in our data frame, but that probably isn't how you will normally read in your data.
-
-There are many ways to read and write data in R. To read in .csv files, you can use \texttt{read\_csv()} which is included in the Tidyverse with the \{readr\} package, and to save csv files use \texttt{write\_csv()}. The \{readxl\} package is great for reading in excel files, however it is not included in the Tidyverse and will need to be loaded separately.
 
   \bibliography{book.bib,packages.bib}
 

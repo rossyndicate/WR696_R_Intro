@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 3 Introduction to R, RStudio and R Markdown | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 3 Introduction to R, RStudio and R Markdown | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-08-25" />
+<meta name="date" content="2023-08-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -340,20 +344,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You now see it in the Environment pane. Print it to the console to see a snapshot of the data:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb20-1" tabindex="-1"></a>penguins</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g</code></pre>
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <hr>
 </div>
 <div id="data-types" class="section level3 hasAnchor" number="3.5.2">
@@ -423,20 +427,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## [[1]][[4]]
 ## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
 ## 
 ## 
 ## [[2]]
@@ -460,20 +464,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;apple&quot;</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb38-1" tabindex="-1"></a>myList[[<span class="st">&quot;data&quot;</span>]] <span class="co"># select the object in the list named &quot;data&quot; (a data frame)</span></span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g</code></pre>
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <p>Index vectors:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb40-1" tabindex="-1"></a><span class="co"># for vectors we use single brackets []</span></span>
 <span id="cb40-2"><a href="introduction-to-r-rstudio-and-r-markdown.html#cb40-2" tabindex="-1"></a>myVector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>)</span>
