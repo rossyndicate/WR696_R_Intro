@@ -8,20 +8,17 @@
 
 This lesson will go a little deeper into data visualization and how to customize figures and tables and make them 'publication ready'.
 
-First start by reading in the packages for this lesson:
+First start by reading in the packages for this lesson, which in this case is only the {tidyverse}:
 
-```{r eval = TRUE}
-library(tidyverse) #which includes ggplot2
-library(tmap) # interactive and static maps
-library(sf) # to manage spatial data to make maps
-library(tigris) # to import census tract spatial data
+```{r}
+library(tidyverse)
 ```
 
 ### Data Preparation
 
-For today's lesson we are going to be working with some census data for Larimer County, CO. This data can be found on Canvas in .csv format titled `larimer_census.csv`. Download that file and put it in your `data/` folder in the R Project you will be using for this lesson.
+For today's lesson we are going to be working with some census data for Larimer County, CO. This data can be found on Canvas in .csv format titled `larimer_census.csv`. Download that file and put it in a `data/` folder in the your R Project.
 
-After that, read the .csv into your R session:
+After that, read the .csv into your R session using `read_csv()`:
 
 ```{r eval = TRUE, message = FALSE}
 census_data <- read_csv("data/larimer_census.csv")
@@ -32,23 +29,6 @@ Inspect `census_data` and the structure of the data frame. This data contains in
 ::: {.alert .alert-info}
 Note: This census data for Larimer county was retrieved entirely in R using the `tidycensus` package. If you are interested in how I did this, I've uploaded the script to do so on Canvas titled 'getCensusData.R'. Note that you will need to retrieve your own census API key and paste it at the top of the script to run it (API keys are free and easy to get [here](https://api.census.gov/data/key_signup.html)). To learn more about `tidycensus`, check out [Analyzing U.S. Census Data](https://walker-data.com/census-r/index.html) by Kyle Walker.
 :::
-
-In the second half of this lesson we will be making maps, so we will need to retrieve spatial data in the form of census tract polygons for Larimer County. We can use the `tigris` package you used in the [Introduction to Spatial Data lesson](07-spatial.Rmd) to import a Larimer County census tract shapefile. We also want to just keep the `GEOID` column, as it will make our data join later on cleaner (i.e., we only need to keep the spatial data and an ID column).
-
-```{r eval = TRUE, message = FALSE}
-larimer_tracts <- tracts(state = "CO", county = "Larimer", progress_bar = FALSE) %>% 
-  select(GEOID)
-```
-
-Now in order to visualize our census tract attributes spatially, we need to join the `census_data` to `larimer_tracts`. We use the function `full_join()`, specify the two variables we want to join, and specify the name of the column in each that we want to join by (i.e., the column that is consistent between the two). In this case we want to use the column `GEOID`, which is a unique number given to each census tract in the US.
-
-We want to create a new variable that will become an `sf` object we can map with `tmap` later.
-
-```{r eval = TRUE}
-census_spatial <- full_join(larimer_tracts, census_data, by = ("GEOID"))
-```
-
-When you inspect this output, you can see that it is a spatial `sf` multipolygon object, where the data is exactly the same as our `census_data` data frame but now there is a geometry column/attribute tied to it.
 
 <hr>
 
@@ -62,7 +42,7 @@ Let's start with this basic plot:
 
 ```{r eval = TRUE}
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc))+
   geom_point(color = "black")
 ```
 
@@ -72,18 +52,16 @@ And by the end of this lesson turn it into this:
 
 ### General Appearance
 
-*Note that these customizations will vary depending on what `geom_`* *you are using.*
-
 #### Customize points within `geom_point()`
 
 -   color or size points by a variable or apply a specific color/number
 
 -   change the transparency with `alpha` (ranges from 0-1)
 
-```{r eval = TRUE}
+```{r eval = TR}
 #specific color and size value
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc))+
   geom_point(color = "red", size = 4, alpha = 0.5)
 ```
 
@@ -92,14 +70,14 @@ When sizing or coloring points by a variable in the dataset, it goes within `aes
 ```{r eval = TRUE}
 # size by a variable
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc))+
   geom_point(aes(size = median_income), color = "red")
 ```
 
 ```{r eval = TRUE}
 # color by a variable
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc))+
   geom_point(aes(color = median_income), size = 4)
 ```
 
@@ -113,7 +91,7 @@ census_data %>%
 
 ```{r eval = TRUE, warning=FALSE}
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black")+
   ggtitle("Census Tract socioeconomic data for Larimer County")+
   xlab("Median Age")+
@@ -128,7 +106,7 @@ You can also put multiple label arguments within `labs()` like this:
 
 ```{r eval = TRUE, warning=FALSE}
 census_data %>% 
-  ggplot(aes(x = median_age, y = non_white_percent))+
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black")+
   labs(
     title = "Census Tract socioeconomic data for Larimer County",
@@ -145,7 +123,7 @@ All `ggplot2` components can be customized within the `theme()` function. The fu
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -163,11 +141,11 @@ census_data %>%
   )
 ```
 
-Another change you may want to make is the value breaks in the axis labels (i.e., what values are shown on the axis). To customize that for a continuous variable you can use `scale_x_continuous()` / `scale_y_continuous` (for discrete variables use `scale_x_discrete` ). In this example we will also add `anlge =` to our axis text to able the labels so they are not too jumbled:
+Another change you may want to make is the value breaks in the axis labels (i.e., what values are shown on the axis). To customize that for a continuous variable you can use `scale_x_continuous()` / `scale_y_continuous` (for discrete variables use `scale_x_discrete` ). In this example we will also add `anlge =` to our axis text to angle the labels so they are not too jumbled:
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -189,7 +167,7 @@ For example, see what `theme_minimal()` and `theme_classic()` look like:
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -199,7 +177,7 @@ census_data %>%
 
 ```{r eval=TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -215,15 +193,15 @@ To run this example, first install the `ggthemes` package and then load it in to
 install.packages("ggthemes")
 ```
 
-```{r eval = TRUE}
+```{r eval = TRUE, message=FALSE}
 library(ggthemes)
 ```
 
-Now explore a few themes, such as `theme_wsj`, which uses the Wall Street Journal theme, and `theme_economist` and `theme_economist_white` to use themes used by the Economist,
+Now explore a few themes, such as `theme_wsj`, which uses the Wall Street Journal theme, and `theme_economist` and `theme_economist_white` to use themes used by the Economist.
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -233,14 +211,13 @@ census_data %>%
   theme(text = element_text(size = 8))
 ```
 
-
 ::: {.alert .alert-info}
 Note you may need to click 'Zoom' in the Plot window to view the figure better.
 :::
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -252,7 +229,7 @@ Some themes may look messy out of the box, but you can apply any elements from `
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income), color = "black") +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -263,7 +240,6 @@ census_data %>%
   )
 ```
 
-
 ### Color, Size and Legends
 
 #### Color
@@ -272,7 +248,7 @@ To specify a single color, the most common way is to specify the name (e.g., `"r
 
 You can also specify an entire color palette. Some of the most common packages to work with color palettes in R are `RColorBrewer` and [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). Viridis is designed to be color-blind friendly, and RColorBrewer has a [web application](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) where you can explore your data requirements and preview various palettes.
 
-First, if you want to run these examples install the `RColorBrewer` and `viridis` packages:
+First, if you want to run these examples install and load the `RColorBrewer` and `viridis` packages:
 
 ```{r eval = FALSE}
 install.packages("RColorBrewer")
@@ -289,7 +265,7 @@ Now, lets color our points using the palettes in `viridis`. To customize continu
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -301,7 +277,7 @@ Second, let's see how to do that with an `RColorBrewer` palette, using the 'Gree
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -315,7 +291,7 @@ You can edit the range of the point radius with `scale_radius` :
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -331,7 +307,7 @@ In the previous plots we notice that two separate legends are created for size a
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -361,7 +337,7 @@ When investigating the outlying point with the highest median age and high perce
 
 ```{r eval=TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -379,7 +355,7 @@ We can also add an arrow to point at the data point the annotation is referring 
 
 ```{r eval=TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income)) +
   ggtitle("Census Tract socioeconomic data for Larimer County") +
   xlab("Median Age") +
@@ -417,7 +393,7 @@ We are almost done with this figure. I am going to add/change a few more element
 
 ```{r eval = TRUE, fig.height=6}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income), alpha = 0.9) +
   labs(
     title = "Socioeconomic data for Larimer County",
@@ -474,7 +450,7 @@ library(ggdark)
 
 ```{r eval = TRUE}
 census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income), alpha = 0.9) +
   labs(
     title = "Socioeconomic data for Larimer County",
@@ -526,15 +502,21 @@ ggsave(filename = "data/census_plot.png", width = 6, height = 5, units = "in")
 
 #### Want to make it interactive?
 
-Remember the use of the `plotly` package and the `ggplotly()` function from previous lessons. We can put our entire ggplot code above inside `ggplotly()` below:
+The `plotly` package and the `ggplotly()` function lets you make your charts interactive.
+
+```{r eval=FALSE}
+install.packages("plotly")
+```
 
 ```{r eval = TRUE}
 library(plotly)
 ```
 
+We can put our entire ggplot code above inside `ggplotly()` below to make it interactive:
+
 ```{r eval = TRUE}
 ggplotly(census_data %>%
-  ggplot(aes(x = median_age, y = non_white_percent)) +
+  ggplot(aes(x = median_age, y = percent_bipoc)) +
   geom_point(aes(size = median_income, color = median_income), alpha = 0.9) +
   labs(
     title = "Socioeconomic data for Larimer County",
@@ -561,158 +543,15 @@ ggplotly(census_data %>%
 
 Note that we removed the annotations as `plotly` doesn't yet support them.
 
-## Publication Ready Maps with `tmap`
-
-You used `tmap` in the [Introduction to Spatial Data lesson](07-spatial.Rmd). Let's use it here to visualize the spatial patterns of our Larimer County census data, and learn how to customize the map to make it 'Publication Ready'.
-
-To run these examples, make sure you have created the `census_spatial` object at the beginning of this lesson in the 'Data Preparation' section.
-
-```{r message=FALSE}
-#set the tmap mode to static
-tmap_mode("plot")
-```
-
-#### Color polygons
-
-Within `tm_polygons()` we can color by a variable in the data, specify the quantiles to group values by, and add a title:
-
-```{r eval = TRUE}
-tm_shape(census_spatial)+
-  tm_polygons(col = "median_income",
-              style = "quantile",
-              title = "Median Income")
-```
-
-#### Edit the layout
-
-Within `tm_layout()`, there are many ways to customize the map layout and elements. For example, let's remove the border around the map and move the legend:
-
-```{r eval = TRUE}
-tm_shape(census_spatial)+
-  tm_polygons(col = "median_income",
-              style = "quantile",
-              title = "Median Income")+
-  tm_layout(frame = FALSE,
-            legend.outside = TRUE)
-```
-
-You can also add other things like a scale bar, compass, and map credit:
-
-```{r eval = TRUE}
-tm_shape(census_spatial)+
-  tm_polygons(col = "median_income",
-              style = "quantile",
-              title = "Median Income")+
-  tm_layout(frame = FALSE,
-            legend.outside = TRUE)+
-  tm_scale_bar(position = c("left", "bottom")) +
-  tm_compass(position = c("right", "top")) +
-  tm_credits("Map credit goes here", position = c("left", "bottom"))
-```
-
-#### Faceting
-
-Want to compare across multiple variables? We can quickly do that with `tm_facets()` and supplying a string of column names for each variable we want to create a map for.
-
-Also, lets focus on the Fort Collins area. To change the extent of the map `tmap` has a cool feature that you can supply a city name to `bbox =` within `tm_shape()` and it will use Open Street Map to locate that city and crop your map to it!
-
-```{r eval = TRUE}
-tm_shape(census_spatial, bbox = "Fort Collins") +
-  tm_polygons(
-    c("median_income", "median_age", "non_white_percent"),
-    title = c("Median Income", "Median Age", "People of Color (%)"),
-    style = "quantile",
-    n = 5
-  ) +
-  tm_facets(ncol = 3) +
-  tm_layout(frame = FALSE,
-            legend.position = c("left", "bottom"),
-            legend.width = 0.5)
-```
-
-#### Color and Themes
-
-A few ways you can edit the aesthetics are shown below. You can supply any `RColorBrewer` or `viridis` palette to `palette =`, control border colors by separating `tm_polygons()` into `tm_borders()` and `tm_fill()`, and explore the different styles of `tm_style()` by running `?tm_style()`
-
-```{r eval = TRUE}
-tm_shape(census_spatial, bbox = "Fort Collins") +
-  tm_borders(col = "lightgray")+
-  tm_fill(
-    col = "non_white_percent",
-    title = "People of Color (%)",
-    style = "quantile",
-    n = 6,
-    palette = "PuBu",
-    legend.hist = TRUE #adds a histogram of the data to the map
-  ) +
-  tm_style("classic")+
-  tm_layout(frame = FALSE,
-            legend.outside = TRUE,
-            legend.hist.width = 5)
-```
-
-#### Saving your maps
-
-You can save your maps within the "Plots" pane, or use `tmap_save()`.
-
-```{r eval = FALSE}
-map <- tm_shape(census_spatial, bbox = "Fort Collins") +
-  tm_borders(col = "lightgray")+
-  tm_fill(
-    col = "non_white_percent",
-    title = "People of Color (%)",
-    style = "quantile",
-    n = 6,
-    palette = "PuBu",
-    legend.hist = TRUE
-  ) +
-  tm_style("classic")+
-  tm_layout(frame = FALSE,
-            legend.outside = TRUE,
-            legend.hist.width = 5)
-
-tmap_save(map, filename = "data/census_map.png")
-```
-
-## Publication Ready Tables with [`flextable`](https://ardata-fr.github.io/flextable-book/)
-
-While tables aren't necessarily always grouped in to the 'data visualization' discussion (but check out [these awesome tables](https://ardata.fr/en/flextable-gallery/) made with the `flextable` package!), this section will provide a quick example of creating publication ready tables you can render in your Word documents.
-
-To make tables that can render in a Word document, you can use the `flextable` package. If you want to test it out, install and load the package:
-
-```{r eval = FALSE}
-install.packages("flextable")
-```
-
-```{r eval = TRUE}
-library(flextable)
-```
-
-Using the `flextable` package, rendering nicely formatted tables is pretty simple by feeding a data frame into the `flextable()` argument. Normally you don't want a table with 50+ rows in it (publication tables are meant to summarize), so let's make a quick table showing some summary information of race and ethnicity for the top 5 wealthiest census tracts.
-
-We can clean our data and then pipe it into `flextable()` to create the rendered table:
-
-```{r eval = TRUE}
-census_data %>% 
-  arrange(-median_income) %>% 
-  filter(median_income > 145000) %>% 
-  select(NAME, White:Hispanic) %>% 
-  # round values to 2 decimal places
-  mutate(across(White:Hispanic, ~round(.x, digits = 2))) %>% 
-  flextable()
-```
-
-In addition to cleaning and formatting your data with `dplyr` functions before creating the flextable (e.g., edit column names, round numeric values), there are a ton of ways you can customize the flextable objects with various `flextable` functions. Check out the [flextable book](https://ardata-fr.github.io/flextable-book/) for more details.
-
-<hr>
+------------------------------------------------------------------------
 
 ## The Assignment
 
-This week's assignment is to use anything you've learned today and additional resources (if you want) to make two maps. One 'good map' and one 'bad map'. Essentially you will first make a good plot, and then break all the rules of data viz and ruin it. For the bad map you **must specify two things** that are wrong with it (e.g., not color-blind friendly, jumbled labels, wrong plot for the job, poor legend or axis descriptions, etc.) Be as 'poorly' creative as you want! Check out [this thread](https://twitter.com/NSilbiger/status/1642006283103662080?s=20) by Dr. Nyssa Silbiger and [this thread](https://twitter.com/drdrewsteen/status/1172547837046820864?s=20) by Dr. Drew Steen for some bad plot examples, which were both the inspiration for this assignment.
+This week's assignment is to use anything you've learned today, in previous lessons and additional resources (if you want) to make two maps. One 'good map' and one 'bad map'. Essentially you will first make a good plot, and then break all the rules of data viz and ruin it. For the bad map you **must specify two things** that are wrong with it (e.g., not color-blind friendly, jumbled labels, wrong plot for the job, poor legend or axis descriptions, etc.) Be as 'poorly' creative as you want! Check out [this thread](https://twitter.com/NSilbiger/status/1642006283103662080?s=20) by Dr. Nyssa Silbiger and [this thread](https://twitter.com/drdrewsteen/status/1172547837046820864?s=20) by Dr. Drew Steen for some bad plot examples, which were both the inspiration for this assignment.
 
-You can create these plots with any data (e.g., the census data from today, any datasets we've used in past lessons, or new ones!), the good (and bad) visualization just has to be something we have not made in class before.
+You can create these plots with any data (e.g., the census data from today, the penguins data past lessons, or new ones!), the good (and bad) visualization just has to be something we have not made in class before.
 
-To submit the assignment, create an R Markdown document that includes reading in of the data and libraries, and the code to make the good figure and the bad figure. You will render your assignment to Word (**and make sure both code and plots are shown in the output**), and don't forget to add the two reasons (minimum) your bad figure is 'bad'. You will then submit this rendered Word document on Canvas. (25 pts. total)
+To submit the assignment, create an R Markdown document that includes reading in of the data and libraries, and the code to make the good figure and the bad figure. You will render your assignment to Word or HTML (**and make sure both code and plots are shown in the output**), and don't forget to add the two reasons (minimum) your bad figure is 'bad'. You will then submit this rendered document on Canvas. (25 pts. total)
 
 *Note: the class will vote on the worst bad plot and the winner will receive 5 points of extra credit!*
 
