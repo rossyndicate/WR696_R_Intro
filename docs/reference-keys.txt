@@ -49,4 +49,14 @@ finalize-and-save
 want-to-make-it-interactive
 the-assignment
 acknowledgements-and-resources
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+data-analysis-t-test-and-anova
+explore-the-dataset
+t-test---compare-two-means
+assumptions
+variable-transformation
+anova-test---compare-more-than-two-means
+assumptions-1
+post-hoc-analysis
+exercises-4
+acknowledgements
+citations

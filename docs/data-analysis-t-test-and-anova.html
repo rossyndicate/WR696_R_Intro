@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R</title>
+  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R" />
+  
+  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  
+
+<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+
+
+<meta name="date" content="2023-09-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization-in-r.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Data Analysis in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
+<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
+<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
+<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-analysis-t-test-and-anova" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number"> 6</span> Data Analysis: T-test and ANOVA<a href="data-analysis-t-test-and-anova.html#data-analysis-t-test-and-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this lesson you will be introduced to the process of conducting statistical tests in R, specifically t-tests and ANOVA tests for working with categorical predictor variables.</p>
+<p>First, to access the dataset(s) you will be using in this lesson, we will be using a new data package called <a href="https://lter.github.io/lterdatasampler/">{lterdatasampler}</a>. This package contains subsets of data from various Long Term Ecological Research (LTER) sites, designed for use in R teaching and training activities.</p>
+<p>We we also need the {<a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a>} package, which allows us to conduct various statistical tests that are ‘tidyverse’ friendly (aka, we can use them with the pipe <code>%&gt;%</code>).</p>
+<p>So since these are new packages, we need to install them first:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="data-analysis-t-test-and-anova.html#cb125-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lterdatasampler&quot;</span>)</span>
+<span id="cb125-2"><a href="data-analysis-t-test-and-anova.html#cb125-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstatix&quot;</span>)</span></code></pre></div>
+<p>Now load in the three libraries/packages needed for this lesson (OR, add <code>lterdatasampler</code> and <code>car</code> to your ‘setup.R’ script if you have been setting up your environment that way).</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="data-analysis-t-test-and-anova.html#cb126-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb126-2"><a href="data-analysis-t-test-and-anova.html#cb126-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
+<span id="cb126-3"><a href="data-analysis-t-test-and-anova.html#cb126-3" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div id="explore-the-dataset" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Explore the dataset<a href="data-analysis-t-test-and-anova.html#explore-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will be using the <code>and_vertebrates</code> dataset for this lesson. Do a little exploration of this data first to understand its structure, variables and data types:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="data-analysis-t-test-and-anova.html#cb127-1" tabindex="-1"></a><span class="co"># View the data structure</span></span>
+<span id="cb127-2"><a href="data-analysis-t-test-and-anova.html#cb127-2" tabindex="-1"></a><span class="fu">glimpse</span>(and_vertebrates)</span>
+<span id="cb127-3"><a href="data-analysis-t-test-and-anova.html#cb127-3" tabindex="-1"></a></span>
+<span id="cb127-4"><a href="data-analysis-t-test-and-anova.html#cb127-4" tabindex="-1"></a><span class="co"># Explore the metadata in the Help pane</span></span>
+<span id="cb127-5"><a href="data-analysis-t-test-and-anova.html#cb127-5" tabindex="-1"></a>?and_vertebrates</span></code></pre></div>
+<p>This data set contains length and weight observations for three aquatic species in clear cut and old growth coniferous forest sections of Mack Creek in HJ Andrews Experimental Forest in Oregon. The three species are <strong>Cutthroat trout</strong>, <strong>Coastal giant salamander</strong> and <strong>Cascade torrent salamander</strong>.</p>
+</div>
+<div id="t-test---compare-two-means" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> t-test - Compare two means<a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Previous work has shown that forest harvesting can impact aquatic vertebrate biomass (Kaylor &amp; Warren 2017). With this <code>and_vertebrates</code> data set we can investigate this hypothesis, by comparing weight to forest type (clear cut or old growth). This therefore involves a test comparing the means (average weight) among two groups (clear cut and old growth forests), which then requires a t-test.</p>
+<p>Lets focus on conducting this test for just Cutthroat trout to reduce species-level variances in weight. Before conducting analyses, we need to clean our dataset. The steps below will filter our data to just include the trout species, and remove any NA values of weight with the <code>drop_na()</code> function:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-analysis-t-test-and-anova.html#cb128-1" tabindex="-1"></a><span class="co">#create a new variable for downstream analysis</span></span>
+<span id="cb128-2"><a href="data-analysis-t-test-and-anova.html#cb128-2" tabindex="-1"></a>trout_clean <span class="ot">&lt;-</span> and_vertebrates <span class="sc">%&gt;%</span> </span>
+<span id="cb128-3"><a href="data-analysis-t-test-and-anova.html#cb128-3" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
+<span id="cb128-4"><a href="data-analysis-t-test-and-anova.html#cb128-4" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb128-5"><a href="data-analysis-t-test-and-anova.html#cb128-5" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
+<span id="cb128-6"><a href="data-analysis-t-test-and-anova.html#cb128-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g)</span></code></pre></div>
+<p>Before conducting any analsys, we may want to <strong>visualize</strong> the relationship between forest type and weight, which we can do with a boxplot given we have a categorical predicator variable (forest type, aka <code>section</code>) and a continuous response variable (<code>weight_g</code>).</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="data-analysis-t-test-and-anova.html#cb129-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span></span>
+<span id="cb129-2"><a href="data-analysis-t-test-and-anova.html#cb129-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> section, <span class="at">y =</span> weight_g)) <span class="sc">+</span>   </span>
+<span id="cb129-3"><a href="data-analysis-t-test-and-anova.html#cb129-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>We don’t see too much of a difference based on this visual, but lets conduct the statistical test to verify if our hypothesis is supported.</p>
+<div id="assumptions" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Assumptions<a href="data-analysis-t-test-and-anova.html#assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First however we need to check our test assumptions, which for t-tests assumes the <strong>variance of the groups is equal</strong>. We can test for equal variances with the function <code>levene_test()</code>, which performs a Levene’s test for homogeneity of variance across groups where the <em>null</em> hypothesis is that the variances are equal. In this function we specify the continuous, dependent variable (<code>weight_g</code>) and the predictor variable we want to test for variances between groups (<code>section</code>). We write this as a formula using <code>~</code> , which reads ’test is weight <em>varies by</em> forest section`.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-analysis-t-test-and-anova.html#cb130-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb130-2"><a href="data-analysis-t-test-and-anova.html#cb130-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> section)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic        p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1 12592      42.5 7.28e-11</code></pre>
+<p>Looks like our variances are <strong>not equal,</strong> since the null hypothesis of the variance test is that they are equal and we have a (very) significant p-value. We have two options now, <strong>1)</strong> we can transform our weight variable or <strong>2)</strong> use the non-parametric Welch t-test which does not assume equal variances.</p>
+<div id="variable-transformation" class="section level4 hasAnchor" number="6.2.1.1">
+<h4><span class="header-section-number">6.2.1.1</span> <strong>Variable transformation</strong><a href="data-analysis-t-test-and-anova.html#variable-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If we look at the distribution of weight (our continuous variable), it is pretty right skewed. Therefore, we’d likely want to do a log transformation on the data, which works well the data is skewed like this:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-analysis-t-test-and-anova.html#cb132-1" tabindex="-1"></a><span class="fu">hist</span>(trout_clean<span class="sc">$</span>weight_g)</span></code></pre></div>
+<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Lets perform the variances check like we did before, but on the log transformed values, which you can do with <code>log()</code> , and we can nest the functions so we only use one line of code like this:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="data-analysis-t-test-and-anova.html#cb133-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb133-2"><a href="data-analysis-t-test-and-anova.html#cb133-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(<span class="fu">log</span>(weight_g) <span class="sc">~</span> section)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1     1 12592     0.468 0.494</code></pre>
+<p>Now we have a high, insignificant p-value, indicating support for the null that the variances are equal. So. we can use the default <code>t_test()</code> test which assumes equal variances, but on a log transformed weight variable. For the <code>t_test()</code> function, it needs column names and we cannot nest a column name within a function like <code>log()</code>. Therefore we will need to use <code>mutate()</code> to create a new column for our log transformed weight variable.</p>
+<p>The order of the variables in the <code>t_test()</code> function is <strong>{dependent variable} ~ {independent variable}</strong>. We use the <code>~</code> to specify a model/formula, similar to that of the <code>levene_test()</code>, telling the test we want to know if weight <em>varies by</em> forest section. We also set <code>var.equal = TRUE</code> to specify we know our groups have equal variances and <code>detailed=TRUE</code> to return the detailed results including group means (aka estimates).</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-analysis-t-test-and-anova.html#cb135-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb135-2"><a href="data-analysis-t-test-and-anova.html#cb135-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
+<span id="cb135-3"><a href="data-analysis-t-test-and-anova.html#cb135-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 15
+##   estimate estim…¹ estim…² .y.   group1 group2    n1    n2 stati…³       p    df
+## *    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1    0.131    1.52    1.39 weig… CC     OG      6798  5796    5.49 4.06e-8 12592
+## # … with 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+## #   alternative &lt;chr&gt;, and abbreviated variable names ¹​estimate1, ²​estimate2,
+## #   ³​statistic</code></pre>
+<p>The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that <em>Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests</em>. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.</p>
+<p>How does this relate to our original hypothesis?</p>
+<p><strong>Welch Two Sample t-test</strong></p>
+<p>Alternatively, instead of transforming our variable we can actually change the default <code>t_test()</code> argument by specifying <code>var.equal = FALSE</code>, which will then conduct a Welch t-test, which does not assume equal variances among groups.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="data-analysis-t-test-and-anova.html#cb137-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb137-2"><a href="data-analysis-t-test-and-anova.html#cb137-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<pre><code>## # A tibble: 1 × 15
+##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 stati…¹        p
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.17      9.38      8.21 weigh… CC     OG      6798  5796    6.69 2.26e-11
+## # … with 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
+## #   method &lt;chr&gt;, alternative &lt;chr&gt;, and abbreviated variable name ¹​statistic</code></pre>
+<p>While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.</p>
+</div>
+</div>
+</div>
+<div id="anova-test---compare-more-than-two-means" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> ANOVA test - compare more than two means<a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We found a significant difference in weight among forest types, but how about channel types? The <code>unittype</code> variable is categorical like <code>section</code> was, but here we have more than two categories. With more than two categories we use an ANOVA test instead of a t-test to assess significant differences in some continuous variable among groups.</p>
+<p>Since we found significant size differences between forest types, for the next analysis let’s just compare weight among channel types for one type of forest section to remove effects of forest type. Let’s look at clear-cut forests where trout were found to be significantly larger:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="data-analysis-t-test-and-anova.html#cb139-1" tabindex="-1"></a><span class="co"># create a new variable to use for downstream analysis</span></span>
+<span id="cb139-2"><a href="data-analysis-t-test-and-anova.html#cb139-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb139-3"><a href="data-analysis-t-test-and-anova.html#cb139-3" tabindex="-1"></a>  <span class="fu">filter</span>(section <span class="sc">==</span> <span class="st">&quot;CC&quot;</span>)</span></code></pre></div>
+<p>Now lets first look at the distribution of trout samples among different channel types in our new filtered dataset:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="data-analysis-t-test-and-anova.html#cb140-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb140-2"><a href="data-analysis-t-test-and-anova.html#cb140-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb140-3"><a href="data-analysis-t-test-and-anova.html#cb140-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 2
+## # Groups:   unittype [6]
+##   unittype     n
+##   &lt;chr&gt;    &lt;int&gt;
+## 1 C         3911
+## 2 P         1400
+## 3 R           97
+## 4 S            7
+## 5 SC        1000
+## 6 &lt;NA&gt;       383</code></pre>
+<p>We see there are quite a few samples with missing information for channel type. Also, there are some groups that have relatively low sample size. For the sake of this lesson, lets just keep the three most abundant channel types, i.e. C (cascade), P (pool), and SC (side channel).</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="data-analysis-t-test-and-anova.html#cb142-1" tabindex="-1"></a><span class="co"># override our trout_cc variale with our groups of interest</span></span>
+<span id="cb142-2"><a href="data-analysis-t-test-and-anova.html#cb142-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb142-3"><a href="data-analysis-t-test-and-anova.html#cb142-3" tabindex="-1"></a>  <span class="co"># note this line of code is the same as doing filter(!is.na(unittype))</span></span>
+<span id="cb142-4"><a href="data-analysis-t-test-and-anova.html#cb142-4" tabindex="-1"></a>    <span class="fu">drop_na</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb142-5"><a href="data-analysis-t-test-and-anova.html#cb142-5" tabindex="-1"></a>    <span class="fu">filter</span>(unittype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;SC&quot;</span>))</span></code></pre></div>
+<div id="assumptions-1" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Assumptions<a href="data-analysis-t-test-and-anova.html#assumptions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><em>Normality</em></strong></p>
+<p>ANOVA assumes normal distributions within each group. Here our group sample sizes are &gt;30 each which can be considered as large enough to not worry about this assumption. In fact the Shapiro-Wilk test won’t even operate if your group sizes are greater than 5,000. But, we can use the <code>shapiro_test()</code> function along with <code>group_by()</code> to test for normality within each channel group.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="data-analysis-t-test-and-anova.html#cb143-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb143-2"><a href="data-analysis-t-test-and-anova.html#cb143-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb143-3"><a href="data-analysis-t-test-and-anova.html#cb143-3" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(weight_g)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   unittype variable statistic        p
+##   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+## 1 C        weight_g     0.794 3.48e-57
+## 2 P        weight_g     0.847 1.01e-34
+## 3 SC       weight_g     0.632 8.64e-42</code></pre>
+<p>Since the null hypothesis of the Shapiro-Wilk test is that the data is normally distributed, these results tell us all groups do not fit a normal distribution for weight.</p>
+<p><strong><em>Equal Variances</em></strong></p>
+<p>To test for equal variances among more than two groups, it is easiest to use a Levene’s Test like we did earlier:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="data-analysis-t-test-and-anova.html#cb145-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb145-2"><a href="data-analysis-t-test-and-anova.html#cb145-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic        p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1     2  6308      126. 3.19e-54</code></pre>
+<p>Given this small we see that the variances of our groups are not equal.</p>
+<p>Therefore, after checking out assumptions we need to perform a non-parametric ANOVA test, the Kruskal-Wallis test. We can do this with the <code>kruskal_test()</code> function specifying a formula like we have for previous tests to see if weight varies by channel (aka <code>unittype</code>).</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="data-analysis-t-test-and-anova.html#cb147-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb147-2"><a href="data-analysis-t-test-and-anova.html#cb147-2" tabindex="-1"></a>  <span class="fu">kruskal_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 6
+##   .y.          n statistic    df         p method        
+## * &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         
+## 1 weight_g  6311      542.     2 2.05e-118 Kruskal-Wallis</code></pre>
+<p>Our results here are highly significant, meaning that at least one of our groups means is significantly different from the others.</p>
+<p>Let’s visualize the spread of weight among each group, looking at group summaries with a <code>geom_boxplot()</code> and group weight distributions with <code>geom_histogram()</code> and <code>facet_wrap()</code></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="data-analysis-t-test-and-anova.html#cb149-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb149-2"><a href="data-analysis-t-test-and-anova.html#cb149-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> unittype, <span class="at">y =</span> weight_g, <span class="at">color =</span> unittype)) <span class="sc">+</span> </span>
+<span id="cb149-3"><a href="data-analysis-t-test-and-anova.html#cb149-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="data-analysis-t-test-and-anova.html#cb150-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb150-2"><a href="data-analysis-t-test-and-anova.html#cb150-2" tabindex="-1"></a>  <span class="co"># since we are making a histogram only need an &#39;x&#39; variable</span></span>
+<span id="cb150-3"><a href="data-analysis-t-test-and-anova.html#cb150-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
+<span id="cb150-4"><a href="data-analysis-t-test-and-anova.html#cb150-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb150-5"><a href="data-analysis-t-test-and-anova.html#cb150-5" tabindex="-1"></a>  <span class="co"># separate plot by unittype</span></span>
+<span id="cb150-6"><a href="data-analysis-t-test-and-anova.html#cb150-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>unittype, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div id="post-hoc-analysis" class="section level4 hasAnchor" number="6.3.1.1">
+<h4><span class="header-section-number">6.3.1.1</span> Post-Hoc Analysis<a href="data-analysis-t-test-and-anova.html#post-hoc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now ANOVAs don’t tell us which groups are significantly different, for that we would need to use a post-hoc test. Since we used the non-parametric Kruskal-Wallace test, we can use the associated Dunn’s test for multiple comparisons to assess significant differences among each pair of groups.</p>
+<p><em>Note, if your data fits the ANOVA assumptions you would use the <code>anova_test()</code> function instead, and <code>tukey_hsd()</code> as the associated post-hoc test.</em></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="data-analysis-t-test-and-anova.html#cb151-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb151-2"><a href="data-analysis-t-test-and-anova.html#cb151-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 9
+##   .y.      group1 group2    n1    n2 statistic         p     p.adj p.adj.signif
+## * &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+## 1 weight_g C      P       3911  1400      15.2 5.05e- 52 1.01e- 51 ****        
+## 2 weight_g C      SC      3911  1000     -13.7 1.83e- 42 1.83e- 42 ****        
+## 3 weight_g P      SC      1400  1000     -23.1 4.18e-118 1.25e-117 ****</code></pre>
+<p>This result shows us an adjusted p-value (for multiple comparisons) for each combination of groups, where a significant value represents a significant difference in weight between those two channel types. Our results here show that all channel types are significantly different in trout weight.</p>
+</div>
+</div>
+</div>
+<div id="exercises-4" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Exercises<a href="data-analysis-t-test-and-anova.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Each question requires you to carry out a statistical analysis to test some hypothesis related to the <code>and_vertebrates</code> data set. To answer each question fully:</p>
+<ul>
+<li><p>Include the code you used to clean the data and conduct the appropriate statistical test. (<em>Including the steps to assess and address your statistical test assumptions</em>).</p></li>
+<li><p>Report the findings of your test.</p></li>
+<li><p>Include an appropriate figure showing the patterns in the data associated with the test.</p></li>
+</ul>
+<p><br></p>
+<p><strong>1.</strong> Conduct a t-test similar to the one we carried out earlier in this lesson plan, but test for a difference in snout-vent length (<code>length_2_mm</code>) between forest types (<code>section</code>) for the <em>Coastal giant salamander</em>. (10 pts.)</p>
+<p><br></p>
+<p><strong>2.</strong> Conduct an ANOVA test to test for differences in snout-vent length between channel types (<code>unittype</code>, only using C, P and SC channel types) for the <em>Coastal Giant salamander</em>. Remember to check your test assumptions and use the appropriate test based on your findings. You must also conduct the associated post-hoc test and report which groups are significantly difference from each other (if any) (10 pts.)</p>
+<p><br> <br></p>
+<div id="acknowledgements" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Acknowledgements<a href="data-analysis-t-test-and-anova.html#acknowledgements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Thanks to the developers of <a href="https://lter.github.io/lterdatasampler/index.html"><code>lterdatasampler</code></a> for providing the data set and vignettes that helped guide the creation of this lesson plan.</p>
+</div>
+<div id="citations" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Citations<a href="data-analysis-t-test-and-anova.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><em>Data Source:</em></strong> Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165" class="uri">https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165</a></p>
+<p>Kaylor, M.J. and D.R. Warren. 2017. Linking riparian shade and the legacies of forest management to fish and vertebrate biomass in forested streams. Ecosphere <em>8</em>(6). <a href="https://doi.org/10.1002/ecs2.1845" class="uri">https://doi.org/10.1002/ecs2.1845</a></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-ttest-anova.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

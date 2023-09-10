@@ -55,7 +55,6 @@ penguins
 ## 10 Adelie  Torgersen           42            20.2        190    4250 <NA>   2007
 ## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
 ## #   ²​body_mass_g
-## # ℹ Use `print(n = ...)` to see more rows
 ```
 
 ### Exploratory Data Analysis
