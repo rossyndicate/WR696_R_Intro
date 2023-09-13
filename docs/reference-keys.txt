@@ -60,3 +60,4 @@ post-hoc-analysis
 exercises-4
 acknowledgements
 citations
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg

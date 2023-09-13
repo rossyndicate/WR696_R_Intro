@@ -224,7 +224,7 @@ Each question requires you to carry out a statistical analysis to test some hypo
 
 <br>
 
-**1.** Conduct a t-test similar to the one we carried out earlier in this lesson plan, but test for a difference in snout-vent length (`length_2_mm`) between forest types (`section`) for the *Coastal giant salamander*. (10 pts.)
+**1.** Conduct a t-test similar to the one we carried out earlier in this lesson plan, but test for a difference in snout-vent length (`length_1_mm`) between forest types (`section`) for the *Coastal giant salamander*. (10 pts.)
 
 ```{r eval = FALSE, include=FALSE}
 

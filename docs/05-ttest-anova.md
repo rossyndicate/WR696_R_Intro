@@ -133,6 +133,7 @@ trout_clean %>%
 ## # … with 4 more variables: conf.low <dbl>, conf.high <dbl>, method <chr>,
 ## #   alternative <chr>, and abbreviated variable names ¹​estimate1, ²​estimate2,
 ## #   ³​statistic
+## # ℹ Use `colnames()` to see all variable names
 ```
 
 The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that *Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests*. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.
@@ -156,6 +157,7 @@ trout_clean %>%
 ## 1     1.17      9.38      8.21 weigh… CC     OG      6798  5796    6.69 2.26e-11
 ## # … with 5 more variables: df <dbl>, conf.low <dbl>, conf.high <dbl>,
 ## #   method <chr>, alternative <chr>, and abbreviated variable name ¹​statistic
+## # ℹ Use `colnames()` to see all variable names
 ```
 
 While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.
@@ -324,7 +326,7 @@ Each question requires you to carry out a statistical analysis to test some hypo
 
 <br>
 
-**1.** Conduct a t-test similar to the one we carried out earlier in this lesson plan, but test for a difference in snout-vent length (`length_2_mm`) between forest types (`section`) for the *Coastal giant salamander*. (10 pts.)
+**1.** Conduct a t-test similar to the one we carried out earlier in this lesson plan, but test for a difference in snout-vent length (`length_1_mm`) between forest types (`section`) for the *Coastal giant salamander*. (10 pts.)
 
 
 
