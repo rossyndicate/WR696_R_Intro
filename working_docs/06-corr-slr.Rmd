@@ -1,0 +1,234 @@
+---
+title: "linear_modelling"
+author: "Katie Willi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Correlation and simple linear regression
+
+Bergmann's rule states that within a broadly distributed taxonomy, body mass increases with colder climates. To test this rule, we will be using the Plum Island Ecosystem (PIE) LTER fiddler crabs data set in the {lterdatasampler} package.
+
+In the summer of 2016, researchers surveyed fiddler crabs for their size across the Atlantic coast - from Florida to Massachusetts. Additional information about where the crabs lived (including coordinates, air and water temperature) was also provided. Because we have size data across multiple climates, this study provides an excellent data set to test Bergmann's rule.
+
+With this data set, we can broadly assume that the further north we go, the colder the climate. Therefore, let's use latitude as our variable to represent "coldness", with an increase in latitude representing cooler climate conditions, to explore the relationship between crab size and climate.
+
+```{r}
+#load in packages
+library(tidyverse)
+library(lterdatasampler)
+library(rstatix)
+library(lubridate) # THIS IS A NEW ONE FOR Y'ALL!
+
+# data set
+data("pie_crab")
+```
+
+### EDA
+
+As a first pass, we should review the data using the `pie_crab` object, and get general summary statistics for the variables in the data set.
+
+```{r}
+pie_crab %>%
+  get_summary_stats()
+```
+
+Let's make a scatter plot of `size` and `latitude` to see how they relate to each other:
+
+```{r}
+ggplot(data = pie_crab) + 
+  geom_point(aes(x = size, y = latitude)) +
+  theme_bw()
+```
+
+## Correlation
+
+From our plot, we see that there is indeed a pretty clear relationship between a crab's size and its location. In other words, the latitude of the crab and its body mass seem to be **linearly** **correlated:** as latitude increases, crab size increases, and vice versa.
+
+Correlation measures the strength and direction of a relationship between two continuous variables. The correlation coefficient (*r*) ranges from -1 to +1, with 0 indicating no linear relationship, and values closer to -1 or 1 indicating a stronger linear relationship.
+
+In R, we can perform a test to see the strength and direction of this correlation using the {rstatix}'s `cor_test()` function:
+
+```{r}
+cor_test(pie_crab,
+         vars = c(latitude, size), # vector of continuous variables we want to test
+         alternative = "two.sided", # we want to test both positive and negative correlation 
+         method = "pearson", # pearson correlation is for two continuous variables
+         conf.level = 0.99) %>% # meaning, our p-value must be < 0.01 for significance
+  head()
+```
+
+**`cor`** is the the correlation coefficient, *r*. In this example it is positive, indicating that there is a positive correlation between latitude and size. Remember that *r* can only range from -1 to +1. So, a value of 0.59 indicates a moderately strong relationship.
+
+`statistic` is the test statistic (t) which is calculated using *r* and the number of observations in the test.
+
+`p` is the p-value. Here, it is calculated using the confidence level and the test statistic.
+
+`conf.high` and `conf.low` is the range in which we are 99% confident (based on our selected confidence level) that the true correlation coefficient falls within.
+
+#### **Correlation limitations**
+
+Using a correlation test, we identified that latitude and crab size have a positive linear relationship. But, our conclusions have to stop there: all we can deduce from a correlation test is whether or not a linear relationship exists. There is no information about which one leads to the other (i.e., causality), and there is no information about how we might be able to predict one from the other.
+
+To provide a *description* of the linear relationship between crab size and its climate would require **simple linear regression**.
+
+## Simple Linear Regression
+
+As mentioned in the previous section, simple linear regression allows us to *describe* the relationship between two continuous variables. This description comes in the form on an equation that produces a line of best fit through our variables plotted against each other. Using that line, we can then predict a new crab's body mass based on its location, and vice versa.
+
+But first we must define which variable leads to the other's change, something we didn't really need to think about for correlation. Based on Bergmann's rule, we know that the cooler climate leads to increased size, so our explanatory variable (*x*) will be latitude, and our response variable (*y*) will be crab size. There are a few ways to describe this relationship between latitude and size in the statistics lexicon:
+
+|                                |                                 |
+|--------------------------------|---------------------------------|
+| **X Variable (Crab Latitude)** | **Y Variable (Crab Size)**      |
+| Cause (what changes)           | Effect (outcome of that change) |
+| Independent                    | Dependent                       |
+| Predictor                      | Outcome                         |
+| Explanatory                    | Response                        |
+
+: Let's look at our scatter plot of latitude vs. size again. When plotting, it is important to have the predictor variable on the x-axis, and the response variable on the y-axis. Then, we can fit a linear regression line through this data so that the distance between the line and the most observations is at its lowest:
+
+```{r}
+ggplot(data = pie_crab, aes(x = latitude, y = size)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw() 
+```
+
+Each observation's vertical distance away from the line is the observation's **error**. Getting the standard deviation of these distances gives us the line's **residual standard error**.
+
+The intercept of this line, or the value of the line if we extended it out to meet the y-axis (i.e., where our crab size is zero), is also known as the line's **constant**.
+
+Lastly, we have our **slope** of the line. This tells us how much a crab's average size increases if we increase the latitude, and vice versa.
+
+When we put all of these pieces together, we get the following **simple linear regression equation for each observation**:
+
+```         
+size = constant + slope of the line * latitude + point's distance from line
+```
+
+... which we write statistically as:
+
+```         
+y = (β1 * x) β0 + ε
+```
+
+In this equation, *y* is a our response variable (crab's size), β0 is the constant, β1 is the slope, x is our explanatory variable (the crab's latitude), and ε is the distance between the line and each observation's true size.
+
+In R, we can identify the values that go into delineating this line of best fit using the base R {stats} package's `lm()` function (lm for linear model):
+
+```{r}
+# Simple linear regression model
+slr_model <- lm(size ~ latitude, data = pie_crab) # lm(response ~ predictor, data = dataset)
+
+summary(slr_model)
+
+```
+
+... where -3.62442 is our line's intercept (β0), 0.48512 is our line's slope (β1):
+
+$y = 0.48512x - 3.62442$
+
+In the model's summary, our p-value is indicated in the `Pr(>|t|)` column for `latitude`: because our p-value is well below 0.01, we can deduce that latitude has a significant effect on crab size. Therefore, fiddler crabs appear to follow Bergmann's rule: on average, crab size increased by 0.48 mm for every degree in latitude.
+
+#### Predicting crab size
+
+With this linear equation, we can now predict crab size at different latitudes using the base R `predict()` function.
+
+Let's predict crab size for latitudes of 32, 36, and 38 degrees. Note that we need to create these values as a new data frame with the same column name used in the data that the model was built off of (i.e., `latitude`):
+
+```{r}
+new_lat <- tibble(latitude = c(32, 36, 38))
+
+predict(slr_model, newdata = new_lat)
+```
+
+# Assignment:
+
+For this week's exercise, we will be using the `ntl_airtemp` and `ntl_icecover` data sets to explore the relationship between mean annual lake ice duration and mean winter air temperature at two lakes in Wisconsin. `ntl_airtemp` contains daily estimates of the air temperature nearby the two lakes. `ntl_icecover` contains the duration of ice cover per year, per lake.
+
+```{r}
+data("ntl_airtemp")
+data("ntl_icecover")
+```
+
+First, let's get the average lake ice duration across years:
+
+```{r}
+avg_icecover <- ntl_icecover %>%
+  # rename year to wyear, as this is more appropriate:
+  group_by(wyear = year) %>%
+  summarize(mean_duration = mean(ice_duration, na.rm = TRUE))
+```
+
+Next, we will need to compute the mean winter (November-April) air temperature per *water year* to align with the data in `avg_icecover`. A *water year* is a 12-month period starting in October and ending in September, aligning with the winter season when precipitation and snowpack accumulation occur in many regions.
+
+Let's first define each date's water year using an `ifelse()` statement and the `month()` function from the {lubridate} package:
+
+```{r}
+ntl_airtemp_wyear <- ntl_airtemp %>%
+  # Add a column to group the Fall and Spring season into a same year 
+  # (similar to hydrologic "water years") using the lubridate package:
+  mutate(wyear = if_else(month(sampledate) < 10, year-1, year))
+
+```
+
+#### E1: Using `ntl_airtemp_wyear`, compute the average air temperature for the winter season per water year.
+
+```{r, echo = FALSE, message = FALSE}
+ntl_winter_airtemp <- ntl_airtemp_wyear %>%
+  filter(month(sampledate) %in% c(11:12, 1:4)) %>% # filter the months from Nov to April
+  group_by(wyear) %>%
+  summarize(mean_air_temp = mean(ave_air_temp_adjusted))
+```
+
+#### E2: Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
+
+```{r, echo = FALSE, message = FALSE}
+icecover_temp <- avg_icecover %>%
+  left_join(., ntl_winter_airtemp, by = "wyear" )
+```
+
+#### E3: Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
+
+```{r, echo = FALSE, message = FALSE, eval = FALSE}
+cor_test(icecover_temp,
+         vars = c(mean_air_temp, mean_duration), # vector of continuous variables we want to test
+         alternative = "two.sided", # we want to test both positive and negative correlation 
+         method = "pearson", # pearson correlation is for two continuous variables
+         conf.level = 0.99) # meaning, our p-value must be < 0.01 for significance
+
+```
+
+#### E4: Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
+
+```{r, echo = FALSE, message = FALSE, eval = FALSE}
+# Simple linear regression model
+slr_model <- lm(mean_duration ~ mean_air_temp, data = icecover_temp) # lm(response ~ predictor, dataset)
+
+summary(slr_model)
+
+new_temp <- tibble(mean_air_temp = c(-2, 0, 2))
+
+predict(slr_model, newdata = new_temp)
+```
+
+#### E5: Plot the average air temperature against the average ice cover duration. Include our simple linear regression in the plot.
+
+```{r, echo = FALSE, message = FALSE, result = FALSE, eval = FALSE}
+ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+#### E6: What are the slope, intercept, and the residual standard error of our simple linear regression line?
+
+```{r,echo = FALSE, eval = FALSE, result = FALSE, message = FALSE}
+# slope = -8.903
+# intercept = 85.186
+# residual standard error: 11.43
+```
