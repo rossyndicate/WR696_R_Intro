@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 Assignment: | Introduction to Data Analysis in R</title>
+  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 Assignment: | Introduction to Data Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 Assignment: | Introduction to Data Analysis in R" />
+  
+  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  
+
+<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+
+
+<meta name="date" content="2023-09-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="correlation-and-simple-linear-regression.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Data Analysis in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
+<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
+<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
+<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and simple linear regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="assignment.html"><a href="assignment.html"><i class="fa fa-check"></i><b>8</b> Assignment:</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="assignment" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number"> 8</span> Assignment:<a href="assignment.html#assignment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For this week’s exercise, we will be using the <code>ntl_airtemp</code> and <code>ntl_icecover</code> data sets to explore the relationship between mean annual lake ice duration and mean winter air temperature at two nearby lakes in Wisconsin. <code>ntl_airtemp</code> contains daily estimates of the air temperature near the two lakes. <code>ntl_icecover</code> contains the duration of ice cover per year, per lake.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="assignment.html#cb163-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_airtemp&quot;</span>)</span>
+<span id="cb163-2"><a href="assignment.html#cb163-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_icecover&quot;</span>)</span></code></pre></div>
+<p>First, let’s get the average lake ice duration across years:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="assignment.html#cb164-1" tabindex="-1"></a>avg_icecover <span class="ot">&lt;-</span> ntl_icecover <span class="sc">%&gt;%</span></span>
+<span id="cb164-2"><a href="assignment.html#cb164-2" tabindex="-1"></a>  <span class="co"># rename year to wyear, as this is technically what they&#39;re listing here:</span></span>
+<span id="cb164-3"><a href="assignment.html#cb164-3" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">wyear =</span> year) <span class="sc">%&gt;%</span></span>
+<span id="cb164-4"><a href="assignment.html#cb164-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_duration =</span> <span class="fu">mean</span>(ice_duration, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<p>Next, we will need to compute the mean winter (November-April) air temperature per <em>water year</em> to align with the data in <code>avg_icecover</code>. A <em>water year</em> is a 12-month period starting in October and ending in September, aligning with the winter season and thereby not splitting up the winter.</p>
+<p>Let’s first define each date’s water year using an <code>if_else()</code> statement and the <code>month()</code> function from the {lubridate} package:</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="assignment.html#cb165-1" tabindex="-1"></a>ntl_airtemp_wyear <span class="ot">&lt;-</span> ntl_airtemp <span class="sc">%&gt;%</span></span>
+<span id="cb165-2"><a href="assignment.html#cb165-2" tabindex="-1"></a>  <span class="co"># Add a column to group the Fall and Spring season into a same year </span></span>
+<span id="cb165-3"><a href="assignment.html#cb165-3" tabindex="-1"></a>  <span class="co"># (similar to hydrologic &quot;water years&quot;) using the lubridate package:</span></span>
+<span id="cb165-4"><a href="assignment.html#cb165-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wyear =</span> <span class="fu">if_else</span>(<span class="fu">month</span>(sampledate) <span class="sc">&lt;</span> <span class="dv">10</span>, year<span class="dv">-1</span>, year))</span></code></pre></div>
+<p>Next, using <code>ntl_airtemp_wyear</code>, we can compute the average air temperature for the winter season per water year.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="assignment.html#cb166-1" tabindex="-1"></a>ntl_winter_airtemp <span class="ot">&lt;-</span> ntl_airtemp_wyear <span class="sc">%&gt;%</span></span>
+<span id="cb166-2"><a href="assignment.html#cb166-2" tabindex="-1"></a>  <span class="fu">filter</span>(lubridate<span class="sc">::</span><span class="fu">month</span>(sampledate) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span> <span class="co"># filter the months from Nov to April</span></span>
+<span id="cb166-3"><a href="assignment.html#cb166-3" tabindex="-1"></a>  <span class="fu">group_by</span>(wyear) <span class="sc">%&gt;%</span></span>
+<span id="cb166-4"><a href="assignment.html#cb166-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_air_temp =</span> <span class="fu">mean</span>(ave_air_temp_adjusted))</span></code></pre></div>
+<div id="e1-join-your-table-of-water-yearly-average-winter-temperatures-to-our-avg_icecover-object.-save-this-new-table-as-icecover_temp.-hint-use-a-join-function-to-do-this." class="section level4 hasAnchor" number="8.0.0.1">
+<h4><span class="header-section-number">8.0.0.1</span> E1: Join your table of (water-)yearly average winter temperatures to our <code>avg_icecover</code> object. Save this new table as <code>icecover_temp</code>. (HINT: use a <code>join()</code> function to do this.)<a href="assignment.html#e1-join-your-table-of-water-yearly-average-winter-temperatures-to-our-avg_icecover-object.-save-this-new-table-as-icecover_temp.-hint-use-a-join-function-to-do-this." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="e2-visualize-the-data-by-plotting-our-variables-against-one-another-and-using-histograms.-is-their-relationship-linear-are-our-variables-normally-distributed" class="section level4 hasAnchor" number="8.0.0.2">
+<h4><span class="header-section-number">8.0.0.2</span> E2: Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?<a href="assignment.html#e2-visualize-the-data-by-plotting-our-variables-against-one-another-and-using-histograms.-is-their-relationship-linear-are-our-variables-normally-distributed" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="e3-perform-a-correlation-test-on-icecover_temp-to-see-whether-there-is-a-significant-relationship-between-mean-ice-duration-and-mean-air-temperature.-what-is-the-test-statistic-of-this-relationship-is-the-relationship-positive-or-negative" class="section level4 hasAnchor" number="8.0.0.3">
+<h4><span class="header-section-number">8.0.0.3</span> E3: Perform a correlation test on <code>icecover_temp</code> to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?<a href="assignment.html#e3-perform-a-correlation-test-on-icecover_temp-to-see-whether-there-is-a-significant-relationship-between-mean-ice-duration-and-mean-air-temperature.-what-is-the-test-statistic-of-this-relationship-is-the-relationship-positive-or-negative" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="e4-use-a-simple-linear-model-to-predict-the-mean-ice-duration-for-a-year-whose-mean-temperature-is--2-degrees-0-degrees-and-2-degrees." class="section level4 hasAnchor" number="8.0.0.4">
+<h4><span class="header-section-number">8.0.0.4</span> E4: Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.<a href="assignment.html#e4-use-a-simple-linear-model-to-predict-the-mean-ice-duration-for-a-year-whose-mean-temperature-is--2-degrees-0-degrees-and-2-degrees." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="e5-plot-the-average-air-temperature-against-the-average-ice-cover-duration.-include-our-simple-linear-regression-i.e.-the-line-of-best-fit-in-the-plot." class="section level4 hasAnchor" number="8.0.0.5">
+<h4><span class="header-section-number">8.0.0.5</span> E5: Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.<a href="assignment.html#e5-plot-the-average-air-temperature-against-the-average-ice-cover-duration.-include-our-simple-linear-regression-i.e.-the-line-of-best-fit-in-the-plot." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="e6-what-are-the-slope-intercept-and-the-residual-standard-error-of-our-simple-linear-regression-line" class="section level4 hasAnchor" number="8.0.0.6">
+<h4><span class="header-section-number">8.0.0.6</span> E6: What are the slope, intercept, and the residual standard error of our simple linear regression line?<a href="assignment.html#e6-what-are-the-slope-intercept-and-the-residual-standard-error-of-our-simple-linear-regression-line" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlation-and-simple-linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-corr-slr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

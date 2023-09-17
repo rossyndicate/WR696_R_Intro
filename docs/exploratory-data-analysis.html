@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 4 Exploratory Data Analysis | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 4 Exploratory Data Analysis | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-09-13" />
+<meta name="date" content="2023-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,13 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -126,6 +126,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -224,6 +228,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and simple linear regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#assignment"><i class="fa fa-check"></i><b>7.3</b> Assignment:</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -263,21 +273,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You should now see it in the Environment pane. Print it to the console to see a snapshot of the data:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="exploratory-data-analysis.html#cb57-1" tabindex="-1"></a>penguins</span></code></pre></div>
 <pre><code>## # A tibble: 344 × 8
-##    species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
-##  1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
-##  2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
-##  3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
-##  4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
-##  5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
-##  6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
-##  7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
-##  8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
-##  9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-## 10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-## # … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-## #   ²​body_mass_g
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 <div id="exploratory-data-analysis-1" class="section level3 hasAnchor" number="4.0.2">
 <h3><span class="header-section-number">4.0.2</span> Exploratory Data Analysis<a href="exploratory-data-analysis.html#exploratory-data-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -535,6 +544,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
