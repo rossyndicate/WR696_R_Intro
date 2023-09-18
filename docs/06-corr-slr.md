@@ -71,7 +71,7 @@ shapiro.test(sal_sub$length_2_mm)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.9338, p-value < 2.2e-16
+## W = 0.93413, p-value < 2.2e-16
 ```
 
 ```r
@@ -83,7 +83,7 @@ shapiro.test(sal_sub$weight_g)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.56103, p-value < 2.2e-16
+## W = 0.56436, p-value < 2.2e-16
 ```
 
 The *null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed*, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.
@@ -258,8 +258,8 @@ First, let's get the average lake ice duration across years:
 
 ```r
 avg_icecover <- ntl_icecover %>%
-  # rename year to wyear, as this is technically what they're listing here:
-  group_by(wyear = year) %>%
+  # mutate within group by, and create a new variable for the WATER year (Oct - Sept). Water year is the FUTURE year so we do year + 1
+  group_by(wyear = year + 1) %>%
   summarize(mean_duration = mean(ice_duration, na.rm = TRUE))
 ```
 
@@ -272,7 +272,7 @@ Let's first define each date's water year using an `if_else()` statement and the
 ntl_airtemp_wyear <- ntl_airtemp %>%
   # Add a column to group the Fall and Spring season into a same year 
   # (similar to hydrologic "water years") using the lubridate package:
-  mutate(wyear = if_else(month(sampledate) < 10, year-1, year))
+  mutate(wyear = if_else(month(sampledate) < 10, year, year+1))
 ```
 
 Next, using `ntl_airtemp_wyear`, we can compute the average air temperature for the winter season per water year.

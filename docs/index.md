@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Data Analysis in R"
 author: "Caitlin C. Mothes, PhD and Katie Willi"
-date: "2023-09-17"
+date: "2023-09-18"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
