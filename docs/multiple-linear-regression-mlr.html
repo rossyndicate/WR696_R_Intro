@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 Multiple linear regression (MLR) | Introduction to Data Analysis in R</title>
+  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 Multiple linear regression (MLR) | Introduction to Data Analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 Multiple linear regression (MLR) | Introduction to Data Analysis in R" />
+  
+  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  
+
+<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+
+
+<meta name="date" content="2023-09-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="correlation-and-simple-linear-regression.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Data Analysis in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
+<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
+<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
+<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and simple linear regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#assignment"><i class="fa fa-check"></i><b>7.3</b> Assignment:</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple linear regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-in-r"><i class="fa fa-check"></i><b>8.1</b> MLR in R</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#predicting-crab-size-1"><i class="fa fa-check"></i><b>8.1.1</b> Predicting crab size</a></li>
+<li class="chapter" data-level="8.1.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-assumptions"><i class="fa fa-check"></i><b>8.1.2</b> MLR Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#assignment-1"><i class="fa fa-check"></i><b>8.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#download-the-usgs-folder-on-canvas-and-store-it-in-a-data-folder-in-this-assignments-project-directory.-here-is-a-list-of-all-of-these-files"><i class="fa fa-check"></i><b>8.2.1</b> Download the ‘usgs’ folder on Canvas and store it in a “data” folder in this assignment’s project directory. Here is a list of all of these files:</a></li>
+<li class="chapter" data-level="8.2.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#read-in-each-of-the-data-sets-associated-with-the-assignment-and-combine-them-into-a-single-data-set.-hint-what-does-map_dfr-do"><i class="fa fa-check"></i><b>8.2.2</b> Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do?)</a></li>
+<li class="chapter" data-level="8.2.3" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#using-our-combined-data-set-plot-each-variable-against-mean-annual-stream-flow-to-identify-variables-that-seem-to-have-a-linear-relationship-with-stream-flow."><i class="fa fa-check"></i><b>8.2.3</b> Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow.</a></li>
+<li class="chapter" data-level="8.2.4" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#develop-a-multiple-linear-regression-model-using-any-combination-of-the-variables-in-the-data-set.-what-is-your-r-squared-value-which-of-your-variables-if-any-are-significant-predictors-of-stream-flow"><i class="fa fa-check"></i><b>8.2.4</b> Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow?</a></li>
+<li class="chapter" data-level="8.2.5" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#check-to-see-if-your-model-meets-the-model-assumptions-required-for-mlr."><i class="fa fa-check"></i><b>8.2.5</b> Check to see if your model meets the model assumptions required for MLR.</a></li>
+<li class="chapter" data-level="8.2.6" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#use-your-model-to-predict-mean-annual-stream-flow-for-two-new-sets-of-predictor-data."><i class="fa fa-check"></i><b>8.2.6</b> Use your model to predict mean annual stream flow for two new sets of predictor data.</a></li>
+<li class="chapter" data-level="8.2.7" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#if-your-model-does-not-meet-the-models-assumptions-what-are-some-ways-of-manipulating-the-data-set-so-that-it-might-hint-review-chapter-6"><i class="fa fa-check"></i><b>8.2.7</b> If your model does not meet the model’s assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6)</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple-linear-regression-mlr" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number"> 8</span> Multiple linear regression (MLR)<a href="multiple-linear-regression-mlr.html#multiple-linear-regression-mlr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Multiple linear regression is the most common form of linear regression analysis. As a predictive analysis, multiple linear regression is used to explain the relationship between one continuous dependent variable (or, the response variable) and two or more independent variables (or, the predictor variables). The independent variables can be continuous OR categorical. Unlike a simple linear regression, where we describe the relationship between X and Y (two dimensional) and can simply plot them against each other, we are now working with multiple X’s and Y - which is three-dimensional.</p>
+<p>Here we are using the <code>pie_crab</code> data set again to develop a multiple linear regression model to predict crab size with additional variables from the data set, <code>latitude</code>, <code>air_temp</code>, and <code>water_temp</code>. Let’s first plot each of our predictor variables’ linear relationship with our response variable, crab size:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="multiple-linear-regression-mlr.html#cb168-1" tabindex="-1"></a><span class="fu">data</span>(pie_crab)</span>
+<span id="cb168-2"><a href="multiple-linear-regression-mlr.html#cb168-2" tabindex="-1"></a></span>
+<span id="cb168-3"><a href="multiple-linear-regression-mlr.html#cb168-3" tabindex="-1"></a>pie_crab_long <span class="ot">&lt;-</span> pie_crab <span class="sc">%&gt;%</span></span>
+<span id="cb168-4"><a href="multiple-linear-regression-mlr.html#cb168-4" tabindex="-1"></a>  <span class="fu">select</span>(size, latitude, air_temp, water_temp) <span class="sc">%&gt;%</span></span>
+<span id="cb168-5"><a href="multiple-linear-regression-mlr.html#cb168-5" tabindex="-1"></a>  <span class="co"># select all but &quot;size&quot; to </span></span>
+<span id="cb168-6"><a href="multiple-linear-regression-mlr.html#cb168-6" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>size)</span>
+<span id="cb168-7"><a href="multiple-linear-regression-mlr.html#cb168-7" tabindex="-1"></a></span>
+<span id="cb168-8"><a href="multiple-linear-regression-mlr.html#cb168-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pie_crab_long, <span class="fu">aes</span>(<span class="at">x =</span> size, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb168-9"><a href="multiple-linear-regression-mlr.html#cb168-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb168-10"><a href="multiple-linear-regression-mlr.html#cb168-10" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb168-11"><a href="multiple-linear-regression-mlr.html#cb168-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb168-12"><a href="multiple-linear-regression-mlr.html#cb168-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="07-mlr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>A multiple linear regression, at the location of each observation, incorporates each of our three variable’s simple linear relationships with crab size using the following equation:</p>
+<p><span class="math inline">\(y = β0 + (β1 * x1) + (β2 * x2) + (β3 * x3) + ε\)</span></p>
+<p>In this equation, <em>y</em> is a our response variable, crab size, while each <em>x</em> represents one of our predictor variables. <em>β0</em> represents the intercept; we can think of this as the value of <em>y</em> if all of our <em>x</em>’s were zero. Each <em>β</em> is called a <strong>partial regression coefficient</strong>; this is because we can think of each as the slope in the <em>x</em>’s dimension if all of our other <em>x</em>’s were held constant. Lastly, ε is the distance between our observation, and what our model predicts for it (i.e., observed - predicted).</p>
+<div id="mlr-in-r" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> MLR in R<a href="multiple-linear-regression-mlr.html#mlr-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Running a multiple linear regression is very similar to the simple linear regression, but now we specify our multiple predictor variables by adding them together with a + sign (the order of our predictor variables does not matter). Here we are using the <code>pie_crab</code> data set again to develop a multiple linear regression model with additional variables from the data set:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="multiple-linear-regression-mlr.html#cb169-1" tabindex="-1"></a><span class="fu">data</span>(pie_crab)</span>
+<span id="cb169-2"><a href="multiple-linear-regression-mlr.html#cb169-2" tabindex="-1"></a></span>
+<span id="cb169-3"><a href="multiple-linear-regression-mlr.html#cb169-3" tabindex="-1"></a>mlr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(size <span class="sc">~</span> latitude <span class="sc">+</span> air_temp <span class="sc">+</span> water_temp, <span class="at">data =</span> pie_crab)</span>
+<span id="cb169-4"><a href="multiple-linear-regression-mlr.html#cb169-4" tabindex="-1"></a></span>
+<span id="cb169-5"><a href="multiple-linear-regression-mlr.html#cb169-5" tabindex="-1"></a><span class="fu">summary</span>(mlr_model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = size ~ latitude + air_temp + water_temp, data = pie_crab)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.7099 -1.7195 -0.0602  1.7823  7.7271 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  77.7460    17.3477   4.482 9.76e-06 ***
+## latitude     -1.0587     0.3174  -3.336 0.000933 ***
+## air_temp     -2.4041     0.3844  -6.255 1.05e-09 ***
+## water_temp    0.7563     0.1465   5.162 3.92e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.677 on 388 degrees of freedom
+## Multiple R-squared:  0.4206, Adjusted R-squared:  0.4161 
+## F-statistic:  93.9 on 3 and 388 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>… where:</p>
+<p><strong>77.7460 is our line’s intercept (β0)</strong></p>
+<p><strong>-1.0587 is the slope in the latitude dimension,</strong> or the estimated change in crab size for a unit change in latitude among crabs living with the same air temperature and water temperature conditions.</p>
+<p><strong>-2.4041 is the slope in the air temperature dimension,</strong> or the estimated change in crab size for a unit change in air temperature among crabs living with the same water temperature and latitude conditions.</p>
+<p><strong>0.7563 is the slope in the water temperature dimension,</strong> or the estimated change in crab size for a unit change in water temperature among crabs living with the same air temperature and latitude conditions.</p>
+<p><span class="math inline">\(y = -1.0587x1 -2.4041x2 + 0.7563x3 + 77.7460\)</span></p>
+<p>In the model’s summary, our p-value is indicated in the Pr(&gt;|t|) column for each variable: because our p-values are well below 0.01, we can deduce that each variable has a significant effect on crab size.</p>
+<p>Our multiple R-squared (R<sup>2</sup>) is the Pearson correlation between the observed and the fitted (i.e. predicted) values. We can interpret this as 42.06% of the variability in crab size is explained by the linear regression on water temperature, air temperature, and latitude. <strong>NOTE: R<sup>2</sup> always increases when an additional predictor is added to a linear model.</strong></p>
+<div id="predicting-crab-size-1" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Predicting crab size<a href="multiple-linear-regression-mlr.html#predicting-crab-size-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>With this multiple linear equation, we can now predict crab size across different varieties of latitude, air temperature, and water temperature using the base R <code>predict()</code> function:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="multiple-linear-regression-mlr.html#cb171-1" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">latitude =</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">38</span>),</span>
+<span id="cb171-2"><a href="multiple-linear-regression-mlr.html#cb171-2" tabindex="-1"></a>                   <span class="at">air_temp =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">12</span>, <span class="dv">9</span>),</span>
+<span id="cb171-3"><a href="multiple-linear-regression-mlr.html#cb171-3" tabindex="-1"></a>                   <span class="at">water_temp =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">11</span>))</span>
+<span id="cb171-4"><a href="multiple-linear-regression-mlr.html#cb171-4" tabindex="-1"></a></span>
+<span id="cb171-5"><a href="multiple-linear-regression-mlr.html#cb171-5" tabindex="-1"></a><span class="fu">predict</span>(mlr_model, <span class="at">newdata =</span> new_data)</span></code></pre></div>
+<pre><code>##        1        2        3 
+## 12.42241 21.37004 24.19604</code></pre>
+</div>
+<div id="mlr-assumptions" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> MLR Assumptions<a href="multiple-linear-regression-mlr.html#mlr-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An important aspect when building a multiple linear regression model is to make sure that the following <strong>key assumptions</strong> are met:</p>
+<p><strong>All observations are independent of one another.</strong></p>
+<p><strong>There must be a linear relationship between the dependent and the independent variables.</strong></p>
+<p>And:</p>
+<p><strong>The variance of the residual errors is similar across the value of each independent variable.</strong></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="multiple-linear-regression-mlr.html#cb173-1" tabindex="-1"></a><span class="fu">plot</span>(mlr_model, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="images/Screenshot%202023-09-21%20at%2014.26.25.png" /></p>
+<p>This “Residuals vs Fitted” (fitted meaning the predicted values) plot gives an indication if there are non-linear patterns. This is a bit subjective, but a good way of verifying that this assumption is met is by ensuring that no clear trend seems so exist. The residuals should also occupy equal space above and below the line, and along the length of the line.</p>
+<p><strong>The residual error values are normally distributed.</strong></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="multiple-linear-regression-mlr.html#cb174-1" tabindex="-1"></a><span class="fu">plot</span>(mlr_model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="07-mlr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>… also a bit subjective, but so long as the points on the Q-Q plot follow the dotted line, this assumption is fulfilled.</p>
+<p><strong>The independent variables are not highly correlated with each other.</strong></p>
+<p>Multicolinearity can lead to unreliable coefficient estimates, while adding more variables to the model will always increase the R<sup>2</sup> value, reflecting a higher proportion of variance explained by the model that is unjust.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="multiple-linear-regression-mlr.html#cb175-1" tabindex="-1"></a>pie_crab <span class="sc">%&gt;%</span> </span>
+<span id="cb175-2"><a href="multiple-linear-regression-mlr.html#cb175-2" tabindex="-1"></a>  <span class="fu">select</span>(latitude, air_temp, water_temp) <span class="sc">%&gt;%</span> </span>
+<span id="cb175-3"><a href="multiple-linear-regression-mlr.html#cb175-3" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div>
+<pre><code>##              latitude   air_temp water_temp
+## latitude    1.0000000 -0.9949715 -0.9571738
+## air_temp   -0.9949715  1.0000000  0.9632287
+## water_temp -0.9571738  0.9632287  1.0000000</code></pre>
+<p>Normally, we should exclude variables that have a correlation coefficient greater than 0.7/-0.7. Alas, all of our variables are HIGHLY correlated with each other. Therefore, these predictors should not all be used in our model. Which is also to say… it is a good idea to check your predictor variables for colinearity <em>before</em> developing a model.</p>
+</div>
+</div>
+<div id="assignment-1" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Assignment<a href="multiple-linear-regression-mlr.html#assignment-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.</p>
+<div id="download-the-usgs-folder-on-canvas-and-store-it-in-a-data-folder-in-this-assignments-project-directory.-here-is-a-list-of-all-of-these-files" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Download the ‘usgs’ folder on Canvas and store it in a “data” folder in this assignment’s project directory. Here is a list of all of these files:<a href="multiple-linear-regression-mlr.html#download-the-usgs-folder-on-canvas-and-store-it-in-a-data-folder-in-this-assignments-project-directory.-here-is-a-list-of-all-of-these-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="multiple-linear-regression-mlr.html#cb177-1" tabindex="-1"></a>data_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&#39;data/usgs&#39;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="read-in-each-of-the-data-sets-associated-with-the-assignment-and-combine-them-into-a-single-data-set.-hint-what-does-map_dfr-do" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do?)<a href="multiple-linear-regression-mlr.html#read-in-each-of-the-data-sets-associated-with-the-assignment-and-combine-them-into-a-single-data-set.-hint-what-does-map_dfr-do" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2.5 pts.</p>
+</div>
+<div id="using-our-combined-data-set-plot-each-variable-against-mean-annual-stream-flow-to-identify-variables-that-seem-to-have-a-linear-relationship-with-stream-flow." class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow.<a href="multiple-linear-regression-mlr.html#using-our-combined-data-set-plot-each-variable-against-mean-annual-stream-flow-to-identify-variables-that-seem-to-have-a-linear-relationship-with-stream-flow." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>5 pts.</p>
+</div>
+<div id="develop-a-multiple-linear-regression-model-using-any-combination-of-the-variables-in-the-data-set.-what-is-your-r-squared-value-which-of-your-variables-if-any-are-significant-predictors-of-stream-flow" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow?<a href="multiple-linear-regression-mlr.html#develop-a-multiple-linear-regression-model-using-any-combination-of-the-variables-in-the-data-set.-what-is-your-r-squared-value-which-of-your-variables-if-any-are-significant-predictors-of-stream-flow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>5 pts.</p>
+</div>
+<div id="check-to-see-if-your-model-meets-the-model-assumptions-required-for-mlr." class="section level3 hasAnchor" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> Check to see if your model meets the model assumptions required for MLR.<a href="multiple-linear-regression-mlr.html#check-to-see-if-your-model-meets-the-model-assumptions-required-for-mlr." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2.5 pts.</p>
+</div>
+<div id="use-your-model-to-predict-mean-annual-stream-flow-for-two-new-sets-of-predictor-data." class="section level3 hasAnchor" number="8.2.6">
+<h3><span class="header-section-number">8.2.6</span> Use your model to predict mean annual stream flow for two new sets of predictor data.<a href="multiple-linear-regression-mlr.html#use-your-model-to-predict-mean-annual-stream-flow-for-two-new-sets-of-predictor-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2.5 pts.</p>
+</div>
+<div id="if-your-model-does-not-meet-the-models-assumptions-what-are-some-ways-of-manipulating-the-data-set-so-that-it-might-hint-review-chapter-6" class="section level3 hasAnchor" number="8.2.7">
+<h3><span class="header-section-number">8.2.7</span> If your model does not meet the model’s assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6)<a href="multiple-linear-regression-mlr.html#if-your-model-does-not-meet-the-models-assumptions-what-are-some-ways-of-manipulating-the-data-set-so-that-it-might-hint-review-chapter-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>2.5 pts.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="correlation-and-simple-linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-mlr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

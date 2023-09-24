@@ -75,3 +75,15 @@ e3-perform-a-correlation-test-on-icecover_temp-to-see-whether-there-is-a-signifi
 e4-use-a-simple-linear-model-to-predict-the-mean-ice-duration-for-a-year-whose-mean-temperature-is--2-degrees-0-degrees-and-2-degrees.
 e5-plot-the-average-air-temperature-against-the-average-ice-cover-duration.-include-our-simple-linear-regression-i.e.-the-line-of-best-fit-in-the-plot.
 e6-what-are-the-slope-intercept-and-the-residual-standard-error-of-our-simple-linear-regression-line
+multiple-linear-regression-mlr
+mlr-in-r
+predicting-crab-size-1
+mlr-assumptions
+assignment-1
+download-the-usgs-folder-on-canvas-and-store-it-in-a-data-folder-in-this-assignments-project-directory.-here-is-a-list-of-all-of-these-files
+read-in-each-of-the-data-sets-associated-with-the-assignment-and-combine-them-into-a-single-data-set.-hint-what-does-map_dfr-do
+using-our-combined-data-set-plot-each-variable-against-mean-annual-stream-flow-to-identify-variables-that-seem-to-have-a-linear-relationship-with-stream-flow.
+develop-a-multiple-linear-regression-model-using-any-combination-of-the-variables-in-the-data-set.-what-is-your-r-squared-value-which-of-your-variables-if-any-are-significant-predictors-of-stream-flow
+check-to-see-if-your-model-meets-the-model-assumptions-required-for-mlr.
+use-your-model-to-predict-mean-annual-stream-flow-for-two-new-sets-of-predictor-data.
+if-your-model-does-not-meet-the-models-assumptions-what-are-some-ways-of-manipulating-the-data-set-so-that-it-might-hint-review-chapter-6

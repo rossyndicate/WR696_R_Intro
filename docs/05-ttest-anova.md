@@ -127,13 +127,11 @@ trout_clean %>%
 
 ```
 ## # A tibble: 1 × 15
-##   estimate estim…¹ estim…² .y.   group1 group2    n1    n2 stati…³       p    df
-## *    <dbl>   <dbl>   <dbl> <chr> <chr>  <chr>  <int> <int>   <dbl>   <dbl> <dbl>
-## 1    0.131    1.52    1.39 weig… CC     OG      6798  5796    5.49 4.06e-8 12592
-## # … with 4 more variables: conf.low <dbl>, conf.high <dbl>, method <chr>,
-## #   alternative <chr>, and abbreviated variable names ¹​estimate1, ²​estimate2,
-## #   ³​statistic
-## # ℹ Use `colnames()` to see all variable names
+##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p
+## *    <dbl>     <dbl>     <dbl> <chr> <chr>  <chr>  <int> <int>     <dbl>   <dbl>
+## 1    0.131      1.52      1.39 weig… CC     OG      6798  5796      5.49 4.06e-8
+## # ℹ 5 more variables: df <dbl>, conf.low <dbl>, conf.high <dbl>, method <chr>,
+## #   alternative <chr>
 ```
 
 The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that *Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests*. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.
@@ -152,12 +150,11 @@ trout_clean %>%
 
 ```
 ## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 stati…¹        p
-## *    <dbl>     <dbl>     <dbl> <chr>  <chr>  <chr>  <int> <int>   <dbl>    <dbl>
-## 1     1.17      9.38      8.21 weigh… CC     OG      6798  5796    6.69 2.26e-11
-## # … with 5 more variables: df <dbl>, conf.low <dbl>, conf.high <dbl>,
-## #   method <chr>, alternative <chr>, and abbreviated variable name ¹​statistic
-## # ℹ Use `colnames()` to see all variable names
+##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic
+## *    <dbl>     <dbl>     <dbl> <chr>    <chr>  <chr>  <int> <int>     <dbl>
+## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69
+## # ℹ 6 more variables: p <dbl>, df <dbl>, conf.low <dbl>, conf.high <dbl>,
+## #   method <chr>, alternative <chr>
 ```
 
 While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.

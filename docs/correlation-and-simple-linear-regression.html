@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 7 Correlation and simple linear regression | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 7 Correlation and simple linear regression | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-09-18" />
+<meta name="date" content="2023-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="data-analysis-t-test-and-anova.html"/>
-
+<link rel="next" href="multiple-linear-regression-mlr.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,13 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -126,6 +126,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -230,6 +234,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
 <li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#assignment"><i class="fa fa-check"></i><b>7.3</b> Assignment:</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple linear regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-in-r"><i class="fa fa-check"></i><b>8.1</b> MLR in R</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#predicting-crab-size-1"><i class="fa fa-check"></i><b>8.1.1</b> Predicting crab size</a></li>
+<li class="chapter" data-level="8.1.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-assumptions"><i class="fa fa-check"></i><b>8.1.2</b> MLR Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#assignment-1"><i class="fa fa-check"></i><b>8.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#download-the-usgs-folder-on-canvas-and-store-it-in-a-data-folder-in-this-assignments-project-directory.-here-is-a-list-of-all-of-these-files"><i class="fa fa-check"></i><b>8.2.1</b> Download the ‘usgs’ folder on Canvas and store it in a “data” folder in this assignment’s project directory. Here is a list of all of these files:</a></li>
+<li class="chapter" data-level="8.2.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#read-in-each-of-the-data-sets-associated-with-the-assignment-and-combine-them-into-a-single-data-set.-hint-what-does-map_dfr-do"><i class="fa fa-check"></i><b>8.2.2</b> Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do?)</a></li>
+<li class="chapter" data-level="8.2.3" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#using-our-combined-data-set-plot-each-variable-against-mean-annual-stream-flow-to-identify-variables-that-seem-to-have-a-linear-relationship-with-stream-flow."><i class="fa fa-check"></i><b>8.2.3</b> Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow.</a></li>
+<li class="chapter" data-level="8.2.4" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#develop-a-multiple-linear-regression-model-using-any-combination-of-the-variables-in-the-data-set.-what-is-your-r-squared-value-which-of-your-variables-if-any-are-significant-predictors-of-stream-flow"><i class="fa fa-check"></i><b>8.2.4</b> Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow?</a></li>
+<li class="chapter" data-level="8.2.5" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#check-to-see-if-your-model-meets-the-model-assumptions-required-for-mlr."><i class="fa fa-check"></i><b>8.2.5</b> Check to see if your model meets the model assumptions required for MLR.</a></li>
+<li class="chapter" data-level="8.2.6" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#use-your-model-to-predict-mean-annual-stream-flow-for-two-new-sets-of-predictor-data."><i class="fa fa-check"></i><b>8.2.6</b> Use your model to predict mean annual stream flow for two new sets of predictor data.</a></li>
+<li class="chapter" data-level="8.2.7" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#if-your-model-does-not-meet-the-models-assumptions-what-are-some-ways-of-manipulating-the-data-set-so-that-it-might-hint-review-chapter-6"><i class="fa fa-check"></i><b>8.2.7</b> If your model does not meet the model’s assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6)</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -252,59 +274,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="correlation-and-simple-linear-regression" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number"> 7</span> Correlation and simple linear regression<a href="correlation-and-simple-linear-regression.html#correlation-and-simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="correlation-and-simple-linear-regression.html#cb144-1" tabindex="-1"></a><span class="co"># load in packages</span></span>
-<span id="cb144-2"><a href="correlation-and-simple-linear-regression.html#cb144-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb144-3"><a href="correlation-and-simple-linear-regression.html#cb144-3" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
-<span id="cb144-4"><a href="correlation-and-simple-linear-regression.html#cb144-4" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb144-5"><a href="correlation-and-simple-linear-regression.html#cb144-5" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># THIS IS A NEW ONE FOR Y&#39;ALL!</span></span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="correlation-and-simple-linear-regression.html#cb145-1" tabindex="-1"></a><span class="co"># load in packages</span></span>
+<span id="cb145-2"><a href="correlation-and-simple-linear-regression.html#cb145-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb145-3"><a href="correlation-and-simple-linear-regression.html#cb145-3" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
+<span id="cb145-4"><a href="correlation-and-simple-linear-regression.html#cb145-4" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb145-5"><a href="correlation-and-simple-linear-regression.html#cb145-5" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># THIS IS A NEW ONE FOR Y&#39;ALL!</span></span></code></pre></div>
 <div id="correlation-with-salamanders" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Correlation with salamanders<a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Correlation measures the strength and direction of a relationship between <strong>two continuous variables</strong>. The key result of a correlation test, the correlation coefficient (<em>r</em>), ranges from -1 to +1, with 0 indicating no linear relationship, -1 a perfect negative relationship and 1 indicating a perfect positive relationship.</p>
 <p>We will use the <code>and_vertebrates</code> data set to demonstrate the correlation test; we can test our length and weight continuous variables to see if “long” salamanders also weigh more.</p>
 <p>First, we’ll need to clean our data set to just include salamanders, and remove missing values for length and weight. Let’s focus on the variable <code>length_2_mm</code> for snout-to-tail length.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="correlation-and-simple-linear-regression.html#cb145-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;and_vertebrates&quot;</span>)</span>
-<span id="cb145-2"><a href="correlation-and-simple-linear-regression.html#cb145-2" tabindex="-1"></a></span>
-<span id="cb145-3"><a href="correlation-and-simple-linear-regression.html#cb145-3" tabindex="-1"></a>sal <span class="ot">&lt;-</span> and_vertebrates <span class="sc">%&gt;%</span> </span>
-<span id="cb145-4"><a href="correlation-and-simple-linear-regression.html#cb145-4" tabindex="-1"></a>  <span class="co"># find observations that contain the string &quot;salamander&quot; in the species column:</span></span>
-<span id="cb145-5"><a href="correlation-and-simple-linear-regression.html#cb145-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;salamander&quot;</span>, species)) <span class="sc">%&gt;%</span></span>
-<span id="cb145-6"><a href="correlation-and-simple-linear-regression.html#cb145-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(length_2_mm, weight_g)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="correlation-and-simple-linear-regression.html#cb146-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;and_vertebrates&quot;</span>)</span>
+<span id="cb146-2"><a href="correlation-and-simple-linear-regression.html#cb146-2" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="correlation-and-simple-linear-regression.html#cb146-3" tabindex="-1"></a>sal <span class="ot">&lt;-</span> and_vertebrates <span class="sc">%&gt;%</span> </span>
+<span id="cb146-4"><a href="correlation-and-simple-linear-regression.html#cb146-4" tabindex="-1"></a>  <span class="co"># find observations that contain the string &quot;salamander&quot; in the species column:</span></span>
+<span id="cb146-5"><a href="correlation-and-simple-linear-regression.html#cb146-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;salamander&quot;</span>, species)) <span class="sc">%&gt;%</span></span>
+<span id="cb146-6"><a href="correlation-and-simple-linear-regression.html#cb146-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(length_2_mm, weight_g)</span></code></pre></div>
 <div id="eda" class="section level4 hasAnchor" number="7.1.0.1">
 <h4><span class="header-section-number">7.1.0.1</span> EDA<a href="correlation-and-simple-linear-regression.html#eda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Before diving in, let’s visually explore the relationship between our two variables with a scatter plot:</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="correlation-and-simple-linear-regression.html#cb146-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sal) <span class="sc">+</span> </span>
-<span id="cb146-2"><a href="correlation-and-simple-linear-regression.html#cb146-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> length_2_mm, <span class="at">y =</span> weight_g)) <span class="sc">+</span></span>
-<span id="cb146-3"><a href="correlation-and-simple-linear-regression.html#cb146-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="correlation-and-simple-linear-regression.html#cb147-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sal) <span class="sc">+</span> </span>
+<span id="cb147-2"><a href="correlation-and-simple-linear-regression.html#cb147-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> length_2_mm, <span class="at">y =</span> weight_g)) <span class="sc">+</span></span>
+<span id="cb147-3"><a href="correlation-and-simple-linear-regression.html#cb147-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>From our plot, we see that there is indeed a pretty visible relationship between a salamander’s weight and length. In other words, a salamander’s weight and length seem to be <strong>positively correlated:</strong> as length increases, weight also increases, and vice versa. Moreover, this relationship does not appear linear. And, we will need to see what the distribution of our variables looks like:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="correlation-and-simple-linear-regression.html#cb147-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>length_2_mm) <span class="co"># skewed... is it technically &quot;normal&quot; distribution?</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="correlation-and-simple-linear-regression.html#cb148-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>length_2_mm) <span class="co"># skewed... is it technically &quot;normal&quot; distribution?</span></span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="correlation-and-simple-linear-regression.html#cb148-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>weight_g) <span class="co"># def non normal distribution</span></span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="correlation-and-simple-linear-regression.html#cb149-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>weight_g) <span class="co"># def non normal distribution</span></span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <p>They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the <code>shapiro.test()</code> function. However, this function only runs for 5000 observations or less. Thereofore, we will need to test for normality on a random subset of our full data set:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="correlation-and-simple-linear-regression.html#cb149-1" tabindex="-1"></a>sal_sub <span class="ot">&lt;-</span> sal <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5000</span>) </span>
-<span id="cb149-2"><a href="correlation-and-simple-linear-regression.html#cb149-2" tabindex="-1"></a>  </span>
-<span id="cb149-3"><a href="correlation-and-simple-linear-regression.html#cb149-3" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>length_2_mm)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="correlation-and-simple-linear-regression.html#cb150-1" tabindex="-1"></a>sal_sub <span class="ot">&lt;-</span> sal <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5000</span>) </span>
+<span id="cb150-2"><a href="correlation-and-simple-linear-regression.html#cb150-2" tabindex="-1"></a>  </span>
+<span id="cb150-3"><a href="correlation-and-simple-linear-regression.html#cb150-3" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>length_2_mm)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93413, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="correlation-and-simple-linear-regression.html#cb151-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
+## W = 0.93124, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="correlation-and-simple-linear-regression.html#cb152-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.56436, p-value &lt; 2.2e-16</code></pre>
+## W = 0.55866, p-value &lt; 2.2e-16</code></pre>
 <p>The <em>null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed</em>, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.</p>
 <p>Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables or use a non-parametric test. Here, we will go ahead with a non-parametric Spearman correlation test.</p>
 </div>
 <div id="correlation-test-in-r" class="section level4 hasAnchor" number="7.1.0.2">
 <h4><span class="header-section-number">7.1.0.2</span> Correlation test in R<a href="correlation-and-simple-linear-regression.html#correlation-test-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In R, we can perform this correlation test using the {rstatix}’s <code>cor_test()</code> function:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="correlation-and-simple-linear-regression.html#cb153-1" tabindex="-1"></a><span class="fu">cor_test</span>(sal,</span>
-<span id="cb153-2"><a href="correlation-and-simple-linear-regression.html#cb153-2" tabindex="-1"></a>         <span class="at">vars =</span> <span class="fu">c</span>(length_2_mm, weight_g), <span class="co"># vector of continuous vars we want to test</span></span>
-<span id="cb153-3"><a href="correlation-and-simple-linear-regression.html#cb153-3" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="co"># we want to test both positive and negative corr.</span></span>
-<span id="cb153-4"><a href="correlation-and-simple-linear-regression.html#cb153-4" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>) <span class="co"># spearman is for non-parametric corr. method</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="correlation-and-simple-linear-regression.html#cb154-1" tabindex="-1"></a><span class="fu">cor_test</span>(sal,</span>
+<span id="cb154-2"><a href="correlation-and-simple-linear-regression.html#cb154-2" tabindex="-1"></a>         <span class="at">vars =</span> <span class="fu">c</span>(length_2_mm, weight_g), <span class="co"># vector of continuous vars we want to test</span></span>
+<span id="cb154-3"><a href="correlation-and-simple-linear-regression.html#cb154-3" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="co"># we want to test both positive and negative corr.</span></span>
+<span id="cb154-4"><a href="correlation-and-simple-linear-regression.html#cb154-4" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>) <span class="co"># spearman is for non-parametric corr. method</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##   var1        var2       cor  statistic     p method  
 ##   &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
@@ -352,16 +374,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Let’s first visualize latitude vs. size with some histograms and a scatter plot.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="correlation-and-simple-linear-regression.html#cb155-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>latitude)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="correlation-and-simple-linear-regression.html#cb156-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>latitude)</span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="correlation-and-simple-linear-regression.html#cb156-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>size)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="correlation-and-simple-linear-regression.html#cb157-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>size)</span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
 <p>It is clear that crab data was surveyed at only a finite number of locations, which leads to a non-normal distribution. But that’s okay - linear regression does NOT require the variables to be normally distributed. However, the error of the data must be normally distributed around the linear line (more on error later).</p>
 <p>When plotting, it is important to have the predictor variable on the x-axis, and the response variable on the y-axis. Then, we can fit a linear regression line through this data so that the distance between the line and the most observations is at its lowest:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="correlation-and-simple-linear-regression.html#cb157-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pie_crab, <span class="fu">aes</span>(<span class="at">x =</span> latitude, <span class="at">y =</span> size)) <span class="sc">+</span> </span>
-<span id="cb157-2"><a href="correlation-and-simple-linear-regression.html#cb157-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb157-3"><a href="correlation-and-simple-linear-regression.html#cb157-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb157-4"><a href="correlation-and-simple-linear-regression.html#cb157-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="correlation-and-simple-linear-regression.html#cb158-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pie_crab, <span class="fu">aes</span>(<span class="at">x =</span> latitude, <span class="at">y =</span> size)) <span class="sc">+</span> </span>
+<span id="cb158-2"><a href="correlation-and-simple-linear-regression.html#cb158-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb158-3"><a href="correlation-and-simple-linear-regression.html#cb158-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb158-4"><a href="correlation-and-simple-linear-regression.html#cb158-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
 <p><img src="06-corr-slr_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Each observation’s vertical distance away from the line is the observation’s <strong>error</strong>. Getting the standard deviation of these distances gives us the line’s <strong>residual standard error</strong>.</p>
 <p>The intercept of this line, or the value of the line if we extended it out to meet the y-axis (i.e., where our crab size is zero), is also known as the line’s <strong>constant</strong>.</p>
@@ -374,10 +396,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="simple-linear-regression-in-r" class="section level4 hasAnchor" number="7.2.0.1">
 <h4><span class="header-section-number">7.2.0.1</span> Simple linear regression in R<a href="correlation-and-simple-linear-regression.html#simple-linear-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In R, we can identify the values that go into delineating this line of best fit using the base R {stats} package’s <code>lm()</code> function (lm for linear model):</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="correlation-and-simple-linear-regression.html#cb158-1" tabindex="-1"></a><span class="co"># Simple linear regression model</span></span>
-<span id="cb158-2"><a href="correlation-and-simple-linear-regression.html#cb158-2" tabindex="-1"></a>slr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(size <span class="sc">~</span> latitude, <span class="at">data =</span> pie_crab) <span class="co"># lm(response ~ predictor, data = dataset)</span></span>
-<span id="cb158-3"><a href="correlation-and-simple-linear-regression.html#cb158-3" tabindex="-1"></a></span>
-<span id="cb158-4"><a href="correlation-and-simple-linear-regression.html#cb158-4" tabindex="-1"></a><span class="fu">summary</span>(slr_model)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="correlation-and-simple-linear-regression.html#cb159-1" tabindex="-1"></a><span class="co"># Simple linear regression model</span></span>
+<span id="cb159-2"><a href="correlation-and-simple-linear-regression.html#cb159-2" tabindex="-1"></a>slr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(size <span class="sc">~</span> latitude, <span class="at">data =</span> pie_crab) <span class="co"># lm(response ~ predictor, data = dataset)</span></span>
+<span id="cb159-3"><a href="correlation-and-simple-linear-regression.html#cb159-3" tabindex="-1"></a></span>
+<span id="cb159-4"><a href="correlation-and-simple-linear-regression.html#cb159-4" tabindex="-1"></a><span class="fu">summary</span>(slr_model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = size ~ latitude, data = pie_crab)
@@ -404,9 +426,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">7.2.0.2</span> Predicting crab size<a href="correlation-and-simple-linear-regression.html#predicting-crab-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>With this linear equation, we can now predict crab size at different latitudes using the base R <code>predict()</code> function.</p>
 <p>Let’s predict crab size for latitudes of 32, 36, and 38 degrees. Note that we need to create these values as a new data frame with the same column name used in the data that the model was built off of (i.e., <code>latitude</code>):</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="correlation-and-simple-linear-regression.html#cb160-1" tabindex="-1"></a>new_lat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">latitude =</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">38</span>))</span>
-<span id="cb160-2"><a href="correlation-and-simple-linear-regression.html#cb160-2" tabindex="-1"></a></span>
-<span id="cb160-3"><a href="correlation-and-simple-linear-regression.html#cb160-3" tabindex="-1"></a><span class="fu">predict</span>(slr_model, <span class="at">newdata =</span> new_lat)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="correlation-and-simple-linear-regression.html#cb161-1" tabindex="-1"></a>new_lat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">latitude =</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">38</span>))</span>
+<span id="cb161-2"><a href="correlation-and-simple-linear-regression.html#cb161-2" tabindex="-1"></a></span>
+<span id="cb161-3"><a href="correlation-and-simple-linear-regression.html#cb161-3" tabindex="-1"></a><span class="fu">predict</span>(slr_model, <span class="at">newdata =</span> new_lat)</span></code></pre></div>
 <pre><code>##        1        2        3 
 ## 11.89939 13.83987 14.81010</code></pre>
 </div>
@@ -414,24 +436,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="assignment" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Assignment:<a href="correlation-and-simple-linear-regression.html#assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For this week’s exercise, we will be using the <code>ntl_airtemp</code> and <code>ntl_icecover</code> data sets to explore the relationship between mean annual lake ice duration and mean winter air temperature at two nearby lakes in Wisconsin. <code>ntl_airtemp</code> contains daily estimates of the air temperature near the two lakes. <code>ntl_icecover</code> contains the duration of ice cover per year, per lake.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="correlation-and-simple-linear-regression.html#cb162-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_airtemp&quot;</span>)</span>
-<span id="cb162-2"><a href="correlation-and-simple-linear-regression.html#cb162-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_icecover&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="correlation-and-simple-linear-regression.html#cb163-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_airtemp&quot;</span>)</span>
+<span id="cb163-2"><a href="correlation-and-simple-linear-regression.html#cb163-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ntl_icecover&quot;</span>)</span></code></pre></div>
 <p>First, let’s get the average lake ice duration across years:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="correlation-and-simple-linear-regression.html#cb163-1" tabindex="-1"></a>avg_icecover <span class="ot">&lt;-</span> ntl_icecover <span class="sc">%&gt;%</span></span>
-<span id="cb163-2"><a href="correlation-and-simple-linear-regression.html#cb163-2" tabindex="-1"></a>  <span class="co"># mutate within group by, and create a new variable for the WATER year (Oct - Sept). Water year is the FUTURE year so we do year + 1</span></span>
-<span id="cb163-3"><a href="correlation-and-simple-linear-regression.html#cb163-3" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">wyear =</span> year <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb163-4"><a href="correlation-and-simple-linear-regression.html#cb163-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_duration =</span> <span class="fu">mean</span>(ice_duration, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="correlation-and-simple-linear-regression.html#cb164-1" tabindex="-1"></a>avg_icecover <span class="ot">&lt;-</span> ntl_icecover <span class="sc">%&gt;%</span></span>
+<span id="cb164-2"><a href="correlation-and-simple-linear-regression.html#cb164-2" tabindex="-1"></a>  <span class="co"># mutate within group by, and create a new variable for the WATER year (Oct - Sept). Water year is the FUTURE year so we do year + 1</span></span>
+<span id="cb164-3"><a href="correlation-and-simple-linear-regression.html#cb164-3" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">wyear =</span> year <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb164-4"><a href="correlation-and-simple-linear-regression.html#cb164-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_duration =</span> <span class="fu">mean</span>(ice_duration, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <p>Next, we will need to compute the mean winter (November-April) air temperature per <em>water year</em> to align with the data in <code>avg_icecover</code>. A <em>water year</em> is a 12-month period starting in October and ending in September, aligning with the winter season and thereby not splitting up the winter.</p>
 <p>Let’s first define each date’s water year using an <code>if_else()</code> statement and the <code>month()</code> function from the {lubridate} package:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="correlation-and-simple-linear-regression.html#cb164-1" tabindex="-1"></a>ntl_airtemp_wyear <span class="ot">&lt;-</span> ntl_airtemp <span class="sc">%&gt;%</span></span>
-<span id="cb164-2"><a href="correlation-and-simple-linear-regression.html#cb164-2" tabindex="-1"></a>  <span class="co"># Add a column to group the Fall and Spring season into a same year </span></span>
-<span id="cb164-3"><a href="correlation-and-simple-linear-regression.html#cb164-3" tabindex="-1"></a>  <span class="co"># (similar to hydrologic &quot;water years&quot;) using the lubridate package:</span></span>
-<span id="cb164-4"><a href="correlation-and-simple-linear-regression.html#cb164-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wyear =</span> <span class="fu">if_else</span>(<span class="fu">month</span>(sampledate) <span class="sc">&lt;</span> <span class="dv">10</span>, year, year<span class="sc">+</span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="correlation-and-simple-linear-regression.html#cb165-1" tabindex="-1"></a>ntl_airtemp_wyear <span class="ot">&lt;-</span> ntl_airtemp <span class="sc">%&gt;%</span></span>
+<span id="cb165-2"><a href="correlation-and-simple-linear-regression.html#cb165-2" tabindex="-1"></a>  <span class="co"># Add a column to group the Fall and Spring season into a same year </span></span>
+<span id="cb165-3"><a href="correlation-and-simple-linear-regression.html#cb165-3" tabindex="-1"></a>  <span class="co"># (similar to hydrologic &quot;water years&quot;) using the lubridate package:</span></span>
+<span id="cb165-4"><a href="correlation-and-simple-linear-regression.html#cb165-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wyear =</span> <span class="fu">if_else</span>(<span class="fu">month</span>(sampledate) <span class="sc">&lt;</span> <span class="dv">10</span>, year, year<span class="sc">+</span><span class="dv">1</span>))</span></code></pre></div>
 <p>Next, using <code>ntl_airtemp_wyear</code>, we can compute the average air temperature for the winter season per water year.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="correlation-and-simple-linear-regression.html#cb165-1" tabindex="-1"></a>ntl_winter_airtemp <span class="ot">&lt;-</span> ntl_airtemp_wyear <span class="sc">%&gt;%</span></span>
-<span id="cb165-2"><a href="correlation-and-simple-linear-regression.html#cb165-2" tabindex="-1"></a>  <span class="fu">filter</span>(lubridate<span class="sc">::</span><span class="fu">month</span>(sampledate) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span> <span class="co"># filter the months from Nov to April</span></span>
-<span id="cb165-3"><a href="correlation-and-simple-linear-regression.html#cb165-3" tabindex="-1"></a>  <span class="fu">group_by</span>(wyear) <span class="sc">%&gt;%</span></span>
-<span id="cb165-4"><a href="correlation-and-simple-linear-regression.html#cb165-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_air_temp =</span> <span class="fu">mean</span>(ave_air_temp_adjusted))</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="correlation-and-simple-linear-regression.html#cb166-1" tabindex="-1"></a>ntl_winter_airtemp <span class="ot">&lt;-</span> ntl_airtemp_wyear <span class="sc">%&gt;%</span></span>
+<span id="cb166-2"><a href="correlation-and-simple-linear-regression.html#cb166-2" tabindex="-1"></a>  <span class="fu">filter</span>(lubridate<span class="sc">::</span><span class="fu">month</span>(sampledate) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span> <span class="co"># filter the months from Nov to April</span></span>
+<span id="cb166-3"><a href="correlation-and-simple-linear-regression.html#cb166-3" tabindex="-1"></a>  <span class="fu">group_by</span>(wyear) <span class="sc">%&gt;%</span></span>
+<span id="cb166-4"><a href="correlation-and-simple-linear-regression.html#cb166-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_air_temp =</span> <span class="fu">mean</span>(ave_air_temp_adjusted))</span></code></pre></div>
 <div id="e1-join-your-table-of-water-yearly-average-winter-temperatures-to-our-avg_icecover-object.-save-this-new-table-as-icecover_temp.-hint-use-a-join-function-to-do-this." class="section level4 hasAnchor" number="7.3.0.1">
 <h4><span class="header-section-number">7.3.0.1</span> E1: Join your table of (water-)yearly average winter temperatures to our <code>avg_icecover</code> object. Save this new table as <code>icecover_temp</code>. (HINT: use a <code>join()</code> function to do this.)<a href="correlation-and-simple-linear-regression.html#e1-join-your-table-of-water-yearly-average-winter-temperatures-to-our-avg_icecover-object.-save-this-new-table-as-icecover_temp.-hint-use-a-join-function-to-do-this." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
@@ -450,6 +472,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="e6-what-are-the-slope-intercept-and-the-residual-standard-error-of-our-simple-linear-regression-line" class="section level4 hasAnchor" number="7.3.0.6">
 <h4><span class="header-section-number">7.3.0.6</span> E6: What are the slope, intercept, and the residual standard error of our simple linear regression line?<a href="correlation-and-simple-linear-regression.html#e6-what-are-the-slope-intercept-and-the-residual-standard-error-of-our-simple-linear-regression-line" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="correlation-and-simple-linear-regression.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb167-2"><a href="correlation-and-simple-linear-regression.html#cb167-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -458,8 +482,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="data-analysis-t-test-and-anova.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="data-analysis-t-test-and-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-linear-regression-mlr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
