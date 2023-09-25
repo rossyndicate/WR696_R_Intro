@@ -1,3 +1,5 @@
+# Multiple Linear Regression (MLR)
+
 
 
 
@@ -5,8 +7,6 @@
 library(tidyverse)
 library(lterdatasampler)
 ```
-
-# Multiple linear regression (MLR)
 
 Multiple linear regression is the most common form of linear regression analysis. As a predictive analysis, multiple linear regression is used to explain the relationship between one continuous dependent variable (or, the response variable) and two or more independent variables (or, the predictor variables). The independent variables can be continuous OR categorical. Unlike a simple linear regression, where we describe the relationship between X and Y (two dimensional) and can simply plot them against each other, we are now working with multiple X's and Y - which is three-dimensional.
 
@@ -158,49 +158,53 @@ pie_crab %>%
 
 Normally, we should exclude variables that have a correlation coefficient greater than 0.7/-0.7. Alas, all of our variables are HIGHLY correlated with each other. Therefore, these predictors should not all be used in our model. Which is also to say... it is a good idea to check your predictor variables for colinearity *before* developing a model.
 
-## Assignment
+## Exercises
 
 We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.
 
-### Download the 'usgs' folder on Canvas and store it in a "data" folder in this assignment's project directory. Here is a list of all of these files:
+Download the 'usgs' folder on Canvas and store it in a 'data' folder in this assignment's project directory. Here is a list of all of these files:
 
 
 ```r
 data_files <- list.files('data/usgs', full.names = TRUE)
 ```
 
-### Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do?)
-
-2.5 pts.
+**1.** Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do? 2.5 pts.
 
 
 
-### Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow.
+<br>
 
-5 pts.
-
-
-
-### Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow?
-
-5 pts.
+**2.** Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow. 5 pts.
 
 
 
-### Check to see if your model meets the model assumptions required for MLR.
+<br>
 
-2.5 pts.
-
-
-
-### Use your model to predict mean annual stream flow for two new sets of predictor data.
-
-2.5 pts.
+**3.** Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow? 5 pts.
 
 
 
-### If your model does not meet the model's assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6)
+<br>
 
-2.5 pts.
+**4.** Check to see if your model meets the model assumptions required for MLR. 2.5 pts.
 
 
+
+<br>
+
+**5.** Use your model to predict mean annual stream flow for two new sets of predictor data. 2.5 pts.
+
+
+
+<br>
+
+**6.** If your model does not meet the model's assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6) 2.5 pts.
+
+
+
+## Citations
+
+***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb (Accessed 2021-05-27).
+
+Johnson DS, Crowley C, Longmire K, Nelson J, Williams B, Wittyngham S. The fiddler crab, Minuca pugnax, follows Bergmann’s rule. Ecol Evol. 2019;00:1–9. https://doi.org/10.1002/ece3.5883

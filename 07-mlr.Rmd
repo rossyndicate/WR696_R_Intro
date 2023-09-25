@@ -1,3 +1,5 @@
+# Multiple Linear Regression (MLR)
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
@@ -6,8 +8,6 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(lterdatasampler)
 ```
-
-# Multiple linear regression (MLR)
 
 Multiple linear regression is the most common form of linear regression analysis. As a predictive analysis, multiple linear regression is used to explain the relationship between one continuous dependent variable (or, the response variable) and two or more independent variables (or, the predictor variables). The independent variables can be continuous OR categorical. Unlike a simple linear regression, where we describe the relationship between X and Y (two dimensional) and can simply plot them against each other, we are now working with multiple X's and Y - which is three-dimensional.
 
@@ -114,28 +114,42 @@ pie_crab %>%
 
 Normally, we should exclude variables that have a correlation coefficient greater than 0.7/-0.7. Alas, all of our variables are HIGHLY correlated with each other. Therefore, these predictors should not all be used in our model. Which is also to say... it is a good idea to check your predictor variables for colinearity *before* developing a model.
 
-## Assignment
+## Exercises
 
 We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.
 
-### Download the 'usgs' folder on Canvas and store it in a "data" folder in this assignment's project directory. Here is a list of all of these files:
+Download the 'usgs' folder on Canvas and store it in a 'data' folder in this assignment's project directory. Here is a list of all of these files:
 
 ```{r}
 data_files <- list.files('data/usgs', full.names = TRUE)
 ```
 
-### Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do?)
-
-2.5 pts.
+**1.** Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do? 2.5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
 full_dataset <- data_files %>% 
   map_dfr(~read_csv(.)) 
+# OR
+full_dataset <- map_dfr(data_files, read_csv)
+# OR
+full_dataset <- map(data_files, read_csv) %>%
+  bind_rows()
+# OR
+full_dataset <- data_files %>% 
+  map_dfr(read_csv) 
+# OR
+full_dataset <- data_files %>% 
+  map_dfr(~read_csv(.x)) 
+# OR
+full_dataset <- data_files %>% 
+  map_df(~read_csv(.x)) %>%
+  bind_rows()
+#... and a myriad of other combos!
 ```
 
-### Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow.
+<br>
 
-5 pts.
+**2.** Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow. 5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
 
@@ -149,46 +163,58 @@ ggplot(data = full_long, aes(x = (annual_streamflow_mm), y = (value))) +
   theme_bw()
 ```
 
-### Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow?
+<br>
 
-5 pts.
+**3.** Develop a multiple linear regression model using any combination of the variables in the data set. What is your R-squared value? Which of your variables (if any) are significant predictors of stream flow? 5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
 model <- lm((annual_streamflow_mm) ~ 
-              mean_baseflow + ws_area_sqkm + site_elevation +           
-              median_ws_elevation + mean_annual_precip+mean_winter_temp +        
-              mean_aridity_index + soil_sand_content + mean_soil_organic_matter +
-              mean_soil_permeability + percent_urban + percent_forested +     
-              percent_wetland + percent_s_facing,
+              mean_baseflow + site_elevation +           
+              median_ws_elevation + percent_s_facing,
             data = full_dataset)
 
 summary(model)
+
+# median ws elevation is the only significant predictor variable
 ```
 
-### Check to see if your model meets the model assumptions required for MLR.
+<br>
 
-2.5 pts.
+**4.** Check to see if your model meets the model assumptions required for MLR. 2.5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
-full_dataset %>% select(mean_annual_precip, percent_forested, site_elevation,
-                        soil_sand_content, percent_s_facing) %>% 
-  cor()
-plot(model, which = 1)
-plot(model, which = 2)
+full_dataset %>% select(mean_baseflow, site_elevation,         
+              median_ws_elevation, percent_s_facing,) %>% 
+  cor() # there are a vouple variables that are correlated. e.g., median ws elevation and site elevation
+plot(model, which = 1) # not good... "cone" pattern exists as you move from left to right.
+plot(model, which = 2) # meh... ok
 ```
 
-### Use your model to predict mean annual stream flow for two new sets of predictor data.
+<br>
 
-2.5 pts.
-
-```{r}
-
-```
-
-### If your model does not meet the model's assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6)
-
-2.5 pts.
+**5.** Use your model to predict mean annual stream flow for two new sets of predictor data. 2.5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
-#transformations, removing outliers
+
+new <- tibble(mean_baseflow = c(25, 60),
+                 site_elevation =c(80000, 90000),           
+                 median_ws_elevation =c(85000, 91000),
+                 percent_s_facing = c(.25, .75)
+)
+
+predict(model, newdata = new)
 ```
+
+<br>
+
+**6.** If your model does not meet the model's assumptions, what are some ways of manipulating the data set so that it might? (HINT: review chapter 6) 2.5 pts.
+
+```{r, eval = FALSE, echo = FALSE}
+# transformations (sqrt() is a common one used in hydrology), removing outliers, removing correlated variables
+```
+
+## Citations
+
+***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb (Accessed 2021-05-27).
+
+Johnson DS, Crowley C, Longmire K, Nelson J, Williams B, Wittyngham S. The fiddler crab, Minuca pugnax, follows Bergmann’s rule. Ecol Evol. 2019;00:1–9. https://doi.org/10.1002/ece3.5883

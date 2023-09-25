@@ -1,4 +1,4 @@
-# Correlation and simple linear regression
+# Correlation and Simple Linear Regression
 
 
 
@@ -57,7 +57,7 @@ hist(sal$weight_g) # def non normal distribution
 
 <img src="06-corr-slr_files/figure-html/unnamed-chunk-4-2.png" width="672" />
 
-They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Thereofore, we will need to test for normality on a random subset of our full data set:
+They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Therefore, we will need to test for normality on a random subset of our full data set:
 
 
 ```r
@@ -71,7 +71,7 @@ shapiro.test(sal_sub$length_2_mm)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93124, p-value < 2.2e-16
+## W = 0.93184, p-value < 2.2e-16
 ```
 
 ```r
@@ -83,7 +83,7 @@ shapiro.test(sal_sub$weight_g)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.55866, p-value < 2.2e-16
+## W = 0.56049, p-value < 2.2e-16
 ```
 
 The *null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed*, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.
@@ -243,7 +243,7 @@ predict(slr_model, newdata = new_lat)
 ## 11.89939 13.83987 14.81010
 ```
 
-## Assignment:
+## Exercises
 
 For this week's exercise, we will be using the `ntl_airtemp` and `ntl_icecover` data sets to explore the relationship between mean annual lake ice duration and mean winter air temperature at two nearby lakes in Wisconsin. `ntl_airtemp` contains daily estimates of the air temperature near the two lakes. `ntl_icecover` contains the duration of ice cover per year, per lake.
 
@@ -285,26 +285,46 @@ ntl_winter_airtemp <- ntl_airtemp_wyear %>%
   summarize(mean_air_temp = mean(ave_air_temp_adjusted))
 ```
 
-#### E1: Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
+**1.** Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
 
 
 
-#### E2: Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?
+<br>
+
+**2.** Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?
 
 
 
-#### E3: Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
+<br>
+
+**3.** Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
 
 
 
-#### E4: Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
+<br>
+
+**4.** Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
 
 
 
-#### E5: Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.
+<br>
+
+**5.** Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.
 
 
 
-#### E6: What are the slope, intercept, and the residual standard error of our simple linear regression line?
+<br>
+
+**6.** What are the slope, intercept, and the residual standard error of our simple linear regression line?
 
 
+
+## Citations
+
+***Data Source:*** Anderson, L. and D. Robertson. 2020. Madison Wisconsin Daily Meteorological Data 1869 - current ver 32. Environmental Data Initiative. https://doi.org/10.6073/pasta/e3ff85971d817e9898bb8a83fb4c3a8b (Accessed 2021-03-08).
+
+***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb (Accessed 2021-05-27).
+
+***Data Source:*** Magnuson, J.J., S.R. Carpenter, and E.H. Stanley. 2021. North Temperate Lakes LTER: Ice Duration - Madison Lakes Area 1853 - current ver 35. Environmental Data Initiative. https://doi.org/10.6073/pasta/ab31f2489ee436beb73fc8f1d0213d97 (Accessed 2021-03-08).
+
+Magnuson, J.J. 2021. Seeing the invisible present and place: from years to centuries with lake ice from Wisconsin to the Northern Hemisphere. Chapter 9 (243- 277) in R. B. Waide and S. E. Kingsland [eds]. The Challenges of Long Term Ecological Research: A Historical Analysis. Springer, Archimedes Series #59. https://doi.org/10.1007/978-3-030-66933-1_9 (Accessed 2022-02-14).

@@ -1,4 +1,4 @@
-# Correlation and simple linear regression
+# Correlation and Simple Linear Regression
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
@@ -47,7 +47,7 @@ hist(sal$length_2_mm) # skewed... is it technically "normal" distribution?
 hist(sal$weight_g) # def non normal distribution
 ```
 
-They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Thereofore, we will need to test for normality on a random subset of our full data set:
+They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Therefore, we will need to test for normality on a random subset of our full data set:
 
 ```{r}
 sal_sub <- sal %>% slice_sample(n = 5000) 
@@ -167,7 +167,7 @@ new_lat <- tibble(latitude = c(32, 36, 38))
 predict(slr_model, newdata = new_lat)
 ```
 
-## Assignment:
+## Exercises
 
 For this week's exercise, we will be using the `ntl_airtemp` and `ntl_icecover` data sets to explore the relationship between mean annual lake ice duration and mean winter air temperature at two nearby lakes in Wisconsin. `ntl_airtemp` contains daily estimates of the air temperature near the two lakes. `ntl_icecover` contains the duration of ice cover per year, per lake.
 
@@ -205,30 +205,45 @@ ntl_winter_airtemp <- ntl_airtemp_wyear %>%
   summarize(mean_air_temp = mean(ave_air_temp_adjusted))
 ```
 
-#### E1: Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
+**1.** Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
 
 ```{r, echo = FALSE, message = FALSE, results = 'hide'}
 icecover_temp <- avg_icecover %>%
   left_join(., ntl_winter_airtemp, by = "wyear" )
 ```
 
-#### E2: Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?
+<br>
+
+**2.** Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 hist(icecover_temp$mean_air_temp)
 hist(icecover_temp$mean_duration)
+
+shapiro.test(icecover_temp$mean_duration)
+shapiro.test(icecover_temp$mean_air_temp)
+
+# Visually, they are normally distributed. They are also linear. 
+# However, mean duration when conducting a shaprio test is technically 
+# not normally distributed (juuuust barely).
 ```
 
-#### E3: Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
+<br>
+
+**3.** Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 cor_test(icecover_temp,
          vars = c(mean_air_temp, mean_duration), # vector of continuous variables we want to test
          alternative = "two.sided", # we want to test both positive and negative correlation 
-         method = "pearson") # pearson correlation is for two continuous variables
+         method = "pearson") # pearson OR spearman work, depending on how you determined 
+                             # distribution. Note that the results of both tests are 
+                             # very similar!
 ```
 
-#### E4: Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
+<br>
+
+**4.** Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 # Simple linear regression model
@@ -241,7 +256,9 @@ new_temp <- tibble(mean_air_temp = c(-2, 0, 2))
 predict(slr_model, newdata = new_temp)
 ```
 
-#### E5: Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.
+<br>
+
+**5.** Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +
@@ -249,10 +266,24 @@ ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-#### E6: What are the slope, intercept, and the residual standard error of our simple linear regression line?
+<br>
+
+**6.** What are the slope, intercept, and the residual standard error of our simple linear regression line?
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 # slope = -8.903
 # intercept = 85.186
 # residual standard error: 11.43
+# based on:
+summary(slr_model)
 ```
+
+## Citations
+
+***Data Source:*** Anderson, L. and D. Robertson. 2020. Madison Wisconsin Daily Meteorological Data 1869 - current ver 32. Environmental Data Initiative. https://doi.org/10.6073/pasta/e3ff85971d817e9898bb8a83fb4c3a8b (Accessed 2021-03-08).
+
+***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb (Accessed 2021-05-27).
+
+***Data Source:*** Magnuson, J.J., S.R. Carpenter, and E.H. Stanley. 2021. North Temperate Lakes LTER: Ice Duration - Madison Lakes Area 1853 - current ver 35. Environmental Data Initiative. https://doi.org/10.6073/pasta/ab31f2489ee436beb73fc8f1d0213d97 (Accessed 2021-03-08).
+
+Magnuson, J.J. 2021. Seeing the invisible present and place: from years to centuries with lake ice from Wisconsin to the Northern Hemisphere. Chapter 9 (243- 277) in R. B. Waide and S. E. Kingsland [eds]. The Challenges of Long Term Ecological Research: A Historical Analysis. Springer, Archimedes Series #59. https://doi.org/10.1007/978-3-030-66933-1_9 (Accessed 2022-02-14).
