@@ -1,0 +1,29 @@
+---
+title: "09-review"
+author: "Katie Willi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+colorado <- readNWISdv(siteNumbers = c("09380000", # Colorado River at Lee's Ferry, AZ
+                                       "06796000"),# Platte River near Louisville, NE
+                       parameterCd = "00060",
+                       startDate = "1959-10-01",
+                       endDate = "2022-09-30") %>%
+  select(site_no,
+         date = Date,
+         streamflow_cfs = X_00060_00003) %>%
+  mutate(river = case_when(site_no == "09380000" ~ "Colorado River",
+                           site_no == "06796000" ~ "Platte River"))
+
+ggplot(data = colorado, aes(x = date,
+                            y = streamflow_cfs)) +
+         geom_line(aes(color = river)) +
+  facet_wrap(~river, scales = "free_y")
+
+```

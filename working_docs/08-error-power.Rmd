@@ -1,0 +1,232 @@
+# Error + Statistical Power
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(lterdatasampler)
+library(palmerpenguins)
+#library(dataRetrieval)
+library(rstatix)
+```
+
+The results of any statistical test run the risk of giving you the wrong answer; particularly if your data assumptions aren't being met and/or you do not have enough observations. However, these statistical misinterpretations ultimately come down to just two types of error: type I and type II error.
+
+::: {.alert .alert-info}
+The **null hypotheses** are for each test we have learned thus far:
+
+**Levene test** - Variances across groups are equal (homogeneity of variances).
+
+**Shapiro-Wilk test** - Data is drawn from a normal distribution.
+
+**t-test** - Means of the two groups are equal.
+
+**ANOVA** - Means of all groups are equal.
+
+**Pearson correlation** - There is no linear correlation between the two variables.
+
+**Spearman correlation** - There is no monotonic correlation between the two variables.
+
+**Simple linear regression** - There is no linear relationship between the predictor and response variables.
+
+**Multiple linear regression**
+
+-   **Overall model** - All regression coefficients equal zero (i.e., there is no effect from predictors).
+
+-   **Individual predictors** - An individual regression coefficient equals zero (no effect for a specific predictor).
+:::
+
+### **Type I error (false positive)**
+
+Type I error occurs when we mistakenly reject a true null hypothesis. This error is often associated with setting the significance level (alpha, α) too low in hypothesis testing.
+
+\*\*Alpha (α)\*\*, or the significance level, is a predetermined threshold used to evaluate the strength of evidence \*against\* the null hypothesis. Commonly set at 0.05, alpha defines the maximum acceptable probability of making a type I error
+
+On the other hand, **p-values** measure the strength of the evidence against the null hypothesis based on the sample data. A p-value indicates the probability of obtaining the observed results, or more extreme results, if the null hypothesis were true. **When comparing the p-value to alpha, if the p-value is less than or equal to alpha, it suggests that the observed data provides enough evidence to reject the null hypothesis.**
+
+In this sense, α acts as a threshold for making decisions in hypothesis testing. If p ≤ α, we reject the null hypothesis; otherwise, we fail to reject it. Thus, α and p-values are interrelated in hypothesis testing, where the former sets the standard for the strength of evidence required to make a decision about the null hypothesis based on the latter.
+
+### **Type II error (false negative)**
+
+Type II error occurs when we fail to reject a false null hypothesis. In other words, we fail to detect a real effect or difference when it actually exists. Type II error is associated with power, which is also known as beta.
+
+Power depends on several factors:
+
+1.  Sample size - Larger samples provide more power.
+
+2.  Effect size - Larger or more dramatic effects are easier to detect.
+
+3.  Significance level (α/subsequent p-value threshold) - Higher significance levels require more power.
+
+### **Power**
+
+Power analysis is used to calculate the minimum sample size required to have a high chance of detecting an effect of a given magnitude, and at a desired significance level.
+
+Let's go back to our t-test analysis of cutthroat trout weight and forest type from Chapter 5:
+
+```{r}
+data(and_vertebrates)
+and_vertebrates %>% 
+  #filter species (remember spelling and capitalization are IMPORTANT)
+  filter(species == "Cutthroat trout") %>% 
+  # remove NA values for weight
+  drop_na(weight_g) %>%
+  t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
+```
+
+#### Sample size
+
+In our original analysis above, we found that cutthroat trout weight was observed to be significantly higher (at an alpha of 0.05) in clear cut (`CC`) forests compared to old growth (`OG`) forests. But, what if we didn't have as many observations to perform our test on? Let's cut our data set down to just five observations per forest type:
+
+```{r}
+data(and_vertebrates)
+and_vertebrates %>% 
+  #filter species (remember spelling and capitalization are IMPORTANT)
+  filter(species == "Cutthroat trout") %>% 
+  # remove NA values for weight
+  drop_na(weight_g) %>%
+  group_by(section) %>%
+  # select 10 random observations from each forest type:
+  slice_sample(n = 10) %>%
+  ungroup() %>%
+  t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE) 
+
+```
+
+With a sample of just n=5 trout from each forest, we do not have enough power to detect a significant difference between forest types on trout weight. Comparing our p-value above to an α of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.
+
+#### Magnitude of effect
+
+Let's look at a boxplot of our trout weights across our two forest types:
+
+```{r}
+ggplot(data = and_vertebrates %>% 
+  #filter species (remember spelling and capitalization are IMPORTANT)
+  filter(species == "Cutthroat trout")) +
+  geom_boxplot(aes(x = weight_g)) +
+  facet_wrap(~section) 
+```
+
+In the grand scheme of things the difference between these two populations is relatively small in magnitude. But, what if all trout in our clear cut forest type magically gained 15 grams of weight?
+
+```{r}
+and_vertebrates %>% 
+  #filter species (remember spelling and capitalization are IMPORTANT)
+  filter(species == "Cutthroat trout") %>% 
+  mutate(weight_g = ifelse(section == "CC", weight_g + 15, weight_g)) %>%
+  # remove NA values for weight
+  drop_na(weight_g) %>%
+  t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
+```
+
+... when the magnitude of the difference between our observations in our groups increases, our p-value decreases. And, when you have a greater difference between populations, the number of observations required to identify significant differences generally does not have to be so high:
+
+```{r}
+and_vertebrates %>% 
+  #filter species (remember spelling and capitalization are IMPORTANT)
+  filter(species == "Cutthroat trout") %>% 
+  mutate(weight_g = ifelse(section == "CC", weight_g + 15, weight_g)) %>%
+  # remove NA values for weight
+  drop_na(weight_g) %>%
+  group_by(section) %>%
+  # select 5 random observations from each forest type:
+  slice_sample(n = 10) %>%
+  ungroup() %>%
+  t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
+```
+
+### Note about random selection
+
+If you are playing around with this code on your own, you may notice that the results of each test look different than what's written in the bookdown: this is because we are randomly selecting a subset from our cutthroat trout population. In fact, you may have encountered p-values that lead to different conclusions for you (especially those with low sample sizes). The way we select samples from a population significantly impacts our statistical results and the statistical power of our tests. If our samples are representative of the population and sufficiently large, our findings are more likely to accurately reflect reality. However, if our samples are small or not truly representative, our results may be less reliable, and our tests may lack the ability to detect real effects.
+
+## Assignment
+
+Imagine you are conducting a study on penguin species' bill lengths to determine if there's a significant difference between the Adelie and Gentoo penguins. You want to explore how sample size affects your ability to detect this difference. Therefore, our research question is: "Is there a significant difference in bill lengths between Adelie and Gentoo penguins?" **We will set our significance level, alpha, at 0.05.**
+
+```{r}
+data("penguins")
+```
+
+First, we will select a random set of penguin observations from both species across three different sample sizes: 5, 10, 20, 30. Here, I have created the first object of 5 observations per species for you:
+
+```{r, eval = FALSE, echo = FALSE}
+
+p5 <- penguins %>%
+  filter(species %in% c("Adelie", "Gentoo")) %>%
+    # species must be re-formatted as text to get rid of previous factoring.
+  # this needs to happen for t_test to work later.
+  mutate(species = as.character(species)) %>% 
+   drop_na(bill_length_mm) %>%
+  group_by(species) %>%
+  slice_sample(n = 5) %>%
+  ungroup() %>%
+  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = TRUE)
+```
+
+**1.** Write a function called `penguin_subber` that filters our Palmer penguins data set to Adelie and Gentoo species only, and takes a user-selected number of random observations from that data set. HINT: the number of observations will be an argument of the function. The code I've written above can be used as the basis of the function.
+
+```{r, echo = FALSE, eval = FALSE}
+
+penguin_subber <- function(df, no){
+  
+  df %>%
+  filter(species %in% c("Adelie", "Gentoo")) %>%
+  # species must be re-formatted as text to get rid of previous factoring.
+  # this needs to happen for t_test to work later.
+  mutate(species = as.character(species)) %>% 
+  drop_na(bill_length_mm) %>%
+  group_by(species) %>%
+  slice_sample(n = no) %>%
+  ungroup()
+  
+}
+
+# test:
+p100 <- penguin_subber(df = penguins, no = 150)
+
+```
+
+**2.** Build upon the previous function by adding an additional step to perform a t-test on the data set, and to return the results of that t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets).
+
+```{r, eval = FALSE, echo = FALSE}
+
+penguin_tester <- function(df, no){
+  
+  df %>%
+  filter(species %in% c("Adelie", "Gentoo")) %>%
+    # species must be re-formatted as text to get rid of previous factoring.
+  # this needs to happen for t_test to work later.
+  mutate(species = as.character(species)) %>% 
+  group_by(species) %>%
+  slice_sample(n = no) %>%
+  ungroup() %>%
+  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = TRUE)
+  
+  }
+
+p10 <- penguin_tester(penguins, no = 100)
+```
+
+**3.** Map over the function above, using our sample sizes of interest (i.e., 5, 10, 20, 30 per species). Repeat the process 100 times for each sample size to account for variability. The final outcome of this exercise should be a single data frame with 400 rows that includes all of our t-test summaries stacked on top of each other. HINT: what does \`rep()\` do?
+
+```{r, eval = FALSE, echo = FALSE}
+final_data <- rep(c(5,10,20,30), 100)  %>%
+  map(~penguin_tester(df = penguins, no = .x)) %>%
+  bind_rows()
+```
+
+**4.** Using the data frame created in exercise 3, develop a boxplot of p-values grouped by sample size. How do our p-values change with sample size? 
+
+```{r, eval = FALSE, echo = FALSE}
+ggplot(final_data) +
+  geom_boxplot(aes(y = p)) +
+  facet_wrap(~n1, scales = "free_y")
+```
+
+## Citations
+
+***Data Source:*** Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. <https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165>
+
+Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <https://allisonhorst.github.io/palmerpenguins/>. doi: 10.5281/zenodo.3960218.
