@@ -1,43 +1,17 @@
----
-title: "09-review"
-author: "Katie Willi"
-date: "`r Sys.Date()`"
-output: html_document
----
+# Denouement
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
 ```
 
-```{r}
-colorado <- readNWISdv(siteNumbers = c("09380000", # Colorado River at Lee's Ferry, AZ
-                                       "06796000"),# Platte River near Louisville, NE
-                       parameterCd = "00060",
-                       startDate = "1959-10-01",
-                       endDate = "2022-09-30") %>%
-  select(site_no,
-         date = Date,
-         streamflow_cfs = X_00060_00003) %>%
-  mutate(river = case_when(site_no == "09380000" ~ "Colorado River",
-                           site_no == "06796000" ~ "Platte River"))
-
-ggplot(data = colorado, aes(x = date,
-                            y = streamflow_cfs)) +
-         geom_line(aes(color = river)) +
-  facet_wrap(~river, scales = "free_y")
-
-```
-
-## Lesson Objectives:
-
-In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data. This lesson has **five exercises** that need to be completed.
+In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data.
 
 #### Necessary packages:
 
 ```{r}
 library(tidyverse)
-library(plotly)
-library(scales)
+library(rstatix)
+# library(scales)
 library(httr)
 library(jsonlite)
 library(dataRetrieval)
@@ -45,7 +19,7 @@ library(sf) # for the map
 library(mapview) # for making the interactive plot
 ```
 
-## Streaflow Datasets
+## Tidying datasets
 
 We are interested in looking at how the Cache la Poudre River's flow changes as it travels out of the mountainous Poudre Canyon and through Fort Collins.
 
@@ -60,13 +34,13 @@ poudre_sites <- tibble(site = c("Canyon Mouth", "Lincoln Bridge", "Environmental
                        source = c("CDWR", "USGS", "USGS", "CDWR")) %>%
   sf::st_as_sf(coords = c("long", "lat"), crs = 4269)
 
-# Mapview is another package that creates interactive plots, not necessary for you to know yet!
+# Mapview is another package that creates interactive plots, not necessary for you to know yet! More in 523a :-)
 mapview::mapview(poudre_sites, zcol = "site_no", layer.name = "Poudre River Monitoring")
 ```
 
 ### USGS `dataRetrieval` R package
 
-To pull data for USGS stream gages, we can use the `dataRetrieval` package, which is a USGS-managed set of functions that, much like our functions from Lesson 3.1, pull data from the USGS's data warehouse using an API. Here we will pull flow data for our USGS stream gages of interest for the last two water years:
+To pull data for USGS stream gages, we can use the `dataRetrieval` package, which is a USGS-managed set of functions that, much like our functions from Lesson 3.1, pull data from the USGS's data warehouse using an API. Here we will pull flow data for our USGS stream gages of interest for two water years:
 
 ```{r}
 # pulls USGS daily ('dv') stream flow data:
@@ -88,11 +62,10 @@ Using the "URL generator" steps outlined for their [daily surface water time ser
 
 <https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2022>
 
-# Exercise #1 {style="color: maroon"}
-
-Using the URL above as the starting point, develop a function that creates a data frame of CDWR daily flow (CFS) data for a selected range of water years, for any site. (HINT: The final product of our API pull is a list with additional metadata about our API pull... how do we index a list to extract the time series flow data?)
+Using the URL above as the starting point, we can develop a function that creates a data frame of CDWR daily flow (CFS) data for a selected range of water years, for any site. 
 
 ```{r}
+# (Something we will learn in 523a!) Don't fear if you do not understand this.
 co_water_data <- function(site, start_year, end_year){
   
   raw_data <- httr::GET(url = paste0("https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=",site,
@@ -109,9 +82,7 @@ co_water_data <- function(site, start_year, end_year){
 }
 ```
 
-# Exercise #2 {style="color: maroon"}
-
-Map over the function you developed in Exercise #1 to pull flow data for CLAFTCCO and CLARIVCO for the 2021 and 2022 water years.
+Now that we have a function for pulling in CDWR data, we can map over it to pull flow data for CLAFTCCO and CLARIVCO for the 2021 and 2022 water years.
 
 ```{r}
 sites <- c("CLAFTCCO","CLARIVCO")
@@ -124,36 +95,43 @@ cdwr <- sites %>% map(~ co_water_data(site = ., start_year = 2021, end_year = 20
                        "Timnath"))
 ```
 
-# Exercise #3 {style="color: maroon"}
-
-Join our USGS and CDWR data frames together (`bind_rows()`, perhaps?), then create an interactive ggplot of discharge (in CFS) through time displaying all four of our monitoring sites. Be sure all axes and labels are clear.
+Next, we can join our USGS and CDWR data frames together with `bind_rows()`.
 
 ```{r}
 data <- bind_rows(usgs,cdwr)
+```
 
-plotly::ggplotly(
+## Exploratory Data Analysis
+
+Let's explore the data to see if there are any trends we can find visually. We can first visualize the data as time series:
+
+```{r}
+# Discharge (in CFS) through time displaying all four of our monitoring sites.
   ggplot(data = data) +
                    geom_line(aes(x=Date, y=q_cfs, color = Site)) +
                    theme_bw() +
                    xlab("Date") +
                    ylab("Discharge (cfs)") +
                    facet_wrap(~Site, ncol=1)
-)
 
 # OR #
 
-plotly::ggplotly(
   ggplot(data = data) +
     geom_line(aes(x=Date, y=q_cfs, color = Site)) +
     xlab("Date") +
     ylab("Discharge (cfs)") +
     theme_bw()
-)
 ```
 
-# Exercise #4 {style="color: maroon"}
+Next we can visualize the spread of flows across each site, looking at site summaries with a `geom_boxplot()`:
 
-Create an interactive plot of the daily difference in discharge between the Cache la Poudre River at the canyon mouth and each of the sites downstream. Make sure your plot axes are clear.
+```{r}  
+data %>% 
+  ggplot(aes(x = Site, y = q_cfs, color = Site)) + 
+  geom_boxplot()
+```
+
+We can create a plot of the daily difference in discharge between the Cache la Poudre River at the canyon mouth and each of the sites downstream. This will require some rearranging of our data using `pivot_wider()`:
 
 ```{r}
 new_data <- data %>%
@@ -162,22 +140,71 @@ new_data <- data %>%
   mutate_at(.vars = c("Boxelder", "Lincoln", "Timnath"), .funs = ~ (Canyon - .)) %>%
   pivot_longer(-c(Canyon, Date))
 
-plotly::ggplotly(
   ggplot(data = new_data) +
     geom_line(aes(x = Date, y = value, color = name)) +
     theme_bw() +
     ylab("Canyon - Site")
-)
 ```
 
-# Exercise #5 {style="color: maroon"}
+## Data Analysis
 
-For each of our downstream locations, calculate how many days the canyon mouth had LOWER flow. Is this what you expected? Why or why not?
+Through our exploratory data analysis, it *appears* that stream flow decreases as we move through town. But, how can we test if these flows are significantly different, and identify the magnitude/direction of these differences?
+
+Because we will be comparing daily stream flow across multiple sites, we can use an ANOVA test to assess this research question. We will set our alpha at 0.05.
+
+### Testing for normal distibution
+
+ANOVA assumes normal distribution within each group - we can visualize each site's data with a histogram:
 
 ```{r}
-new_data %>% filter(value < 0) %>%
-  group_by(name) %>%
-  summarize(count=n())
-
-# You might have expected flows to consistently get larger as the Poudre travels downstream. However, the Poudre River most often experiences the complete opposite: as the River meanders out of the mountains and through the more populated Front Range, water is diverted and removed from the channel for agricultural, industrial, and community use, making flows lower (or simply less intuitive) the further downstream you go. This is super common in rivers of the arid West. If the author presents a thoughtful response - not necessarily what I've provided -  give them full credit for answering this portion of the exercise. 
+ggplot(data = data, aes(x = q_cfs)) +
+         geom_histogram() + 
+  facet_wrap (~Site)
 ```
+
+... and use the `shapiro_test()` function along with `group_by()` to statisticaly test for normality within each site's daily stream flow data:
+
+```{r}
+data %>%
+  group_by(Site) %>%
+  shapiro_test(q_cfs)
+```
+
+Since the null hypothesis of the Shapiro-Wilk test is that the data is normally distributed, these results tell us all groups do not fit a normal distribution for daily stream flow. It is also quite clear from their histograms that they are not normally distributed.
+
+### Testing for equal variance
+
+To test for equal variances among more than two groups, it is easiest to use a Levene's Test like we have done in the past:
+
+```{r}
+data %>%
+  levene_test(q_cfs ~ Site)
+```
+
+Given this small p-value, we see that the variances of our groups are not equal.
+
+### ANOVA - Kruska-Wallis
+
+After checking our assumptions we need to perform a non-parametric ANOVA test, the Kruskal-Wallis test.
+
+```{r}
+data %>%
+  kruskal_test(q_cfs ~ Site)
+```
+
+Our results here are highly significant (at alpha = 0.05), meaning that at least one of our groups's mean stream flow is significantly different from the others.
+
+### ANOVE post-hoc analysis
+
+Since we used the non-parametric Kruskal-Wallace test, we can use the associated Dunn's test to test across our sites for significant differences in mean stream flow:
+
+```{r}
+data %>% 
+  dunn_test(q_cfs ~ Site)
+```
+
+The results of our Dunn test signify that the mean streamflow across our sites are significantly different. 
+
+THOUGHT EXPERIMENT 1: Based on our results, which of our two gages have the greatest difference in mean daily stream flow?
+
+THOUGHT EXPERIMENT 2: Is this an appropriate test to perform on stream flow data? Why or why not?
