@@ -1,7 +1,7 @@
 # Error + Statistical Power
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
 ```
 
 ```{r}
@@ -14,7 +14,7 @@ library(rstatix)
 The results of any statistical test run the risk of giving you the wrong answer; particularly if your data assumptions aren't being met and/or you do not have enough observations. However, these statistical misinterpretations ultimately come down to just two types of error: type I and type II error.
 
 ::: {.alert .alert-info}
-The **null hypotheses** are for each test we have learned thus far:
+The **null hypotheses** for each test we have learned thus far:
 
 **Levene test** - Variances across groups are equal (homogeneity of variances).
 
@@ -24,9 +24,7 @@ The **null hypotheses** are for each test we have learned thus far:
 
 **ANOVA** - Means of all groups are equal.
 
-**Pearson correlation** - There is no linear correlation between the two variables.
-
-**Spearman correlation** - There is no monotonic correlation between the two variables.
+**Correlation** - There is no correlation between the two variables.
 
 **Simple linear regression** - There is no linear relationship between the predictor and response variables.
 
@@ -188,7 +186,9 @@ c5 <- and_vertebrates %>%
   t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
 ```
 
-**1.** Write a function called `trout_subber` that filters our `and_vertebrates` to cutthroat trout only, and takes a user-selected number of random observations across both forest types from that data set. HINTS: the number of observations will be an argument of the function. The code I've written above can be used as the basis of the function. Follow steps in the Posit Primer, [How to write a function - Workflow](https://posit.cloud/learn/primers/6.2). - .
+**1.** Write a function called `trout_subber` that filters our `and_vertebrates` to cutthroat trout only, and takes a user-selected number of random observations across both forest types from that data set.
+
+HINTS: the number of observations you want to subset to will be an argument of the function. The code I've written above can be used as the basis of the function. Follow steps in the Posit Primer, [How to write a function - Workflow](https://posit.cloud/learn/primers/6.2).
 
 ```{r, echo = FALSE, eval = FALSE}
 
@@ -232,7 +232,9 @@ trout_subber <- function(df, no){
 t10 <- trout_subber(and_vertebrates, no = 10)
 ```
 
-**3.** Map over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final outcome of this exercise should be a single data frame with rows that includes all of our t-test summaries stacked on top of each other. HINT: what does \`rep()\` do?
+**3.** Map over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final outcome of this exercise should be a single data frame with 400 rows that includes all of our t-test summaries stacked on top of each other.
+
+HINTS: what does \`rep()\` do? Follow along with the Posit Primer lesson, [Iterate - Map](https://posit.cloud/learn/primers/5.2).
 
 ```{r, eval = FALSE, echo = FALSE}
 final_data <- rep(c(5, 10, 1000, 5000), 100)  %>%
