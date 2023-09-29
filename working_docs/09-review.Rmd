@@ -38,33 +38,18 @@ poudre_sites <- tibble(site = c("Canyon Mouth", "Lincoln Bridge", "Environmental
 mapview::mapview(poudre_sites, zcol = "site_no", layer.name = "Poudre River Monitoring")
 ```
 
-### USGS `dataRetrieval` R package
 
-To pull data for USGS stream gages, we can use the `dataRetrieval` package, which is a USGS-managed set of functions that, much like our functions from Lesson 3.1, pull data from the USGS's data warehouse using an API. Here we will pull flow data for our USGS stream gages of interest for two water years:
-
-```{r}
+```{r, echo = FALSE, eval - FALSE}
 # pulls USGS daily ('dv') stream flow data:
-usgs <- dataRetrieval::readNWISdv(siteNumbers = c("06752260", "06752280"), # USGS site code for the Poudre River at the Lincoln Bridge and the ELC
+dataRetrieval::readNWISdv(siteNumbers = c("06752260", "06752280"), # USGS site code for the Poudre River at the Lincoln Bridge and the ELC
                                   parameterCd = "00060", # USGS code for stream flow
                                   startDate = "2020-10-01", # YYYY-MM-DD formatting
                                   endDate = "2022-09-30") %>% # YYYY-MM-DD formatting
   rename(q_cfs = X_00060_00003) %>% # USGS code for stream flow units in cubic feet per second (CFS)
   mutate(Date = lubridate::ymd(Date), # convert the Date column to "Date" formatting using the `lubridate` package
          Site = case_when(site_no == "06752260" ~ "Lincoln", 
-                          site_no == "06752280" ~ "Boxelder"))
-```
+                          site_no == "06752280" ~ "Boxelder"))  %>% write_csv('data/review-usgs.csv')
 
-### CDWR's API
-
-Alas, CDWR does NOT have an R package that pulls data from [their API](https://dwr.state.co.us/Rest/GET/Help#Datasets&#SurfaceWaterController&#gettingstarted&#jsonxml), but they do have user-friendly directions on how to develop API calls.
-
-Using the "URL generator" steps outlined for their [daily surface water time series data set](https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator), we can get the last two water years of CFS data for the Poudre at the Canyon mouth (site abbreviation = CLAFTCCO) using the following URL:
-
-<https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2022>
-
-Using the URL above as the starting point, we can develop a function that creates a data frame of CDWR daily flow (CFS) data for a selected range of water years, for any site. 
-
-```{r}
 # (Something we will learn in 523a!) Don't fear if you do not understand this.
 co_water_data <- function(site, start_year, end_year){
   
@@ -80,15 +65,31 @@ co_water_data <- function(site, start_year, end_year){
   return(final_data)
   
 }
-```
 
-Now that we have a function for pulling in CDWR data, we can map over it to pull flow data for CLAFTCCO and CLARIVCO for the 2021 and 2022 water years.
-
-```{r}
 sites <- c("CLAFTCCO","CLARIVCO")
 
 cdwr <- sites %>% map(~ co_water_data(site = ., start_year = 2021, end_year = 2022)) %>%
-  bind_rows() %>%
+  bind_rows() %>% write_csv('data/review-cdwr.csv')
+  
+  rename(q_cfs = value) %>%
+  mutate(Date = lubridate::ymd(measDate),
+         Site = ifelse(abbrev == "CLAFTCCO", "Canyon",
+                       "Timnath"))
+```
+
+Read in our two data sets. You will find that they provide the same information (daily streamflow) but their structures are different:
+
+```{r}
+usgs <- read_csv('data/review-usgs.csv')
+glimpse(usgs)
+cdwr <- read_csv('data/review-cdwr.csv') 
+glimpse(cdwr)
+```
+
+We will need to clean columns for our CDWR data set to be identical to USGS data:
+
+```{r}
+cdwr <- cdwr %>%
   rename(q_cfs = value) %>%
   mutate(Date = lubridate::ymd(measDate),
          Site = ifelse(abbrev == "CLAFTCCO", "Canyon",
@@ -141,7 +142,7 @@ new_data <- data %>%
   pivot_longer(-c(Canyon, Date))
 
   ggplot(data = new_data) +
-    geom_line(aes(x = Date, y = value, color = name)) +
+    geom_col(aes(x = Date, y = value, color = name, fill = name)) +
     theme_bw() +
     ylab("Canyon - Site")
 ```
