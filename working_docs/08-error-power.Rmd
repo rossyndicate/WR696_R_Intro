@@ -33,7 +33,7 @@ The **null hypotheses** for each test we have learned thus far:
 -   **Individual predictors** - An individual regression coefficient equals zero (no effect for a specific predictor).
 :::
 
-Power in statistics is a measure of how effective a statistical test is at finding genuine trends/effects in your data. It tells you the likelihood that the test will correctly identify a real relationship or effect when one actually exists. In other words, power is the test's ability to avoid missing important discoveries, making it an essential aspect of the reliability and accuracy of statistical analyses. Power can be influenced by the following factors: and has consequences on p-values.
+Power in statistics is a measure of how effective a statistical test is at finding genuine trends/effects in your data. It tells you the likelihood that the test will correctly identify a real relationship or effect when one actually exists. In other words, power is the test's ability to avoid missing important discoveries, making it an essential aspect of the reliability and accuracy of statistical analyses. Power can be influenced by the following factors:
 
 1.  Sample size - Larger samples provide more power.
 
