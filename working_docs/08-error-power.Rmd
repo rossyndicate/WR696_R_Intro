@@ -164,7 +164,7 @@ trout <-
 
 Next, we will select a random set of trout observations at both forest types across four different sample sizes: 5, 10, 1000, 5000. Here, I have created the first object of **5** observations per forest type for you:
 
-```{r, eval = FALSE}
+```{r}
 
 trout_5 <- trout %>% 
   #group by section to pull observations from each group
