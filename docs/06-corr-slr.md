@@ -71,7 +71,7 @@ shapiro.test(sal_sub$length_2_mm)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93379, p-value < 2.2e-16
+## W = 0.92984, p-value < 2.2e-16
 ```
 
 ```r
@@ -83,7 +83,7 @@ shapiro.test(sal_sub$weight_g)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.56592, p-value < 2.2e-16
+## W = 0.55547, p-value < 2.2e-16
 ```
 
 The *null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed*, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.

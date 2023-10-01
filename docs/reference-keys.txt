@@ -76,3 +76,10 @@ predicting-crab-size-1
 mlr-assumptions
 exercises-6
 citations-2
+power
+power-in-action
+sample-size
+magnitude-of-effect
+note-about-random-selection
+assignment
+citations-3

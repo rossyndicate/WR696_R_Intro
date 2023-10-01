@@ -1,12 +1,11 @@
 # Power
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
-```
+
 
 Libraries needed for today (either copy and paste below or `source()` your setup script if you've been using that!):
 
-```{r}
+
+```r
 library(tidyverse)
 library(lterdatasampler)
 library(palmerpenguins)
@@ -35,7 +34,7 @@ The **null hypotheses** for each test we have learned thus far:
 -   **Individual predictors** - An individual regression coefficient equals zero (no effect for a specific predictor).
 :::
 
-Power in statistics is a measure of how effective a statistical test is at finding genuine trends/effects in your data. It tells you the likelihood that the test will correctly identify a real relationship or effect when one actually exists. In other words, power is the test's ability to avoid missing important discoveries or making incorrect discoveries, making it an essential aspect of the reliability and accuracy of statistical analyses. Power can be influenced by the following factors:
+Power in statistics is a measure of how effective a statistical test is at finding genuine trends/effects in your data. It tells you the likelihood that the test will correctly identify a real relationship or effect when one actually exists. In other words, power is the test's ability to avoid missing important discoveries, an essential aspect of the reliability and accuracy of statistical analyses. Power can be influenced by the following factors:
 
 1.  Sample size - Larger samples provide more power.
 
@@ -44,14 +43,15 @@ Power in statistics is a measure of how effective a statistical test is at findi
 Power is also related to our p-values: if we want our test's conclusions to hold greater significance, we require more power.
 
 ::: {.alert .alert-info}
-Significance in statistics means how important or reliable a finding is. P-values help quantify this by telling us how likely it is that our results occurred by chance; smaller p-values indicate greater significance, suggesting that our findings are less likely due to chance.
+Significance in statistics means how important or reliable a finding is. p-values help quantify this by telling us how likely it is that our results occurred by chance; smaller p-values indicate greater significance, suggesting that our findings are less likely due to chance.
 :::
 
 ### Power in action
 
 Let's perform a t-test analysis on our Palmer penguins data set, where we compare bill length across two penguins species, Gentoo and Adelie.
 
-```{r}
+
+```r
 data("penguins")
 
 penguins %>%
@@ -59,14 +59,22 @@ penguins %>%
   # species must be re-formatted as text to get rid of previous factoring.
   # this needs to happen for t_test to work later.
   mutate(species = as.character(species)) %>% 
-  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = TRUE)
+  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = FALSE)
+```
+
+```
+## # A tibble: 1 × 8
+##   .y.            group1 group2    n1    n2 statistic    df        p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl>    <dbl>
+## 1 bill_length_mm Adelie Gentoo   151   123     -24.7  243. 3.09e-68
 ```
 
 #### Sample size
 
 In our analysis above, we find that bill length is observed to be significantly higher (p-value \< 0.05) in Gentoo penguins when compared to Adelie penguins. But, what if we didn't have as many observations to perform our test on? Let's cut our data set down to just two observations per species:
 
-```{r}
+
+```r
 penguins %>%   filter(species %in% c("Adelie", "Gentoo")) %>%   
   # species must be re-formatted as text to get rid of previous factoring.   
   # this needs to happen for t_test to work later.   
@@ -75,7 +83,14 @@ penguins %>%   filter(species %in% c("Adelie", "Gentoo")) %>%
   slice_sample(n = 2) %>% 
   # we need to upgroup our data frame for statistical tests
   ungroup() %>%   
-  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = TRUE)
+  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = FALSE)
+```
+
+```
+## # A tibble: 1 × 8
+##   .y.            group1 group2    n1    n2 statistic    df     p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl> <dbl>
+## 1 bill_length_mm Adelie Gentoo     2     2     -1.36  1.73 0.324
 ```
 
 With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.
@@ -84,7 +99,8 @@ With a sample of just n=2 penguins of each species, we do not have enough power 
 
 Let's look at a histogram of our bill lengths across our two penguin species. Note the last two lines of code I am adding a vertical line at the mean of each group, which we got from the output of the t-test.
 
-```{r}
+
+```r
 penguins %>%
   filter(species %in% c("Adelie", "Gentoo")) %>%
   ggplot() +
@@ -93,9 +109,12 @@ penguins %>%
   geom_vline(xintercept = 47.5)
 ```
 
+<img src="08-power_files/figure-html/unnamed-chunk-5-1.png" width="864" />
+
 In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins *magically* grew an extra 15 mm?
 
-```{r}
+
+```r
 penguins %>%
   filter(species %in% c("Adelie", "Gentoo")) %>%
   #for all Gentoo species increase bill length by 15 mm
@@ -104,7 +123,11 @@ penguins %>%
   geom_histogram(aes(x = bill_length_mm, fill = species), alpha = 0.56) +
   geom_vline(xintercept =  38.8) +
   geom_vline(xintercept = 62.5)
+```
 
+<img src="08-power_files/figure-html/unnamed-chunk-6-1.png" width="864" />
+
+```r
 penguins %>%
   filter(species %in% c("Adelie", "Gentoo")) %>%
   # species must be re-formatted as text to get rid of previous factoring.
@@ -117,14 +140,22 @@ penguins %>%
                                  bill_length_mm)) %>%
   t_test(bill_length_mm ~ species,
          var.equal = FALSE,
-         detailed = TRUE)
+         detailed =   FALSE)
+```
+
+```
+## # A tibble: 1 × 8
+##   .y.            group1 group2    n1    n2 statistic    df         p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl>     <dbl>
+## 1 bill_length_mm Adelie Gentoo   151   123     -67.3  243. 6.46e-159
 ```
 
 ... when the magnitude of the difference between our observations in our groups increases, our p-value decreases. And, when you have a greater difference between populations, the number of observations required to identify significant differences generally does not have to be so high.
 
-Lets run the above code again but keep just five observations from each group and note the p-value:
+Lets run the above code again but keep just two observations from each group and note the p-value:
 
-```{r}
+
+```r
 penguins %>%
   filter(species %in% c("Adelie", "Gentoo")) %>%
   # species must be re-formatted as text to get rid of previous factoring.
@@ -135,9 +166,16 @@ penguins %>%
   drop_na(bill_length_mm) %>%
   group_by(species) %>%
   # select 2 random observations from each species:
-  slice_sample(n = 5) %>%
+  slice_sample(n = 2) %>%
   ungroup() %>%
-  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = TRUE)
+  t_test(bill_length_mm ~ species, var.equal = FALSE, detailed = FALSE)
+```
+
+```
+## # A tibble: 1 × 8
+##   .y.            group1 group2    n1    n2 statistic    df      p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl>  <dbl>
+## 1 bill_length_mm Adelie Gentoo     2     2     -6.43  1.66 0.0362
 ```
 
 ### Note about random selection
@@ -150,7 +188,8 @@ Let's re-explore the difference in weight of cutthroat trout in clear cut (CC) a
 
 First load in your data and create a new variable `trout` for just the trout species:
 
-```{r}
+
+```r
 data(and_vertebrates)
 
 
@@ -164,77 +203,36 @@ trout <-
 
 Next, we will select a random set of trout observations at both forest types across four different sample sizes: 5, 10, 1000, 5000. Here, I have created the first object of **5** observations per forest type for you:
 
-```{r}
 
+```r
 trout_5 <- trout %>% 
   #group by section to pull observations from each group
   group_by(section) %>%
   slice_sample(n = 5) %>%
   # ungroup the data frame to perform the statistical test
   ungroup() %>%
-  t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
+  t_test(weight_g ~ section, var.equal = FALSE, detailed = FALSE)
 ```
 
 **1.** Write a function called `trout_subber` that takes a user-selected number of random observations (the thing that changes) from our `trout` data frame across both forest types (i.e., section).
 
 HINTS: the number of observations you want to subset to will be an argument of the function. The code I've written above can be used as the basis of the function. Follow steps in the Posit Primer, [How to write a function - Workflow](https://posit.cloud/learn/primers/6.2).
 
-```{r, echo = FALSE, eval = FALSE}
 
-trout_subber <- function(df, n_obs){
-  
-  df %>%
-  group_by(section) %>%
-  slice_sample(n = n_obs) %>%
-  ungroup() 
-
-  
-}
-
-# test it:
-trout_150 <- trout_subber(df = and_vertebrates, n_obs = 150)
-
-```
 
 **2.** Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, and to return the results of that t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets).
 
-```{r, eval = FALSE, echo = FALSE}
 
-trout_subber <- function(df, n_obs) {
-  df %>%
-    group_by(section) %>%
-    slice_sample(n = n_obs) %>%
-    ungroup()  %>%
-    t_test(weight_g ~ section,
-           var.equal = FALSE,
-           detailed = TRUE)
-  
-}
-
-trout_10 <- trout_subber(and_vertebrates, n_obs = 10)
-```
 
 **3.** **Map** over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final outcome of this exercise should be a **single data frame** with 400 rows that includes all of our t-test summaries stacked on top of each other.
 
 HINTS: what does \`rep()\` do? Follow along with the Posit Primer lesson, [Iterate - Map](https://posit.cloud/learn/primers/5.2).
 
-```{r, eval = FALSE, echo = FALSE}
-final_data <- rep(c(5, 10, 1000, 5000), 100)  %>%
-  map(~trout_subber(df = trout, n_obs = .x)) %>%
-  bind_rows()
 
-#OR
-final_data <- rep(c(5, 10, 1000, 5000), 100)  %>%
-  map_dfr(~trout_subber(df = trout, n_obs = .x))
-```
 
 **4.** Using the data frame created in exercise 3, make a histogram of p-values for each sample size group (HINT: see what column name in your final data frame you should facet by). Make note of how the p-values and their variance change with sample size.
 
-```{r, eval = FALSE, echo = FALSE}
-ggplot(final_data) +
-  geom_histogram(aes(x = p)) +
-  facet_wrap(~n1, scales = "free_y")
-```
+
 
 ## Citations
 
