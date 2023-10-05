@@ -83,3 +83,16 @@ magnitude-of-effect
 note-about-random-selection
 assignment
 citations-3
+r-skills-review
+necessary-packages
+tidying-datasets
+get-usgs-stream-flow-data
+get-cdwr-stream-flow-data
+or-read-in-the-.csvs-we-already-generated-and-saved-for-you
+exploratory-data-analysis-2
+data-analysis
+testing-for-normal-distribution
+testing-for-equal-variance
+anova---kruskal-wallis
+anova-post-hoc-analysis
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg

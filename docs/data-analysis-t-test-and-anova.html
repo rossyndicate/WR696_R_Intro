@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-10-01" />
+<meta name="date" content="2023-10-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,13 +52,32 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/FlatGeoBuf-3.21.3/fgb.js"></script>
+<script src="libs/FlatGeoBuf-3.21.3/flatgeobuf-geojson.min.js"></script>
+<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+<link id="PoudreRiverMonitoring-1-attachment" rel="attachment" href="libs/PoudreRiverMonitoring-0.0.1/PoudreRiverMonitoring_layer.fgb"/>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -126,10 +145,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,6 +267,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="power.html"><a href="power.html#assignment"><i class="fa fa-check"></i><b>9.1</b> Assignment</a></li>
 <li class="chapter" data-level="9.2" data-path="power.html"><a href="power.html#citations-3"><i class="fa fa-check"></i><b>9.2</b> Citations</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="r-skills-review.html"><a href="r-skills-review.html"><i class="fa fa-check"></i><b>10</b> R Skills Review</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="r-skills-review.html"><a href="r-skills-review.html#tidying-datasets"><i class="fa fa-check"></i><b>10.1</b> Tidying datasets</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="r-skills-review.html"><a href="r-skills-review.html#get-usgs-stream-flow-data"><i class="fa fa-check"></i><b>10.1.1</b> Get USGS stream flow data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="r-skills-review.html"><a href="r-skills-review.html#get-cdwr-stream-flow-data"><i class="fa fa-check"></i><b>10.1.2</b> Get CDWR stream flow data</a></li>
+<li class="chapter" data-level="10.1.3" data-path="r-skills-review.html"><a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><i class="fa fa-check"></i><b>10.1.3</b> OR, read in the .csv’s we already generated and saved for you:</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="r-skills-review.html"><a href="r-skills-review.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="10.3" data-path="r-skills-review.html"><a href="r-skills-review.html#data-analysis"><i class="fa fa-check"></i><b>10.3</b> Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-normal-distribution"><i class="fa fa-check"></i><b>10.3.1</b> Testing for normal distribution</a></li>
+<li class="chapter" data-level="10.3.2" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-equal-variance"><i class="fa fa-check"></i><b>10.3.2</b> Testing for equal variance</a></li>
+<li class="chapter" data-level="10.3.3" data-path="r-skills-review.html"><a href="r-skills-review.html#anova---kruskal-wallis"><i class="fa fa-check"></i><b>10.3.3</b> ANOVA - Kruskal-Wallis</a></li>
+<li class="chapter" data-level="10.3.4" data-path="r-skills-review.html"><a href="r-skills-review.html#anova-post-hoc-analysis"><i class="fa fa-check"></i><b>10.3.4</b> ANOVA post-hoc analysis</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -278,43 +310,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, to access the dataset(s) you will be using in this lesson, we will be using a new data package called <a href="https://lter.github.io/lterdatasampler/">{lterdatasampler}</a>. This package contains subsets of data from various Long Term Ecological Research (LTER) sites, designed for use in R teaching and training activities.</p>
 <p>We we also need the {<a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a>} package, which allows us to conduct various statistical tests that are ‘tidyverse’ friendly (aka, we can use them with the pipe <code>%&gt;%</code>).</p>
 <p>So since these are new packages, we need to install them first:</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="data-analysis-t-test-and-anova.html#cb117-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lterdatasampler&quot;</span>)</span>
-<span id="cb117-2"><a href="data-analysis-t-test-and-anova.html#cb117-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstatix&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-analysis-t-test-and-anova.html#cb116-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lterdatasampler&quot;</span>)</span>
+<span id="cb116-2"><a href="data-analysis-t-test-and-anova.html#cb116-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstatix&quot;</span>)</span></code></pre></div>
 <p>Now load in the three libraries/packages needed for this lesson (OR, add <code>lterdatasampler</code> and <code>car</code> to your ‘setup.R’ script if you have been setting up your environment that way).</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-analysis-t-test-and-anova.html#cb118-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb118-2"><a href="data-analysis-t-test-and-anova.html#cb118-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
-<span id="cb118-3"><a href="data-analysis-t-test-and-anova.html#cb118-3" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="data-analysis-t-test-and-anova.html#cb117-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb117-2"><a href="data-analysis-t-test-and-anova.html#cb117-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
+<span id="cb117-3"><a href="data-analysis-t-test-and-anova.html#cb117-3" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
 <div id="explore-the-dataset" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Explore the dataset<a href="data-analysis-t-test-and-anova.html#explore-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will be using the <code>and_vertebrates</code> dataset for this lesson. Do a little exploration of this data first to understand its structure, variables and data types:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="data-analysis-t-test-and-anova.html#cb119-1" tabindex="-1"></a><span class="co"># View the data structure</span></span>
-<span id="cb119-2"><a href="data-analysis-t-test-and-anova.html#cb119-2" tabindex="-1"></a><span class="fu">glimpse</span>(and_vertebrates)</span>
-<span id="cb119-3"><a href="data-analysis-t-test-and-anova.html#cb119-3" tabindex="-1"></a></span>
-<span id="cb119-4"><a href="data-analysis-t-test-and-anova.html#cb119-4" tabindex="-1"></a><span class="co"># Explore the metadata in the Help pane</span></span>
-<span id="cb119-5"><a href="data-analysis-t-test-and-anova.html#cb119-5" tabindex="-1"></a>?and_vertebrates</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-analysis-t-test-and-anova.html#cb118-1" tabindex="-1"></a><span class="co"># View the data structure</span></span>
+<span id="cb118-2"><a href="data-analysis-t-test-and-anova.html#cb118-2" tabindex="-1"></a><span class="fu">glimpse</span>(and_vertebrates)</span>
+<span id="cb118-3"><a href="data-analysis-t-test-and-anova.html#cb118-3" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="data-analysis-t-test-and-anova.html#cb118-4" tabindex="-1"></a><span class="co"># Explore the metadata in the Help pane</span></span>
+<span id="cb118-5"><a href="data-analysis-t-test-and-anova.html#cb118-5" tabindex="-1"></a>?and_vertebrates</span></code></pre></div>
 <p>This data set contains length and weight observations for three aquatic species in clear cut and old growth coniferous forest sections of Mack Creek in HJ Andrews Experimental Forest in Oregon. The three species are <strong>Cutthroat trout</strong>, <strong>Coastal giant salamander</strong> and <strong>Cascade torrent salamander</strong>.</p>
 </div>
 <div id="t-test---compare-two-means" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> t-test - Compare two means<a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Previous work has shown that forest harvesting can impact aquatic vertebrate biomass (Kaylor &amp; Warren 2017). With this <code>and_vertebrates</code> data set we can investigate this hypothesis, by comparing weight to forest type (clear cut or old growth). This therefore involves a test comparing the means (average weight) among two groups (clear cut and old growth forests), which then requires a t-test.</p>
 <p>Lets focus on conducting this test for just Cutthroat trout to reduce species-level variances in weight. Before conducting analyses, we need to clean our dataset. The steps below will filter our data to just include the trout species, and remove any NA values of weight with the <code>drop_na()</code> function:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-analysis-t-test-and-anova.html#cb120-1" tabindex="-1"></a><span class="co">#create a new variable for downstream analysis</span></span>
-<span id="cb120-2"><a href="data-analysis-t-test-and-anova.html#cb120-2" tabindex="-1"></a>trout_clean <span class="ot">&lt;-</span> and_vertebrates <span class="sc">%&gt;%</span> </span>
-<span id="cb120-3"><a href="data-analysis-t-test-and-anova.html#cb120-3" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
-<span id="cb120-4"><a href="data-analysis-t-test-and-anova.html#cb120-4" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb120-5"><a href="data-analysis-t-test-and-anova.html#cb120-5" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
-<span id="cb120-6"><a href="data-analysis-t-test-and-anova.html#cb120-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="data-analysis-t-test-and-anova.html#cb119-1" tabindex="-1"></a><span class="co">#create a new variable for downstream analysis</span></span>
+<span id="cb119-2"><a href="data-analysis-t-test-and-anova.html#cb119-2" tabindex="-1"></a>trout_clean <span class="ot">&lt;-</span> and_vertebrates <span class="sc">%&gt;%</span> </span>
+<span id="cb119-3"><a href="data-analysis-t-test-and-anova.html#cb119-3" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
+<span id="cb119-4"><a href="data-analysis-t-test-and-anova.html#cb119-4" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-5"><a href="data-analysis-t-test-and-anova.html#cb119-5" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
+<span id="cb119-6"><a href="data-analysis-t-test-and-anova.html#cb119-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g)</span></code></pre></div>
 <p>Before conducting any analsys, we may want to <strong>visualize</strong> the relationship between forest type and weight, which we can do with a boxplot given we have a categorical predicator variable (forest type, aka <code>section</code>) and a continuous response variable (<code>weight_g</code>).</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="data-analysis-t-test-and-anova.html#cb121-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span></span>
-<span id="cb121-2"><a href="data-analysis-t-test-and-anova.html#cb121-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> section, <span class="at">y =</span> weight_g)) <span class="sc">+</span>   </span>
-<span id="cb121-3"><a href="data-analysis-t-test-and-anova.html#cb121-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-analysis-t-test-and-anova.html#cb120-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span></span>
+<span id="cb120-2"><a href="data-analysis-t-test-and-anova.html#cb120-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> section, <span class="at">y =</span> weight_g)) <span class="sc">+</span>   </span>
+<span id="cb120-3"><a href="data-analysis-t-test-and-anova.html#cb120-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 <p>We don’t see too much of a difference based on this visual, but lets conduct the statistical test to verify if our hypothesis is supported.</p>
 <div id="assumptions" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Assumptions<a href="data-analysis-t-test-and-anova.html#assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First however we need to check our test assumptions, which for t-tests assumes the <strong>variance of the groups is equal</strong>. We can test for equal variances with the function <code>levene_test()</code>, which performs a Levene’s test for homogeneity of variance across groups where the <em>null</em> hypothesis is that the variances are equal. In this function we specify the continuous, dependent variable (<code>weight_g</code>) and the predictor variable we want to test for variances between groups (<code>section</code>). We write this as a formula using <code>~</code> , which reads ’test is weight <em>varies by</em> forest section`.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-analysis-t-test-and-anova.html#cb122-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb122-2"><a href="data-analysis-t-test-and-anova.html#cb122-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> section)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="data-analysis-t-test-and-anova.html#cb121-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="data-analysis-t-test-and-anova.html#cb121-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> section)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic        p
 ##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -323,38 +355,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="variable-transformation" class="section level4 hasAnchor" number="6.2.1.1">
 <h4><span class="header-section-number">6.2.1.1</span> <strong>Variable transformation</strong><a href="data-analysis-t-test-and-anova.html#variable-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If we look at the distribution of weight (our continuous variable), it is pretty right skewed. Therefore, we’d likely want to do a log transformation on the data, which works well the data is skewed like this:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-analysis-t-test-and-anova.html#cb124-1" tabindex="-1"></a><span class="fu">hist</span>(trout_clean<span class="sc">$</span>weight_g)</span></code></pre></div>
-<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="data-analysis-t-test-and-anova.html#cb123-1" tabindex="-1"></a><span class="fu">hist</span>(trout_clean<span class="sc">$</span>weight_g)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 <p>Lets perform the variances check like we did before, but on the log transformed values, which you can do with <code>log()</code> , and we can nest the functions so we only use one line of code like this:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="data-analysis-t-test-and-anova.html#cb125-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb125-2"><a href="data-analysis-t-test-and-anova.html#cb125-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(<span class="fu">log</span>(weight_g) <span class="sc">~</span> section)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-analysis-t-test-and-anova.html#cb124-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb124-2"><a href="data-analysis-t-test-and-anova.html#cb124-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(<span class="fu">log</span>(weight_g) <span class="sc">~</span> section)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic     p
 ##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1 12592     0.468 0.494</code></pre>
 <p>Now we have a high, insignificant p-value, indicating support for the null that the variances are equal. So. we can use the default <code>t_test()</code> test which assumes equal variances, but on a log transformed weight variable. For the <code>t_test()</code> function, it needs column names and we cannot nest a column name within a function like <code>log()</code>. Therefore we will need to use <code>mutate()</code> to create a new column for our log transformed weight variable.</p>
 <p>The order of the variables in the <code>t_test()</code> function is <strong>{dependent variable} ~ {independent variable}</strong>. We use the <code>~</code> to specify a model/formula, similar to that of the <code>levene_test()</code>, telling the test we want to know if weight <em>varies by</em> forest section. We also set <code>var.equal = TRUE</code> to specify we know our groups have equal variances and <code>detailed=TRUE</code> to return the detailed results including group means (aka estimates).</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="data-analysis-t-test-and-anova.html#cb127-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb127-2"><a href="data-analysis-t-test-and-anova.html#cb127-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
-<span id="cb127-3"><a href="data-analysis-t-test-and-anova.html#cb127-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="data-analysis-t-test-and-anova.html#cb126-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="data-analysis-t-test-and-anova.html#cb126-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-3"><a href="data-analysis-t-test-and-anova.html#cb126-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1    0.131      1.52      1.39 weig… CC     OG      6798  5796      5.49 4.06e-8
-## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
-## #   alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.        group1 group2    n1    n2 statistic        p    df conf.low conf.high method
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.131      1.52      1.39 weight_log CC     OG      6798  5796      5.49  4.06e-8 12592   0.0839     0.177 T-test
+## # ℹ 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that <em>Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests</em>. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.</p>
 <p>How does this relate to our original hypothesis?</p>
 <p><strong>Welch Two Sample t-test</strong></p>
 <p>Alternatively, instead of transforming our variable we can actually change the default <code>t_test()</code> argument by specifying <code>var.equal = FALSE</code>, which will then conduct a Welch t-test, which does not assume equal variances among groups.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="data-analysis-t-test-and-anova.html#cb129-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb129-2"><a href="data-analysis-t-test-and-anova.html#cb129-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-analysis-t-test-and-anova.html#cb128-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb128-2"><a href="data-analysis-t-test-and-anova.html#cb128-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
-## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69
-## # ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
-## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic        p     df conf.low conf.high method
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69 2.26e-11 12588.    0.825      1.51 T-test
+## # ℹ 1 more variable: alternative &lt;chr&gt;</code></pre>
 <p>While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.</p>
 </div>
 </div>
@@ -363,13 +393,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.3</span> ANOVA test - compare more than two means<a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We found a significant difference in weight among forest types, but how about channel types? The <code>unittype</code> variable is categorical like <code>section</code> was, but here we have more than two categories. With more than two categories we use an ANOVA test instead of a t-test to assess significant differences in some continuous variable among groups.</p>
 <p>Since we found significant size differences between forest types, for the next analysis let’s just compare weight among channel types for one type of forest section to remove effects of forest type. Let’s look at clear-cut forests where trout were found to be significantly larger:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="data-analysis-t-test-and-anova.html#cb131-1" tabindex="-1"></a><span class="co"># create a new variable to use for downstream analysis</span></span>
-<span id="cb131-2"><a href="data-analysis-t-test-and-anova.html#cb131-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb131-3"><a href="data-analysis-t-test-and-anova.html#cb131-3" tabindex="-1"></a>  <span class="fu">filter</span>(section <span class="sc">==</span> <span class="st">&quot;CC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-analysis-t-test-and-anova.html#cb130-1" tabindex="-1"></a><span class="co"># create a new variable to use for downstream analysis</span></span>
+<span id="cb130-2"><a href="data-analysis-t-test-and-anova.html#cb130-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb130-3"><a href="data-analysis-t-test-and-anova.html#cb130-3" tabindex="-1"></a>  <span class="fu">filter</span>(section <span class="sc">==</span> <span class="st">&quot;CC&quot;</span>)</span></code></pre></div>
 <p>Now lets first look at the distribution of trout samples among different channel types in our new filtered dataset:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-analysis-t-test-and-anova.html#cb132-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb132-2"><a href="data-analysis-t-test-and-anova.html#cb132-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
-<span id="cb132-3"><a href="data-analysis-t-test-and-anova.html#cb132-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="data-analysis-t-test-and-anova.html#cb131-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb131-2"><a href="data-analysis-t-test-and-anova.html#cb131-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb131-3"><a href="data-analysis-t-test-and-anova.html#cb131-3" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ## # Groups:   unittype [6]
 ##   unittype     n
@@ -381,18 +411,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 SC        1000
 ## 6 &lt;NA&gt;       383</code></pre>
 <p>We see there are quite a few samples with missing information for channel type. Also, there are some groups that have relatively low sample size. For the sake of this lesson, lets just keep the three most abundant channel types, i.e. C (cascade), P (pool), and SC (side channel).</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="data-analysis-t-test-and-anova.html#cb134-1" tabindex="-1"></a><span class="co"># override our trout_cc variale with our groups of interest</span></span>
-<span id="cb134-2"><a href="data-analysis-t-test-and-anova.html#cb134-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb134-3"><a href="data-analysis-t-test-and-anova.html#cb134-3" tabindex="-1"></a>  <span class="co"># note this line of code is the same as doing filter(!is.na(unittype))</span></span>
-<span id="cb134-4"><a href="data-analysis-t-test-and-anova.html#cb134-4" tabindex="-1"></a>    <span class="fu">drop_na</span>(unittype) <span class="sc">%&gt;%</span> </span>
-<span id="cb134-5"><a href="data-analysis-t-test-and-anova.html#cb134-5" tabindex="-1"></a>    <span class="fu">filter</span>(unittype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;SC&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="data-analysis-t-test-and-anova.html#cb133-1" tabindex="-1"></a><span class="co"># override our trout_cc variale with our groups of interest</span></span>
+<span id="cb133-2"><a href="data-analysis-t-test-and-anova.html#cb133-2" tabindex="-1"></a>trout_cc <span class="ot">&lt;-</span> trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb133-3"><a href="data-analysis-t-test-and-anova.html#cb133-3" tabindex="-1"></a>  <span class="co"># note this line of code is the same as doing filter(!is.na(unittype))</span></span>
+<span id="cb133-4"><a href="data-analysis-t-test-and-anova.html#cb133-4" tabindex="-1"></a>    <span class="fu">drop_na</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb133-5"><a href="data-analysis-t-test-and-anova.html#cb133-5" tabindex="-1"></a>    <span class="fu">filter</span>(unittype <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;SC&quot;</span>))</span></code></pre></div>
 <div id="assumptions-1" class="section level3 hasAnchor" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> Assumptions<a href="data-analysis-t-test-and-anova.html#assumptions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong><em>Normality</em></strong></p>
 <p>ANOVA assumes normal distributions within each group. Here our group sample sizes are &gt;30 each which can be considered as large enough to not worry about this assumption. In fact the Shapiro-Wilk test won’t even operate if your group sizes are greater than 5,000. But, we can use the <code>shapiro_test()</code> function along with <code>group_by()</code> to test for normality within each channel group.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-analysis-t-test-and-anova.html#cb135-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb135-2"><a href="data-analysis-t-test-and-anova.html#cb135-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
-<span id="cb135-3"><a href="data-analysis-t-test-and-anova.html#cb135-3" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(weight_g)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="data-analysis-t-test-and-anova.html#cb134-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb134-2"><a href="data-analysis-t-test-and-anova.html#cb134-2" tabindex="-1"></a>  <span class="fu">group_by</span>(unittype) <span class="sc">%&gt;%</span> </span>
+<span id="cb134-3"><a href="data-analysis-t-test-and-anova.html#cb134-3" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(weight_g)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
 ##   unittype variable statistic        p
 ##   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
@@ -402,39 +432,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Since the null hypothesis of the Shapiro-Wilk test is that the data is normally distributed, these results tell us all groups do not fit a normal distribution for weight.</p>
 <p><strong><em>Equal Variances</em></strong></p>
 <p>To test for equal variances among more than two groups, it is easiest to use a Levene’s Test like we did earlier:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="data-analysis-t-test-and-anova.html#cb137-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb137-2"><a href="data-analysis-t-test-and-anova.html#cb137-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="data-analysis-t-test-and-anova.html#cb136-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb136-2"><a href="data-analysis-t-test-and-anova.html#cb136-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic        p
 ##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     2  6308      126. 3.19e-54</code></pre>
 <p>Given this small we see that the variances of our groups are not equal.</p>
 <p>Therefore, after checking out assumptions we need to perform a non-parametric ANOVA test, the Kruskal-Wallis test. We can do this with the <code>kruskal_test()</code> function specifying a formula like we have for previous tests to see if weight varies by channel (aka <code>unittype</code>).</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="data-analysis-t-test-and-anova.html#cb139-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb139-2"><a href="data-analysis-t-test-and-anova.html#cb139-2" tabindex="-1"></a>  <span class="fu">kruskal_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="data-analysis-t-test-and-anova.html#cb138-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb138-2"><a href="data-analysis-t-test-and-anova.html#cb138-2" tabindex="-1"></a>  <span class="fu">kruskal_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##   .y.          n statistic    df         p method        
 ## * &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         
 ## 1 weight_g  6311      542.     2 2.05e-118 Kruskal-Wallis</code></pre>
 <p>Our results here are highly significant, meaning that at least one of our groups means is significantly different from the others.</p>
 <p>Let’s visualize the spread of weight among each group, looking at group summaries with a <code>geom_boxplot()</code> and group weight distributions with <code>geom_histogram()</code> and <code>facet_wrap()</code></p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="data-analysis-t-test-and-anova.html#cb140-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb140-2"><a href="data-analysis-t-test-and-anova.html#cb140-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> unittype, <span class="at">y =</span> weight_g, <span class="at">color =</span> unittype)) <span class="sc">+</span> </span>
+<span id="cb140-3"><a href="data-analysis-t-test-and-anova.html#cb140-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-analysis-t-test-and-anova.html#cb141-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb141-2"><a href="data-analysis-t-test-and-anova.html#cb141-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> unittype, <span class="at">y =</span> weight_g, <span class="at">color =</span> unittype)) <span class="sc">+</span> </span>
-<span id="cb141-3"><a href="data-analysis-t-test-and-anova.html#cb141-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="data-analysis-t-test-and-anova.html#cb142-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb142-2"><a href="data-analysis-t-test-and-anova.html#cb142-2" tabindex="-1"></a>  <span class="co"># since we are making a histogram only need an &#39;x&#39; variable</span></span>
-<span id="cb142-3"><a href="data-analysis-t-test-and-anova.html#cb142-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
-<span id="cb142-4"><a href="data-analysis-t-test-and-anova.html#cb142-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb142-5"><a href="data-analysis-t-test-and-anova.html#cb142-5" tabindex="-1"></a>  <span class="co"># separate plot by unittype</span></span>
-<span id="cb142-6"><a href="data-analysis-t-test-and-anova.html#cb142-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>unittype, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="05-ttest-anova_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<span id="cb141-2"><a href="data-analysis-t-test-and-anova.html#cb141-2" tabindex="-1"></a>  <span class="co"># since we are making a histogram only need an &#39;x&#39; variable</span></span>
+<span id="cb141-3"><a href="data-analysis-t-test-and-anova.html#cb141-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
+<span id="cb141-4"><a href="data-analysis-t-test-and-anova.html#cb141-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb141-5"><a href="data-analysis-t-test-and-anova.html#cb141-5" tabindex="-1"></a>  <span class="co"># separate plot by unittype</span></span>
+<span id="cb141-6"><a href="data-analysis-t-test-and-anova.html#cb141-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>unittype, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <div id="post-hoc-analysis" class="section level4 hasAnchor" number="6.3.1.1">
 <h4><span class="header-section-number">6.3.1.1</span> Post-Hoc Analysis<a href="data-analysis-t-test-and-anova.html#post-hoc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Now ANOVAs don’t tell us which groups are significantly different, for that we would need to use a post-hoc test. Since we used the non-parametric Kruskal-Wallace test, we can use the associated Dunn’s test for multiple comparisons to assess significant differences among each pair of groups.</p>
 <p><em>Note, if your data fits the ANOVA assumptions you would use the <code>anova_test()</code> function instead, and <code>tukey_hsd()</code> as the associated post-hoc test.</em></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="data-analysis-t-test-and-anova.html#cb143-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
-<span id="cb143-2"><a href="data-analysis-t-test-and-anova.html#cb143-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="data-analysis-t-test-and-anova.html#cb142-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
+<span id="cb142-2"><a href="data-analysis-t-test-and-anova.html#cb142-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(weight_g <span class="sc">~</span> unittype)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 9
 ##   .y.      group1 group2    n1    n2 statistic         p     p.adj p.adj.signif
 ## * &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       

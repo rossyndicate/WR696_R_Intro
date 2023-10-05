@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 9 Power | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 9 Power | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-10-01" />
+<meta name="date" content="2023-10-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="multiple-linear-regression-mlr.html"/>
-
+<link rel="next" href="r-skills-review.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,13 +52,32 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
+<script src="libs/FlatGeoBuf-3.21.3/fgb.js"></script>
+<script src="libs/FlatGeoBuf-3.21.3/flatgeobuf-geojson.min.js"></script>
+<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+<link id="PoudreRiverMonitoring-1-attachment" rel="attachment" href="libs/PoudreRiverMonitoring-0.0.1/PoudreRiverMonitoring_layer.fgb"/>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -126,10 +145,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,6 +267,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="power.html"><a href="power.html#assignment"><i class="fa fa-check"></i><b>9.1</b> Assignment</a></li>
 <li class="chapter" data-level="9.2" data-path="power.html"><a href="power.html#citations-3"><i class="fa fa-check"></i><b>9.2</b> Citations</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="r-skills-review.html"><a href="r-skills-review.html"><i class="fa fa-check"></i><b>10</b> R Skills Review</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="r-skills-review.html"><a href="r-skills-review.html#tidying-datasets"><i class="fa fa-check"></i><b>10.1</b> Tidying datasets</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="r-skills-review.html"><a href="r-skills-review.html#get-usgs-stream-flow-data"><i class="fa fa-check"></i><b>10.1.1</b> Get USGS stream flow data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="r-skills-review.html"><a href="r-skills-review.html#get-cdwr-stream-flow-data"><i class="fa fa-check"></i><b>10.1.2</b> Get CDWR stream flow data</a></li>
+<li class="chapter" data-level="10.1.3" data-path="r-skills-review.html"><a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><i class="fa fa-check"></i><b>10.1.3</b> OR, read in the .csv’s we already generated and saved for you:</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="r-skills-review.html"><a href="r-skills-review.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="10.3" data-path="r-skills-review.html"><a href="r-skills-review.html#data-analysis"><i class="fa fa-check"></i><b>10.3</b> Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-normal-distribution"><i class="fa fa-check"></i><b>10.3.1</b> Testing for normal distribution</a></li>
+<li class="chapter" data-level="10.3.2" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-equal-variance"><i class="fa fa-check"></i><b>10.3.2</b> Testing for equal variance</a></li>
+<li class="chapter" data-level="10.3.3" data-path="r-skills-review.html"><a href="r-skills-review.html#anova---kruskal-wallis"><i class="fa fa-check"></i><b>10.3.3</b> ANOVA - Kruskal-Wallis</a></li>
+<li class="chapter" data-level="10.3.4" data-path="r-skills-review.html"><a href="r-skills-review.html#anova-post-hoc-analysis"><i class="fa fa-check"></i><b>10.3.4</b> ANOVA post-hoc analysis</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -275,10 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="power" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number"> 9</span> Power<a href="power.html#power" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Libraries needed for today (either copy and paste below or <code>source()</code> your setup script if you’ve been using that!):</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="power.html#cb178-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb178-2"><a href="power.html#cb178-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
-<span id="cb178-3"><a href="power.html#cb178-3" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb178-4"><a href="power.html#cb178-4" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="power.html#cb177-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb177-2"><a href="power.html#cb177-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span>
+<span id="cb177-3"><a href="power.html#cb177-3" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb177-4"><a href="power.html#cb177-4" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
 <div class="alert alert-info">
 <p>The <strong>null hypotheses</strong> for each test we have learned thus far:</p>
 <p><strong>Levene test</strong> - Variances across groups are equal (homogeneity of variances).</p>
@@ -305,14 +337,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="power-in-action" class="section level3 hasAnchor" number="9.0.1">
 <h3><span class="header-section-number">9.0.1</span> Power in action<a href="power.html#power-in-action" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s perform a t-test analysis on our Palmer penguins data set, where we compare bill length across two penguins species, Gentoo and Adelie.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="power.html#cb179-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span>
-<span id="cb179-2"><a href="power.html#cb179-2" tabindex="-1"></a></span>
-<span id="cb179-3"><a href="power.html#cb179-3" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb179-4"><a href="power.html#cb179-4" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb179-5"><a href="power.html#cb179-5" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
-<span id="cb179-6"><a href="power.html#cb179-6" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
-<span id="cb179-7"><a href="power.html#cb179-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
-<span id="cb179-8"><a href="power.html#cb179-8" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="power.html#cb178-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span>
+<span id="cb178-2"><a href="power.html#cb178-2" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="power.html#cb178-3" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb178-4"><a href="power.html#cb178-4" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb178-5"><a href="power.html#cb178-5" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
+<span id="cb178-6"><a href="power.html#cb178-6" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
+<span id="cb178-7"><a href="power.html#cb178-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
+<span id="cb178-8"><a href="power.html#cb178-8" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df        p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
@@ -320,77 +352,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sample-size" class="section level4 hasAnchor" number="9.0.1.1">
 <h4><span class="header-section-number">9.0.1.1</span> Sample size<a href="power.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In our analysis above, we find that bill length is observed to be significantly higher (p-value &lt; 0.05) in Gentoo penguins when compared to Adelie penguins. But, what if we didn’t have as many observations to perform our test on? Let’s cut our data set down to just two observations per species:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="power.html#cb181-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span>   <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span>   </span>
-<span id="cb181-2"><a href="power.html#cb181-2" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.   </span></span>
-<span id="cb181-3"><a href="power.html#cb181-3" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.   </span></span>
-<span id="cb181-4"><a href="power.html#cb181-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span>    </span>
-<span id="cb181-5"><a href="power.html#cb181-5" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span>   <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>   </span>
-<span id="cb181-6"><a href="power.html#cb181-6" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb181-7"><a href="power.html#cb181-7" tabindex="-1"></a>  <span class="co"># we need to upgroup our data frame for statistical tests</span></span>
-<span id="cb181-8"><a href="power.html#cb181-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>   </span>
-<span id="cb181-9"><a href="power.html#cb181-9" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="power.html#cb180-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span>   <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb180-2"><a href="power.html#cb180-2" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.   </span></span>
+<span id="cb180-3"><a href="power.html#cb180-3" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.   </span></span>
+<span id="cb180-4"><a href="power.html#cb180-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span>    </span>
+<span id="cb180-5"><a href="power.html#cb180-5" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span>   <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>   </span>
+<span id="cb180-6"><a href="power.html#cb180-6" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb180-7"><a href="power.html#cb180-7" tabindex="-1"></a>  <span class="co"># we need to upgroup our data frame for statistical tests</span></span>
+<span id="cb180-8"><a href="power.html#cb180-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>   </span>
+<span id="cb180-9"><a href="power.html#cb180-9" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df     p
-## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -1.36  1.73 0.324</code></pre>
+##   .y.            group1 group2    n1    n2 statistic    df      p
+## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 bill_length_mm Adelie Gentoo     2     2     -4.52  1.97 0.0468</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
 <h4><span class="header-section-number">9.0.1.2</span> Magnitude of effect<a href="power.html#magnitude-of-effect" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s look at a histogram of our bill lengths across our two penguin species. Note the last two lines of code I am adding a vertical line at the mean of each group, which we got from the output of the t-test.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="power.html#cb182-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb182-2"><a href="power.html#cb182-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb182-3"><a href="power.html#cb182-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb182-4"><a href="power.html#cb182-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
+<span id="cb182-5"><a href="power.html#cb182-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
+<span id="cb182-6"><a href="power.html#cb182-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-157-1.png" width="864" /></p>
+<p>In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins <em>magically</em> grew an extra 15 mm?</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="power.html#cb183-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb183-2"><a href="power.html#cb183-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb183-3"><a href="power.html#cb183-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb183-4"><a href="power.html#cb183-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
-<span id="cb183-5"><a href="power.html#cb183-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
-<span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>)</span></code></pre></div>
-<p><img src="08-power_files/figure-html/unnamed-chunk-5-1.png" width="864" /></p>
-<p>In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins <em>magically</em> grew an extra 15 mm?</p>
+<span id="cb183-3"><a href="power.html#cb183-3" tabindex="-1"></a>  <span class="co">#for all Gentoo species increase bill length by 15 mm</span></span>
+<span id="cb183-4"><a href="power.html#cb183-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span> </span>
+<span id="cb183-5"><a href="power.html#cb183-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
+<span id="cb183-7"><a href="power.html#cb183-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
+<span id="cb183-8"><a href="power.html#cb183-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-1.png" width="864" /></p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="power.html#cb184-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb184-2"><a href="power.html#cb184-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb184-3"><a href="power.html#cb184-3" tabindex="-1"></a>  <span class="co">#for all Gentoo species increase bill length by 15 mm</span></span>
-<span id="cb184-4"><a href="power.html#cb184-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span> </span>
-<span id="cb184-5"><a href="power.html#cb184-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb184-6"><a href="power.html#cb184-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
-<span id="cb184-7"><a href="power.html#cb184-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
-<span id="cb184-8"><a href="power.html#cb184-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>)</span></code></pre></div>
-<p><img src="08-power_files/figure-html/unnamed-chunk-6-1.png" width="864" /></p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="power.html#cb185-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb185-2"><a href="power.html#cb185-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb185-3"><a href="power.html#cb185-3" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
-<span id="cb185-4"><a href="power.html#cb185-4" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
-<span id="cb185-5"><a href="power.html#cb185-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span></span>
-<span id="cb185-6"><a href="power.html#cb185-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb185-7"><a href="power.html#cb185-7" tabindex="-1"></a>  <span class="co">#if species == Gentoo, add 15 to bill length..</span></span>
-<span id="cb185-8"><a href="power.html#cb185-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>,</span>
-<span id="cb185-9"><a href="power.html#cb185-9" tabindex="-1"></a>                                 <span class="co"># otherwise, keep it as is.</span></span>
-<span id="cb185-10"><a href="power.html#cb185-10" tabindex="-1"></a>                                 bill_length_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb185-11"><a href="power.html#cb185-11" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species,</span>
-<span id="cb185-12"><a href="power.html#cb185-12" tabindex="-1"></a>         <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb185-13"><a href="power.html#cb185-13" tabindex="-1"></a>         <span class="at">detailed =</span>   <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb184-3"><a href="power.html#cb184-3" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
+<span id="cb184-4"><a href="power.html#cb184-4" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
+<span id="cb184-5"><a href="power.html#cb184-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span></span>
+<span id="cb184-6"><a href="power.html#cb184-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb184-7"><a href="power.html#cb184-7" tabindex="-1"></a>  <span class="co">#if species == Gentoo, add 15 to bill length..</span></span>
+<span id="cb184-8"><a href="power.html#cb184-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>,</span>
+<span id="cb184-9"><a href="power.html#cb184-9" tabindex="-1"></a>                                 <span class="co"># otherwise, keep it as is.</span></span>
+<span id="cb184-10"><a href="power.html#cb184-10" tabindex="-1"></a>                                 bill_length_mm)) <span class="sc">%&gt;%</span></span>
+<span id="cb184-11"><a href="power.html#cb184-11" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species,</span>
+<span id="cb184-12"><a href="power.html#cb184-12" tabindex="-1"></a>         <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb184-13"><a href="power.html#cb184-13" tabindex="-1"></a>         <span class="at">detailed =</span>   <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df         p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 bill_length_mm Adelie Gentoo   151   123     -67.3  243. 6.46e-159</code></pre>
 <p>… when the magnitude of the difference between our observations in our groups increases, our p-value decreases. And, when you have a greater difference between populations, the number of observations required to identify significant differences generally does not have to be so high.</p>
 <p>Lets run the above code again but keep just two observations from each group and note the p-value:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="power.html#cb187-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb187-2"><a href="power.html#cb187-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb187-3"><a href="power.html#cb187-3" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
-<span id="cb187-4"><a href="power.html#cb187-4" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
-<span id="cb187-5"><a href="power.html#cb187-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
-<span id="cb187-6"><a href="power.html#cb187-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb187-7"><a href="power.html#cb187-7" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
-<span id="cb187-8"><a href="power.html#cb187-8" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb187-9"><a href="power.html#cb187-9" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
-<span id="cb187-10"><a href="power.html#cb187-10" tabindex="-1"></a>  <span class="co"># select 2 random observations from each species:</span></span>
-<span id="cb187-11"><a href="power.html#cb187-11" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb187-12"><a href="power.html#cb187-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb187-13"><a href="power.html#cb187-13" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="power.html#cb186-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb186-2"><a href="power.html#cb186-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb186-3"><a href="power.html#cb186-3" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
+<span id="cb186-4"><a href="power.html#cb186-4" tabindex="-1"></a>  <span class="co"># this needs to happen for t_test to work later.</span></span>
+<span id="cb186-5"><a href="power.html#cb186-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
+<span id="cb186-6"><a href="power.html#cb186-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span></span>
+<span id="cb186-7"><a href="power.html#cb186-7" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
+<span id="cb186-8"><a href="power.html#cb186-8" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb186-9"><a href="power.html#cb186-9" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb186-10"><a href="power.html#cb186-10" tabindex="-1"></a>  <span class="co"># select 2 random observations from each species:</span></span>
+<span id="cb186-11"><a href="power.html#cb186-11" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb186-12"><a href="power.html#cb186-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb186-13"><a href="power.html#cb186-13" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df      p
-## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -6.43  1.66 0.0362</code></pre>
+##   .y.            group1 group2    n1    n2 statistic    df     p
+## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 bill_length_mm Adelie Gentoo     2     2     -4.89  1.15 0.105</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">
@@ -401,23 +433,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.1</span> Assignment<a href="power.html#assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our <a href="data-analysis-t-test-and-anova.html#data-analysis-t-test-and-anova">T-test and ANOVA lesson</a>. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: “Is there a significant difference in weight between old growth and clear cut forest types?” <strong>We will set our significance level at 0.05 (i.e., our test’s p-value must be below 0.05 for us to reject the null hypothesis).</strong></p>
 <p>First load in your data and create a new variable <code>trout</code> for just the trout species:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="power.html#cb189-1" tabindex="-1"></a><span class="fu">data</span>(and_vertebrates)</span>
-<span id="cb189-2"><a href="power.html#cb189-2" tabindex="-1"></a></span>
-<span id="cb189-3"><a href="power.html#cb189-3" tabindex="-1"></a></span>
-<span id="cb189-4"><a href="power.html#cb189-4" tabindex="-1"></a>trout <span class="ot">&lt;-</span> </span>
-<span id="cb189-5"><a href="power.html#cb189-5" tabindex="-1"></a>  and_vertebrates <span class="sc">%&gt;%</span></span>
-<span id="cb189-6"><a href="power.html#cb189-6" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
-<span id="cb189-7"><a href="power.html#cb189-7" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-8"><a href="power.html#cb189-8" tabindex="-1"></a>  <span class="co"># remove NA values for weight, the variable we will be measuring</span></span>
-<span id="cb189-9"><a href="power.html#cb189-9" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g) </span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="power.html#cb188-1" tabindex="-1"></a><span class="fu">data</span>(and_vertebrates)</span>
+<span id="cb188-2"><a href="power.html#cb188-2" tabindex="-1"></a></span>
+<span id="cb188-3"><a href="power.html#cb188-3" tabindex="-1"></a></span>
+<span id="cb188-4"><a href="power.html#cb188-4" tabindex="-1"></a>trout <span class="ot">&lt;-</span> </span>
+<span id="cb188-5"><a href="power.html#cb188-5" tabindex="-1"></a>  and_vertebrates <span class="sc">%&gt;%</span></span>
+<span id="cb188-6"><a href="power.html#cb188-6" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
+<span id="cb188-7"><a href="power.html#cb188-7" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb188-8"><a href="power.html#cb188-8" tabindex="-1"></a>  <span class="co"># remove NA values for weight, the variable we will be measuring</span></span>
+<span id="cb188-9"><a href="power.html#cb188-9" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g) </span></code></pre></div>
 <p>Next, we will select a random set of trout observations at both forest types across four different sample sizes: 5, 10, 1000, 5000. Here, I have created the first object of <strong>5</strong> observations per forest type for you:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="power.html#cb190-1" tabindex="-1"></a>trout_5 <span class="ot">&lt;-</span> trout <span class="sc">%&gt;%</span> </span>
-<span id="cb190-2"><a href="power.html#cb190-2" tabindex="-1"></a>  <span class="co">#group by section to pull observations from each group</span></span>
-<span id="cb190-3"><a href="power.html#cb190-3" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
-<span id="cb190-4"><a href="power.html#cb190-4" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb190-5"><a href="power.html#cb190-5" tabindex="-1"></a>  <span class="co"># ungroup the data frame to perform the statistical test</span></span>
-<span id="cb190-6"><a href="power.html#cb190-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb190-7"><a href="power.html#cb190-7" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="power.html#cb189-1" tabindex="-1"></a>trout_5 <span class="ot">&lt;-</span> trout <span class="sc">%&gt;%</span> </span>
+<span id="cb189-2"><a href="power.html#cb189-2" tabindex="-1"></a>  <span class="co">#group by section to pull observations from each group</span></span>
+<span id="cb189-3"><a href="power.html#cb189-3" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
+<span id="cb189-4"><a href="power.html#cb189-4" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb189-5"><a href="power.html#cb189-5" tabindex="-1"></a>  <span class="co"># ungroup the data frame to perform the statistical test</span></span>
+<span id="cb189-6"><a href="power.html#cb189-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb189-7"><a href="power.html#cb189-7" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><strong>1.</strong> Write a function called <code>trout_subber</code> that takes a user-selected number of random observations (the thing that changes) from our <code>trout</code> data frame across both forest types (i.e., section).</p>
 <p>HINTS: the number of observations you want to subset to will be an argument of the function. The code I’ve written above can be used as the basis of the function. Follow steps in the Posit Primer, <a href="https://posit.cloud/learn/primers/6.2">How to write a function - Workflow</a>.</p>
 <p><strong>2.</strong> Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, and to return the results of that t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets).</p>
@@ -437,8 +469,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="multiple-linear-regression-mlr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="multiple-linear-regression-mlr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-skills-review.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

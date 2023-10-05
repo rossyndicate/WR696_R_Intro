@@ -88,9 +88,9 @@ penguins %>%   filter(species %in% c("Adelie", "Gentoo")) %>%
 
 ```
 ## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df     p
-## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl> <dbl>
-## 1 bill_length_mm Adelie Gentoo     2     2     -1.36  1.73 0.324
+##   .y.            group1 group2    n1    n2 statistic    df       p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl>   <dbl>
+## 1 bill_length_mm Adelie Gentoo     2     2     -16.0  1.59 0.00955
 ```
 
 With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.
@@ -173,9 +173,9 @@ penguins %>%
 
 ```
 ## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df      p
-## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl>  <dbl>
-## 1 bill_length_mm Adelie Gentoo     2     2     -6.43  1.66 0.0362
+##   .y.            group1 group2    n1    n2 statistic    df     p
+## * <chr>          <chr>  <chr>  <int> <int>     <dbl> <dbl> <dbl>
+## 1 bill_length_mm Adelie Gentoo     2     2     -9.79  1.18 0.045
 ```
 
 ### Note about random selection
