@@ -1,7 +1,7 @@
 # Data Visualization in R
 
 ```{r include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE, fig.width = 16)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
 
 
 ```
@@ -526,7 +526,7 @@ ggplotly(census_data %>%
     caption = "Data obtained from the U.S. Census 5-year American Community Survey Samples for 2017-2021"
   )+
   scale_radius(range = c(2, 6)) +
-  dark_theme_classic() +
+  #dark_theme_classic() +
   scale_color_viridis() + #use the Viridis palette
   guides(color = guide_legend(title = "Median Income"),
          size = guide_legend(title = "Median Income")) +
