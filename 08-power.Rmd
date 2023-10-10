@@ -1,7 +1,7 @@
 # Power
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
+#knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
 ```
 
 Libraries needed for today (either copy and paste below or `source()` your setup script if you've been using that!):

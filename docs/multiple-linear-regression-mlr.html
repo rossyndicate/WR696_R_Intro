@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 8 Multiple Linear Regression (MLR) | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 8 Multiple Linear Regression (MLR) | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-10-09" />
+<meta name="date" content="2023-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,13 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -66,7 +66,7 @@
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
 <script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
@@ -141,10 +141,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -322,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb167-10"><a href="multiple-linear-regression-mlr.html#cb167-10" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb167-11"><a href="multiple-linear-regression-mlr.html#cb167-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb167-12"><a href="multiple-linear-regression-mlr.html#cb167-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="1536" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <p>A multiple linear regression, at the location of each observation, incorporates each of our three variable’s simple linear relationships with crab size using the following equation:</p>
 <p><span class="math inline">\(y = β0 + (β1 * x1) + (β2 * x2) + (β3 * x3) + ε\)</span></p>
 <p>In this equation, <em>y</em> is a our response variable, crab size, while each <em>x</em> represents one of our predictor variables. <em>β0</em> represents the intercept; we can think of this as the value of <em>y</em> if all of our <em>x</em>’s were zero. Each <em>β</em> is called a <strong>partial regression coefficient</strong>; this is because we can think of each as the slope in the <em>x</em>’s dimension if all of our other <em>x</em>’s were held constant. Lastly, ε is the distance between our observation, and what our model predicts for it (i.e., observed - predicted).</p>
@@ -385,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This “Residuals vs Fitted” (fitted meaning the predicted values) plot gives an indication if there are non-linear patterns. This is a bit subjective, but a good way of verifying that this assumption is met is by ensuring that no clear trend seems so exist. The residuals should also occupy equal space above and below the line, and along the length of the line.</p>
 <p><strong>The residual error values are normally distributed.</strong></p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="multiple-linear-regression-mlr.html#cb173-1" tabindex="-1"></a><span class="fu">plot</span>(mlr_model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-144-1.png" width="1536" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>… also a bit subjective, but so long as the points on the Q-Q plot follow the dotted line, this assumption is fulfilled.</p>
 <p><strong>The independent variables are not highly correlated with each other.</strong></p>
 <p>Multicolinearity can lead to unreliable coefficient estimates, while adding more variables to the model will always increase the R<sup>2</sup> value, reflecting a higher proportion of variance explained by the model that is unjust.</p>

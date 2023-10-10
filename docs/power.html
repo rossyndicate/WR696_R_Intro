@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 9 Power | Introduction to Data Analysis in R</title>
   <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 9 Power | Introduction to Data Analysis in R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2023-10-09" />
+<meta name="date" content="2023-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,13 +52,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -66,7 +66,7 @@
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-binding-2.2.0/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.13.0/leaflet-providers_1.13.0.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
 <script src="libs/leaflet-providers-plugin-2.2.0/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
@@ -141,10 +141,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -364,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df     p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -2.87  1.41 0.151</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -1.95  1.97 0.191</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
@@ -376,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb182-4"><a href="power.html#cb182-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
 <span id="cb182-5"><a href="power.html#cb182-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
 <span id="cb182-6"><a href="power.html#cb182-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-157-1.png" width="864" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
 <p>In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins <em>magically</em> grew an extra 15 mm?</p>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="power.html#cb183-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb183-2"><a href="power.html#cb183-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
@@ -386,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
 <span id="cb183-7"><a href="power.html#cb183-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
 <span id="cb183-8"><a href="power.html#cb183-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-158-1.png" width="864" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="power.html#cb184-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb184-2"><a href="power.html#cb184-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb184-3"><a href="power.html#cb184-3" tabindex="-1"></a>  <span class="co"># species must be re-formatted as text to get rid of previous factoring.</span></span>
@@ -422,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df      p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -11.3  1.00 0.0558</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -11.9  1.79 0.0103</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">

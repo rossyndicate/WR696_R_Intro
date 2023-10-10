@@ -1,7 +1,7 @@
 # R Skills Review
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
+#knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
 ```
 
 In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data.

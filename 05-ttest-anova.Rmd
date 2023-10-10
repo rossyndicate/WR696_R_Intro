@@ -1,7 +1,7 @@
 # Data Analysis: T-test and ANOVA
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE)
+#knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE)
 ```
 
 In this lesson you will be introduced to the process of conducting statistical tests in R, specifically t-tests and ANOVA tests for working with categorical predictor variables.
