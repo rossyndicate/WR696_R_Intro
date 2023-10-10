@@ -80,7 +80,7 @@ Alas, CDWR doesn't have an R packge to easily pull data from their API like USGS
 
 Using the ["URL Generator" steps outlined]((https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator)), if we wanted data from 2020-2022 for the Canyon mouth side (site abbreviation = CLAFTCCO), it generates this URL to retrieve that data:
 
-<https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2022>
+[https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2022](https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator){.uri}
 
 However, we want to pull this data for two different sites, and may want to change the year range of data. Therefore, we can write a function to pull data for our various sites and time frames:
 
@@ -163,7 +163,7 @@ data <- bind_rows(usgs,cdwr_clean)
 
 Let's explore the data to see if there are any trends we can find visually. We can first visualize the data as time series:
 
-```{r}
+```{r eval=FALSE}
 # Discharge (in CFS) through time displaying all four of our monitoring sites.
 data %>%
   ggplot(aes(x = Date, y = q_cfs, color = Site)) +
@@ -174,6 +174,8 @@ data %>%
   facet_wrap( ~ Site, ncol = 1)
 ```
 
+![](images/discharge_time.png)
+
 Say we wanted to examine differences in annual stream flow. We can do this with a little data wrangling, using the `separate()` function to split our "Date" column into Year, Month, and Day columns.
 
 ```{r}
@@ -182,15 +184,20 @@ data_annual <- data %>%
   # create monthly avg for plots
   group_by(Site, Year, Month) %>%
   summarise(monthly_q = mean(q_cfs))
+  
+```
 
+```{r eval = FALSE}
 # visualize annual differences across the course of each year
 data_annual %>% 
   ggplot(aes(x = Month, y = monthly_q, group = Year)) +
   geom_line(aes(colour = Year))+
   facet_wrap(~Site) +
   theme_bw()
-  
+
 ```
+
+![](images/discharge_annual.png)
 
 Let's look at the daily difference in discharge between the mouth of the Cache la Poudre River (Canyon Mouth site) and each of the sites downstream. This will require some more wrangling of our data.
 
@@ -207,8 +214,11 @@ dif_data <- data %>%
   # then pivot these new columns (i.e., NOT the date and canyon columns) longer again
   pivot_longer(-c(Canyon, Date))
 
+```
 
+```{r eval = FALSE}
 dif_data %>% 
+  # This changes our 'name' varible to a factor, so the sites plot in order of their distance from the canyon mouth
   mutate(name = fct(name, levels = c("Lincoln", "Boxelder", "Timnath"))) %>% 
   ggplot() +
     geom_line(aes(x = Date, y = value, color = name)) +
@@ -216,6 +226,8 @@ dif_data %>%
     facet_wrap("name")+
     ylab("Streamflow Difference from Poudre Mouth")
 ```
+
+![](images/discharge_dif.png)
 
 ## Data Analysis
 
@@ -227,11 +239,13 @@ Because we will be comparing daily stream flow across multiple sites, we can use
 
 ANOVA assumes normal distribution within each group - we can visualize each site's data with a histogram:
 
-```{r}
+```{r eval = FALSE}
 ggplot(data = data, aes(x = q_cfs)) +
          geom_histogram() + 
   facet_wrap (~Site)
 ```
+
+![](images/discharge_dist.png)
 
 ... and use the `shapiro_test()` function along with `group_by()` to statistically test for normality within each site's daily stream flow data:
 
